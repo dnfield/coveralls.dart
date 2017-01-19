@@ -2,7 +2,7 @@ name: coveralls
 version: 0.1.0
 
 author: Cédric Belin <cedric@belin.io>
-description: Send coverage reports to the Coveralls service.
+description: Send LCOV coverage reports to the Coveralls service.
 documentation: https://cedx.github.io/coveralls.dart
 homepage: https://github.com/cedx/coveralls.dart
 

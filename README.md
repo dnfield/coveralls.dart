@@ -30,26 +30,6 @@ import 'package:coveralls/coveralls.dart';
 ```
 
 ## Usage
-
-### The easy way
-The simplest way to collect and upload your coverage data is to use the [dedicated set of functions](https://github.com/cedx/coveralls.dart/blob/master/lib/coveralls.dart).
-
-#### 1. Collect the code coverage
-
-```dart
-@Task('Collects the coverage data and saves it as LCOV format')
-void coverageCollect() => collectCoverage('test/all.dart', 'lcov.info');
-```
-
-#### 2. Upload the coverage report
-
-```dart
-@Task('Uploads the LCOV coverage report to Coveralls')
-@Depends(coverageCollect)
-void coverageUpload() => uploadCoverage('lcov.info');
-```
-
-### The hard way
 TODO
 
 ## See also
