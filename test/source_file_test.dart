@@ -16,16 +16,16 @@ void main() => group('SourceFile', () {
       var file = new SourceFile.fromJson(const {
         'coverage': const [null, 2, 0, null, 4, 15, null],
         'name': 'coveralls.dart',
-        'source': 'FooBar',
-        'source_digest': 'f32a26e2a3a8aa338cd77b6e1263c535'
+        'source': 'void main() {}',
+        'source_digest': '27f5ebf0f8c559b2af9419d190299a5e'
       });
 
       expect(file.coverage, allOf(isList, hasLength(7)));
       expect(file.coverage[0], isNull);
       expect(file.coverage[1], equals(2));
       expect(file.name, equals('coveralls.dart'));
-      expect(file.source, equals('FooBar'));
-      expect(file.sourceDigest, equals('f32a26e2a3a8aa338cd77b6e1263c535'));
+      expect(file.source, equals('void main() {}'));
+      expect(file.sourceDigest, equals('27f5ebf0f8c559b2af9419d190299a5e'));
     });
   });
 
@@ -42,8 +42,8 @@ void main() => group('SourceFile', () {
       var map = new SourceFile(
         coverage: [null, 2, 0, null, 4, 15, null],
         name: 'coveralls.dart',
-        source: 'FooBar',
-        sourceDigest: 'f32a26e2a3a8aa338cd77b6e1263c535'
+        source: 'void main() {}',
+        sourceDigest: '27f5ebf0f8c559b2af9419d190299a5e'
       ).toJson();
 
       expect(map, allOf(isMap, hasLength(4)));
@@ -51,8 +51,8 @@ void main() => group('SourceFile', () {
       expect(map['coverage'][0], isNull);
       expect(map['coverage'][1], equals(2));
       expect(map['name'], equals('coveralls.dart'));
-      expect(map['source'], equals('FooBar'));
-      expect(map['source_digest'], equals('f32a26e2a3a8aa338cd77b6e1263c535'));
+      expect(map['source'], equals('void main() {}'));
+      expect(map['source_digest'], equals('27f5ebf0f8c559b2af9419d190299a5e'));
     });
   });
 });
