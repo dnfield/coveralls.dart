@@ -8,16 +8,16 @@ class Job {
 
   /// Creates a new job from the specified [map] in JSON format.
   Job.fromJson(Map<String, dynamic> map):
-      commitSha = map['commit_sha'] != null ? map['commit_sha'].toString() : null,
-      git = map['git'] is Map<String, dynamic> ? map['git'] : null,
-      parallel = map['parallel'] is bool ? map['parallel'] : null,
-      repoToken = map['repo_token'] != null ? map['repo_token'].toString() : null,
-      runAt = map['run_at'] != null ? DateTime.parse(map['run_at'].toString()) : null,
-      serviceJobId = map['service_job_id'] != null ? map['service_job_id'].toString() : null,
-      serviceName = map['service_name'] != null ? map['service_name'].toString() : null,
-      serviceNumber = map['service_number'] != null ? map['service_number'].toString() : null,
-      servicePullRequest = map['service_pull_request'] != null ? map['service_pull_request'].toString() : null,
-      sourceFiles = map['source_files'] is List<Map> ? map['source_files'].map((item) => new SourceFile.fromJson(item)).toList() : [];
+    commitSha = map['commit_sha'] != null ? map['commit_sha'].toString() : null,
+    git = map['git'] is Map<String, dynamic> ? map['git'] : null,
+    parallel = map['parallel'] is bool ? map['parallel'] : null,
+    repoToken = map['repo_token'] != null ? map['repo_token'].toString() : null,
+    runAt = map['run_at'] != null ? DateTime.parse(map['run_at'].toString()) : null,
+    serviceJobId = map['service_job_id'] != null ? map['service_job_id'].toString() : null,
+    serviceName = map['service_name'] != null ? map['service_name'].toString() : null,
+    serviceNumber = map['service_number'] != null ? map['service_number'].toString() : null,
+    servicePullRequest = map['service_pull_request'] != null ? map['service_pull_request'].toString() : null,
+    sourceFiles = map['source_files'] is List<Map> ? map['source_files'].map((item) => new SourceFile.fromJson(item)).toList() : [];
 
   /// The current SHA of the commit being built to override the [git] property.
   String commitSha;

@@ -32,6 +32,14 @@ import 'package:coveralls/coveralls.dart';
 ## Usage
 TODO
 
+## Supported CI services
+- [CircleCI](https://circleci.com)
+- [Codeship](https://codeship.com)
+- [GitLab](https://about.gitlab.com)
+- [Jenkins](https://jenkins.io)
+- [Semaphore](https://semaphoreci.com)
+- [Travis CI](https://travis-ci.com)
+
 ## See also
 - [API reference](https://cedx.github.io/coveralls.dart)
 - [Code coverage](https://coveralls.io/github/cedx/coveralls.dart)

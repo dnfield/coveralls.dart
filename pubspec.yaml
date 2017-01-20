@@ -16,6 +16,7 @@ dependencies:
   args: ^0.13.7
   http: ^0.11.3
   lcov: ^0.1.0
+  yaml: ^2.1.12
 
 dev_dependencies:
   grinder: ^0.8.0
