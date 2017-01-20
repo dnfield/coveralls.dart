@@ -9,7 +9,11 @@ homepage: https://github.com/cedx/coveralls.dart
 environment:
   sdk: '>=1.21.0 <2.0.0'
 
+executables:
+  coveralls: coveralls
+
 dependencies:
+  args: ^0.13.7
   http: ^0.11.3
   lcov: ^0.1.0
 
