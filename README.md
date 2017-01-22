@@ -1,5 +1,7 @@
 # Coveralls for Dart
-Send [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) coverage reports to the [Coveralls](https://coveralls.io) service.
+![Release](https://img.shields.io/pub/v/coveralls.svg) ![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg) ![Build](https://travis-ci.org/cedx/coveralls.dart.svg)
+
+Send [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) coverage reports to the [Coveralls](https://coveralls.io) service, in [Dart](https://www.dartlang.org).
 
 ## Requirements
 The latest [Dart SDK](https://www.dartlang.org) and [Pub](https://pub.dartlang.org) versions.
