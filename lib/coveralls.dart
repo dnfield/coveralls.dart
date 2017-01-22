@@ -2,40 +2,27 @@
 library coveralls;
 
 import 'dart:async';
+import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:lcov/lcov.dart';
+import 'package:yaml/yaml.dart';
+
+import 'src/services/appveyor.dart' as appveyor;
+import 'src/services/circleci.dart' as circleci;
+import 'src/services/codeship.dart' as codeship;
+import 'src/services/gitlab_ci.dart' as gitlab_ci;
+import 'src/services/jenkins.dart' as jenkins;
+import 'src/services/travis_ci.dart' as travis_ci;
+import 'src/services/surf.dart' as surf;
+import 'src/services/wercker.dart' as wercker;
 
 part 'src/client.dart';
+part 'src/configuration.dart';
 part 'src/formatter.dart';
 part 'src/job.dart';
 part 'src/source_file.dart';
 
-
-
-Future<Map> getConfigFromFile(String path) {
-
-}
-
-Future<Map> getConfigFromEnvironment() {
-  
-}
-
-/// TODO
-Future<Job> getJob() async {
-  var job = new Job();
-
-  // Fetch values from the configuration file.
-  var file = new File('${Directory.current}/.coveralls.yml');
-  if (await file.exists()) {
-
-  }
-
-  // Fetch values from the environment variables.
-  var path = await new File('${Directory.current}/.coveralls.yml').exists();
-}
-
-Map<String, dynamic> _parseYamlConfig() {
-
-}
+/// The version number of this package.
+const String version = '0.1.0';
