@@ -1,5 +1,5 @@
 # Coveralls for Dart
-TODO
+Send [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) coverage reports to the [Coveralls](https://coveralls.io) service.
 
 ## Requirements
 The latest [Dart SDK](https://www.dartlang.org) and [Pub](https://pub.dartlang.org) versions.
@@ -33,12 +33,15 @@ import 'package:coveralls/coveralls.dart';
 TODO
 
 ## Supported CI services
+- [AppVeyor](https://www.appveyor.com)
 - [CircleCI](https://circleci.com)
 - [Codeship](https://codeship.com)
-- [GitLab](https://about.gitlab.com)
+- [GitLab CI](https://gitlab.com)
 - [Jenkins](https://jenkins.io)
 - [Semaphore](https://semaphoreci.com)
+- [Surf](https://github.com/surf-build/surf)
 - [Travis CI](https://travis-ci.com)
+- [Wercker](http://www.wercker.com)
 
 ## See also
 - [API reference](https://cedx.github.io/coveralls.dart)

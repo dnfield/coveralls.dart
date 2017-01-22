@@ -8,11 +8,10 @@ void main() => group('Job', () {
       var job = new Job.fromJson(const {});
       expect(job.commitSha, isNull);
       expect(job.git, isNull);
-      expect(job.parallel, isNull);
       expect(job.repoToken, isNull);
+      expect(job.parallel, isNull);
       expect(job.runAt, isNull);
       expect(job.serviceJobId, isNull);
-      expect(job.serviceName, isNull);
       expect(job.serviceNumber, isNull);
       expect(job.servicePullRequest, isNull);
       expect(job.sourceFiles, allOf(isList, isEmpty));
@@ -38,7 +37,6 @@ void main() => group('Job', () {
       expect(job.repoToken, equals('WC78ivPhL7xYWjt4BgfyYJwM8p1eOmpbb'));
       expect(job.runAt, isNull); // TODO other value
       expect(job.serviceJobId, equals('168145156'));
-      expect(job.serviceName, equals('travis-ci'));
       expect(job.serviceNumber, equals('168145155'));
       expect(job.servicePullRequest, equals('10'));
       expect(job.sourceFiles, allOf(isList, isEmpty));

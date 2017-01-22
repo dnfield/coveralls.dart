@@ -3,8 +3,8 @@ part of coveralls;
 /// Represents the coverage data from a single run of a test suite.
 class Job {
 
-  /// Creates a new job.
-  Job({this.repoToken, this.serviceJobId, this.serviceName, List<SourceFile> sourceFiles}): sourceFiles = sourceFiles ?? [];
+  /// Creates a new job from the specified list of source files.
+  Job([List<SourceFile> sourceFiles]): sourceFiles = sourceFiles ?? [];
 
   /// Creates a new job from the specified [map] in JSON format.
   Job.fromJson(Map<String, dynamic> map):
