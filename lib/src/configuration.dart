@@ -1,18 +1,16 @@
 part of coveralls;
 
 /// Provides access to the coverage settings.
-class Configuration extends MapBase<String, dynamic> {
+class Configuration extends Object with MapMixin<String, dynamic> {
 
   /// The coverage parameters.
-  final Map<String, dynamic> _params = {};
+  final Map<String, dynamic> _params;
 
   /// Creates a new configuration from the specified [map].
-  Configuration([Map<String, dynamic> map]) {
-    if (map != null) this.addAll(map);
-  }
+  Configuration([Map<String, dynamic> map]): _params = map ?? {};
 
   /// Creates a new configuration from the environment variables.
-  Configuration.fromEnvironment() {
+  Configuration.fromEnvironment(): _params = {} {
     this['run_at'] = Platform.environment['COVERALLS_RUN_AT'] ?? new DateTime.now().toIso8601String();
     if (Platform.environment.containsKey('COVERALLS_GIT_BRANCH')) this['git_branch'] = Platform.environment['COVERALLS_GIT_BRANCH'];
     if (Platform.environment.containsKey('COVERALLS_GIT_COMMIT')) this['git_commit'] = Platform.environment['COVERALLS_GIT_COMMIT'];
