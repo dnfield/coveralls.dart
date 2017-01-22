@@ -7,36 +7,37 @@ class Client {
   static final Uri endPoint = Uri.parse('https://coveralls.io/api/v1/jobs');
 
   /// The stream of "request" events.
-  Stream<http.Request> get onRequest => _onRequest.stream;
+  Stream<MultipartRequest> get onRequest => _onRequest.stream;
 
   /// The stream of "response" events.
-  Stream<http.Response> get onResponse => _onResponse.stream;
+  Stream<Response> get onResponse => _onResponse.stream;
 
   /// The handler of "request" events.
-  final StreamController<http.Request> _onRequest = new StreamController<http.Request>.broadcast();
+  final StreamController<MultipartRequest> _onRequest = new StreamController<MultipartRequest>.broadcast();
 
   /// The handler of "response" events.
-  final StreamController<http.Response> _onResponse = new StreamController<http.Response>.broadcast();
+  final StreamController<Response> _onResponse = new StreamController<Response>.broadcast();
 
   /// Uploads the specified code [coverage] report in LCOV format to the Coveralls service.
-  Future<http.Response> upload(String coverage) async {
+  Future<Response> upload(String coverage) async {
     assert(coverage != null);
-
     var hitmap = await new Formatter().format(coverage);
     print(hitmap);
-    return null;
 
-    var fields = {'json_file': JSON.encode(hitmap)};
-    var request = new http.Request('POST', endPoint)..bodyFields = fields;
+    var request = new MultipartRequest('POST', endPoint);
+    request.files.add(new MultipartFile.fromString('json_file', JSON.encode(hitmap), filename: 'json_file'));
     _onRequest.add(request);
 
-    var response = await http.post(request.url, body: request.bodyFields);
+    var streamedResponse = await request.send();
+    var response = await Response.fromStream(streamedResponse);
     _onResponse.add(response);
+
+    if (response.statusCode != 200) throw new HttpException(response.reasonPhrase, uri: request.url);
     return response;
   }
 
   /// Uploads the specified code [coverage] report in LCOV format to the Coveralls service.
-  Future<http.Response> uploadFile(File coverage) async {
+  Future<Response> uploadFile(File coverage) async {
     assert(coverage != null);
     if (!await coverage.exists())
       throw new ArgumentError.value(coverage, 'coverage', 'The specified file does not exist.');
