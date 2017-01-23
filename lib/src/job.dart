@@ -46,7 +46,7 @@ class Job {
   /// The associated pull request ID of the build.
   String servicePullRequest;
 
-  /// An array of source files, including their coverage data.
+  /// The list of source files.
   final List<SourceFile> sourceFiles;
 
   /// Converts this object to a map in JSON format.

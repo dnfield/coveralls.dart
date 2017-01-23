@@ -13,13 +13,13 @@ class SourceFile {
     source = map['source'] != null ? map['source'].toString() : null,
     sourceDigest = map['source_digest'] != null ? map['source_digest'].toString() : null;
 
-  /// The coverage data for the file's job.
+  /// The coverage data for this file's job.
   final List<int> coverage;
 
   /// The file path of this source file.
   String name;
 
-  /// The contents of the source file.
+  /// The contents of this source file.
   String source;
 
   /// The MD5 digest of the full source code of this file.
