@@ -7,9 +7,9 @@ void main() => group('SourceFile', () {
     test('should return an instance with default values for an empty map', () {
       var file = new SourceFile.fromJson(const {});
       expect(file.coverage, allOf(isList, isEmpty));
-      expect(file.name, isNull);
-      expect(file.source, isNull);
-      expect(file.sourceDigest, isNull);
+      expect(file.name, isEmpty);
+      expect(file.source, isEmpty);
+      expect(file.sourceDigest, isEmpty);
     });
 
     test('should return an initialized instance for a non-empty map', () {
@@ -34,16 +34,16 @@ void main() => group('SourceFile', () {
       var map = new SourceFile().toJson();
       expect(map, allOf(isMap, hasLength(3)));
       expect(map['coverage'], allOf(isList, isEmpty));
-      expect(map['name'], isNull);
-      expect(map['source_digest'], isNull);
+      expect(map['name'], isEmpty);
+      expect(map['source_digest'], isEmpty);
     });
 
     test('should return a non-empty map for an initialized instance', () {
       var map = new SourceFile(
         'coveralls.dart',
         '27f5ebf0f8c559b2af9419d190299a5e',
-        [null, 2, 0, null, 4, 15, null],
-        'void main() {}'
+        'void main() {}',
+        [null, 2, 0, null, 4, 15, null]
       ).toJson();
 
       expect(map, allOf(isMap, hasLength(4)));

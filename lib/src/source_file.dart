@@ -4,7 +4,7 @@ part of coveralls;
 class SourceFile {
 
   /// Creates a new source file.
-  SourceFile([this.name = '', this.sourceDigest = '', List<int> coverage, this.source = '']): coverage = coverage ?? [];
+  SourceFile([this.name = '', this.sourceDigest = '', this.source = '', List<int> coverage]): coverage = coverage ?? [];
 
   /// Creates a new source file from the specified [map] in JSON format.
   SourceFile.fromJson(Map<String, dynamic> map):
