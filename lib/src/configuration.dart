@@ -1,10 +1,7 @@
 part of coveralls;
 
 /// Provides access to the coverage settings.
-class Configuration extends Object with MapMixin<String, dynamic> {
-
-  /// The default configuration.
-  static Configuration _default;
+class Configuration {
 
   /// The coverage parameters.
   final Map<String, dynamic> _params;
@@ -22,8 +19,10 @@ class Configuration extends Object with MapMixin<String, dynamic> {
     if (Platform.environment.containsKey('CI_JOB_ID')) this['service_job_id'] = Platform.environment['CI_JOB_ID'];
     if (Platform.environment.containsKey('CI_NAME')) this['service_name'] = Platform.environment['CI_NAME'];
 
+    /* TODO
     var matches = new RegExp(r'(\d+)$').allMatches(Platform.environment['CI_PULL_REQUEST'] ?? '').toList();
     if (matches.length >= 2) this['service_pull_request'] = matches[1].toString();
+    */
 
     // Coveralls.
     if (Platform.environment.containsKey('COVERALLS_COMMIT_SHA')) this['commit_sha'] = Platform.environment['COVERALLS_COMMIT_SHA'];
@@ -51,6 +50,7 @@ class Configuration extends Object with MapMixin<String, dynamic> {
   Configuration.fromYaml(String document): this(loadYaml(document));
 
   /// TODO
+  /*
   static Future<Configuration> getDefault() async {
     if (_default == null) {
       _default = new Configuration();
@@ -62,37 +62,15 @@ class Configuration extends Object with MapMixin<String, dynamic> {
     }
 
     return _default;
-  }
-
-  /// The keys of this configuration.
-  @override
-  Iterable<String> get keys => _params.keys;
-
-  /// The secret token for the repository.
-  String get repoToken => this['repo_token'];
-  set repoToken(String value) => this['repo_token'] = value;
-
-  /// The CI service or other environment in which the test suite was run.
-  String get serviceName => this['service_name'];
-  set serviceName(String value) => this['service_name'] = value;
+  }*/
 
   /// Returns the value for the given [key] or `null` if [key] is not in the map.
-  @override
   String operator [](Object key) => _params[key];
 
   /// Associates the [key] with the given [value].
-  @override
   void operator []=(String key, dynamic value) {
     _params[key] = value;
   }
-
-  /// Removes all pairs from the map.
-  @override
-  void clear() => _params.clear();
-
-  /// Removes [key] and its associated value, if present, from the map.
-  @override
-  String remove(Object key) => this.remove(key);
 
   /// Returns a string representation of this object.
   @override
