@@ -29,7 +29,8 @@ class Job {
   bool parallel;
 
   /// The secret token for the repository.
-  String repoToken;
+  String get repoToken => this.config['repo_token'];
+  set repoToken(String value) => this.config['repo_token'] = value;
 
   /// A timestamp of when the job ran.
   DateTime runAt;
@@ -38,7 +39,8 @@ class Job {
   String serviceJobId;
 
   /// The CI service or other environment in which the test suite was run.
-  String serviceName;
+  String get serviceName => this.config['service_name'];
+  set serviceName(String value) => this.config['service_name'] = value;
 
   /// The build number.
   String serviceNumber;
