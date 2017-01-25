@@ -4,10 +4,10 @@ part of coveralls;
 class Configuration extends MapBase<String, String> {
 
   /// The coverage parameters.
-  final Map<String, dynamic> _params;
+  final Map<String, String> _params;
 
   /// Creates a new configuration from the specified [map].
-  Configuration([Map<String, dynamic> map]): _params = map ?? {};
+  Configuration([Map<String, String> map]): _params = map ?? {};
 
   /// Creates a new configuration from the variables of the specified environment.
   /// If [env] is not provided, it defaults to [Platform.environment].
@@ -67,7 +67,9 @@ class Configuration extends MapBase<String, String> {
 
   /// Associates the [key] with the given [value].
   @override
-  void operator []=(String key, dynamic value) => _params[key] = value;
+  void operator []=(String key, String value) {
+    _params[key] = value;
+  }
 
   /// Removes all pairs from this configuration.
   @override
@@ -91,7 +93,7 @@ class Configuration extends MapBase<String, String> {
   String remove(Object key) => _params.remove(key);
 
   /// Converts this object to a map in JSON format.
-  Map<String, dynamic> toJson() => _params;
+  Map<String, String> toJson() => _params;
 
   /// Returns a string representation of this object.
   @override
