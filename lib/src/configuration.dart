@@ -9,58 +9,59 @@ class Configuration extends MapBase<String, String> {
   /// Creates a new configuration from the specified [map].
   Configuration([Map<String, dynamic> map]): _params = map ?? {};
 
-  /// Creates a new configuration from the variables of the specified [environment].
-  /// If [environment] is not provided, it defaults to [Platform.environment].
-  Configuration.fromEnvironment([Map<String, String> environment]): _params = {} {
-    if (environment == null) environment = Platform.environment;
+  /// Creates a new configuration from the variables of the specified environment.
+  /// If [env] is not provided, it defaults to [Platform.environment].
+  Configuration.fromEnvironment([Map<String, String> env]): _params = {} {
+    if (env == null) env = Platform.environment;
 
     // Standard.
-    var serviceName = environment['CI_NAME'] ?? '';
+    var serviceName = env['CI_NAME'] ?? '';
     if (serviceName.isNotEmpty) this['service_name'] = serviceName;
 
-    if (environment.containsKey('CI_BRANCH')) this['service_branch'] = environment['CI_BRANCH'];
-    if (environment.containsKey('CI_BUILD_NUMBER')) this['service_number'] = environment['CI_BUILD_NUMBER'];
-    if (environment.containsKey('CI_BUILD_URL')) this['service_build_url'] = environment['CI_BUILD_URL'];
-    if (environment.containsKey('CI_COMMIT')) this['commit_sha'] = environment['CI_COMMIT'];
-    if (environment.containsKey('CI_JOB_ID')) this['service_job_id'] = environment['CI_JOB_ID'];
+    if (env.containsKey('CI_BRANCH')) this['service_branch'] = env['CI_BRANCH'];
+    if (env.containsKey('CI_BUILD_NUMBER')) this['service_number'] = env['CI_BUILD_NUMBER'];
+    if (env.containsKey('CI_BUILD_URL')) this['service_build_url'] = env['CI_BUILD_URL'];
+    if (env.containsKey('CI_COMMIT')) this['commit_sha'] = env['CI_COMMIT'];
+    if (env.containsKey('CI_JOB_ID')) this['service_job_id'] = env['CI_JOB_ID'];
 
-    if (environment.containsKey('CI_PULL_REQUEST')) {
-      var matches = new RegExp(r'(\d+)$').allMatches(environment['CI_PULL_REQUEST']);
+    if (env.containsKey('CI_PULL_REQUEST')) {
+      var matches = new RegExp(r'(\d+)$').allMatches(env['CI_PULL_REQUEST']);
       if (matches.isNotEmpty && matches.first.groupCount >= 1) this['service_pull_request'] = matches.first[1];
     }
 
     // Coveralls.
-    if (environment.containsKey('COVERALLS_REPO_TOKEN') || environment.containsKey('COVERALLS_TOKEN'))
-      this['repo_token'] = environment['COVERALLS_REPO_TOKEN'] ?? environment['COVERALLS_TOKEN'];
+    if (env.containsKey('COVERALLS_REPO_TOKEN') || env.containsKey('COVERALLS_TOKEN'))
+      this['repo_token'] = env['COVERALLS_REPO_TOKEN'] ?? env['COVERALLS_TOKEN'];
 
-    if (environment.containsKey('COVERALLS_COMMIT_SHA')) this['commit_sha'] = environment['COVERALLS_COMMIT_SHA'];
-    if (environment.containsKey('COVERALLS_PARALLEL')) this['parallel'] = environment['COVERALLS_PARALLEL'];
-    if (environment.containsKey('COVERALLS_RUN_AT')) this['run_at'] = environment['COVERALLS_RUN_AT'];
-    if (environment.containsKey('COVERALLS_SERVICE_BRANCH')) this['service_branch'] = environment['COVERALLS_SERVICE_BRANCH'];
-    if (environment.containsKey('COVERALLS_SERVICE_JOB_ID')) this['service_job_id'] = environment['COVERALLS_SERVICE_JOB_ID'];
-    if (environment.containsKey('COVERALLS_SERVICE_NAME')) this['service_name'] = environment['COVERALLS_SERVICE_NAME'];
+    if (env.containsKey('COVERALLS_COMMIT_SHA')) this['commit_sha'] = env['COVERALLS_COMMIT_SHA'];
+    if (env.containsKey('COVERALLS_PARALLEL')) this['parallel'] = env['COVERALLS_PARALLEL'];
+    if (env.containsKey('COVERALLS_RUN_AT')) this['run_at'] = env['COVERALLS_RUN_AT'];
+    if (env.containsKey('COVERALLS_SERVICE_BRANCH')) this['service_branch'] = env['COVERALLS_SERVICE_BRANCH'];
+    if (env.containsKey('COVERALLS_SERVICE_JOB_ID')) this['service_job_id'] = env['COVERALLS_SERVICE_JOB_ID'];
+    if (env.containsKey('COVERALLS_SERVICE_NAME')) this['service_name'] = env['COVERALLS_SERVICE_NAME'];
 
     // CI services.
-    if (environment.containsKey('TRAVIS')) addAll(travis_ci.configuration);
-    else if (environment.containsKey('APPVEYOR')) addAll(appveyor.configuration);
-    else if (environment.containsKey('CIRCLECI')) addAll(circleci.configuration);
+    if (env.containsKey('TRAVIS')) addAll(travis_ci.configuration);
+    else if (env.containsKey('APPVEYOR')) addAll(appveyor.configuration);
+    else if (env.containsKey('CIRCLECI')) addAll(circleci.configuration);
     else if (serviceName == 'codeship') addAll(codeship.configuration);
-    else if (environment.containsKey('GITLAB_CI')) addAll(gitlab_ci.configuration);
-    else if (environment.containsKey('JENKINS_URL')) addAll(jenkins.configuration);
-    else if (environment.containsKey('SEMAPHORE')) addAll(semaphore.configuration);
-    else if (environment.containsKey('SURF_SHA1')) addAll(surf.configuration);
-    else if (environment.containsKey('TDDIUM')) addAll(solano_ci.configuration);
-    else if (environment.containsKey('WERCKER')) addAll(wercker.configuration);
+    else if (env.containsKey('GITLAB_CI')) addAll(gitlab_ci.configuration);
+    else if (env.containsKey('JENKINS_URL')) addAll(jenkins.configuration);
+    else if (env.containsKey('SEMAPHORE')) addAll(semaphore.configuration);
+    else if (env.containsKey('SURF_SHA1')) addAll(surf.configuration);
+    else if (env.containsKey('TDDIUM')) addAll(solano_ci.configuration);
+    else if (env.containsKey('WERCKER')) addAll(wercker.configuration);
   }
 
   /// Creates a new configuration from the specified YAML [document].
   Configuration.fromYaml(String document): this(loadYaml(document));
+  // TODO check if YAML is a Map<String, String>, otherwise throw new FormatException();
 
   /// The keys of this configuration.
   @override
   Iterable<String> get keys => _params.keys;
 
-  /// Returns the value for the given [key] or `null` if [key] is not in the map.
+  /// Returns the value for the given [key] or `null` if [key] is not in this configuration.
   @override
   String operator [](Object key) => _params[key];
 
