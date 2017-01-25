@@ -1,7 +1,7 @@
 part of coveralls;
 
 /// Provides access to the coverage settings.
-class Configuration extends IterableBase<String> {
+class Configuration extends MapBase<String, String> {
 
   /// The coverage parameters.
   final Map<String, dynamic> _params;
@@ -36,30 +36,36 @@ class Configuration extends IterableBase<String> {
     if (Platform.environment.containsKey('COVERALLS_SERVICE_NAME')) this['service_name'] = Platform.environment['COVERALLS_SERVICE_NAME'];
 
     // CI services.
-    if (Platform.environment.containsKey('TRAVIS')) merge(travis_ci.configuration);
-    else if (Platform.environment.containsKey('APPVEYOR')) merge(appveyor.configuration);
-    else if (Platform.environment.containsKey('CIRCLECI')) merge(circleci.configuration);
-    else if (serviceName == 'codeship') merge(codeship.configuration);
-    else if (Platform.environment.containsKey('GITLAB_CI')) merge(gitlab_ci.configuration);
-    else if (Platform.environment.containsKey('JENKINS_URL')) merge(jenkins.configuration);
-    else if (Platform.environment.containsKey('SEMAPHORE')) merge(semaphore.configuration);
-    else if (Platform.environment.containsKey('SURF_SHA1')) merge(surf.configuration);
-    else if (Platform.environment.containsKey('TDDIUM')) merge(solano_ci.configuration);
-    else if (Platform.environment.containsKey('WERCKER')) merge(wercker.configuration);
+    if (Platform.environment.containsKey('TRAVIS')) addAll(travis_ci.configuration);
+    else if (Platform.environment.containsKey('APPVEYOR')) addAll(appveyor.configuration);
+    else if (Platform.environment.containsKey('CIRCLECI')) addAll(circleci.configuration);
+    else if (serviceName == 'codeship') addAll(codeship.configuration);
+    else if (Platform.environment.containsKey('GITLAB_CI')) addAll(gitlab_ci.configuration);
+    else if (Platform.environment.containsKey('JENKINS_URL')) addAll(jenkins.configuration);
+    else if (Platform.environment.containsKey('SEMAPHORE')) addAll(semaphore.configuration);
+    else if (Platform.environment.containsKey('SURF_SHA1')) addAll(surf.configuration);
+    else if (Platform.environment.containsKey('TDDIUM')) addAll(solano_ci.configuration);
+    else if (Platform.environment.containsKey('WERCKER')) addAll(wercker.configuration);
   }
 
   /// Creates a new configuration from the specified YAML [document].
   Configuration.fromYaml(String document): this(loadYaml(document));
 
-  /// Returns a new iterator that allows iterating the keys of this configuration.
+  /// The keys of this configuration.
   @override
-  Iterator<String> get iterator => _params.keys.iterator;
+  Iterable<String> get keys => _params.keys;
 
   /// Returns the value for the given [key] or `null` if [key] is not in the map.
-  String operator [](String key) => _params[key];
+  @override
+  String operator [](Object key) => _params[key];
 
   /// Associates the [key] with the given [value].
+  @override
   void operator []=(String key, dynamic value) => _params[key] = value;
+
+  /// Removes all pairs from this configuration.
+  @override
+  void clear() => _params.clear();
 
   /// Loads the default configuration.
   /// The default values are read from the `.coveralls.yml` file and the environment variables.
@@ -67,16 +73,16 @@ class Configuration extends IterableBase<String> {
     var defaults = new Configuration();
 
     var file = new File('${Directory.current.path}/.coveralls.yml');
-    if (await file.exists()) defaults.merge(new Configuration.fromYaml(await file.readAsString()));
+    if (await file.exists()) defaults.addAll(new Configuration.fromYaml(await file.readAsString()));
 
-    defaults.merge(new Configuration.fromEnvironment());
+    defaults.addAll(new Configuration.fromEnvironment());
     return defaults;
   }
 
-  /// Adds all key-value pairs of the specified configuration to this one.
-  void merge(Configuration config) {
-    for (var key in config) this[key] = config[key];
-  }
+  /// Removes the specified [key] and its associated value from this configuration.
+  /// Returns the value associated with [key] before it was removed.
+  @override
+  String remove(Object key) => _params.remove(key);
 
   /// Converts this object to a map in JSON format.
   Map<String, dynamic> toJson() => _params;
