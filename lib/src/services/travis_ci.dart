@@ -1,20 +1,18 @@
 /// Provides a connector for the [Travis CI](https://travis-ci.com) service.
 library coveralls.services.travis_ci;
-
-import 'dart:io';
 import 'package:coveralls/coveralls.dart';
 
-/// The configuration parameters from the environment.
-Configuration get configuration {
+/// Gets the configuration parameters from the specified environment.
+Configuration getConfiguration(Map<String, String> env) {
   var config = new Configuration({
     'commit_sha': 'HEAD',
-    'service_branch': Platform.environment['TRAVIS_BRANCH'],
-    'service_job_id': Platform.environment['TRAVIS_JOB_ID'],
+    'service_branch': env['TRAVIS_BRANCH'],
+    'service_job_id': env['TRAVIS_JOB_ID'],
     'service_name': 'travis-ci'
   });
 
-  if (Platform.environment.containsKey('TRAVIS_PULL_REQUEST') && Platform.environment['TRAVIS_PULL_REQUEST'] != 'false')
-    config['service_pull_request'] = Platform.environment['TRAVIS_PULL_REQUEST'];
+  if (env.containsKey('TRAVIS_PULL_REQUEST') && env['TRAVIS_PULL_REQUEST'] != 'false')
+    config['service_pull_request'] = env['TRAVIS_PULL_REQUEST'];
 
   return config;
 }

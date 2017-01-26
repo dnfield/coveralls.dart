@@ -1,14 +1,12 @@
 /// Provides a connector for the [Semaphore](https://semaphoreci.com) service.
 library coveralls.services.semaphore;
-
-import 'dart:io';
 import 'package:coveralls/coveralls.dart';
 
-/// The configuration parameters from the environment.
-Configuration get configuration => new Configuration({
-  'commit_sha': Platform.environment['REVISION'],
-  'service_branch': Platform.environment['BRANCH_NAME'],
+/// Gets the configuration parameters from the specified environment.
+Configuration getConfiguration(Map<String, String> env) => new Configuration({
+  'commit_sha': env['REVISION'],
+  'service_branch': env['BRANCH_NAME'],
   'service_name': 'semaphore',
-  'service_number': Platform.environment['SEMAPHORE_BUILD_NUMBER'],
-  'service_pull_request': Platform.environment['PULL_REQUEST_NUMBER']
+  'service_number': env['SEMAPHORE_BUILD_NUMBER'],
+  'service_pull_request': env['PULL_REQUEST_NUMBER']
 });

@@ -40,22 +40,43 @@ class Configuration extends MapBase<String, String> {
     if (env.containsKey('COVERALLS_SERVICE_JOB_ID')) this['service_job_id'] = env['COVERALLS_SERVICE_JOB_ID'];
     if (env.containsKey('COVERALLS_SERVICE_NAME')) this['service_name'] = env['COVERALLS_SERVICE_NAME'];
 
+    // Git.
+    if (env.containsKey('GIT_AUTHOR_EMAIL')) this['git_author_email'] = env['GIT_AUTHOR_EMAIL'];
+    if (env.containsKey('GIT_AUTHOR_NAME')) this['git_author_name'] = env['GIT_AUTHOR_NAME'];
+    if (env.containsKey('GIT_BRANCH')) this['service_branch'] = env['GIT_BRANCH'];
+    if (env.containsKey('GIT_COMMITTER_EMAIL')) this['git_committer_email'] = env['GIT_COMMITTER_EMAIL'];
+    if (env.containsKey('GIT_COMMITTER_NAME')) this['git_committer_name'] = env['GIT_COMMITTER_NAME'];
+    if (env.containsKey('GIT_ID')) this['commit_sha'] = env['GIT_ID'];
+    if (env.containsKey('GIT_MESSAGE')) this['git_message'] = env['GIT_MESSAGE'];
+
     // CI services.
-    if (env.containsKey('TRAVIS')) addAll(travis_ci.configuration);
-    else if (env.containsKey('APPVEYOR')) addAll(appveyor.configuration);
-    else if (env.containsKey('CIRCLECI')) addAll(circleci.configuration);
-    else if (serviceName == 'codeship') addAll(codeship.configuration);
-    else if (env.containsKey('GITLAB_CI')) addAll(gitlab_ci.configuration);
-    else if (env.containsKey('JENKINS_URL')) addAll(jenkins.configuration);
-    else if (env.containsKey('SEMAPHORE')) addAll(semaphore.configuration);
-    else if (env.containsKey('SURF_SHA1')) addAll(surf.configuration);
-    else if (env.containsKey('TDDIUM')) addAll(solano_ci.configuration);
-    else if (env.containsKey('WERCKER')) addAll(wercker.configuration);
+    if (env.containsKey('TRAVIS')) addAll(travis_ci.getConfiguration(env));
+    else if (env.containsKey('APPVEYOR')) addAll(appveyor.getConfiguration(env));
+    else if (env.containsKey('CIRCLECI')) addAll(circleci.getConfiguration(env));
+    else if (serviceName == 'codeship') addAll(codeship.getConfiguration(env));
+    else if (env.containsKey('GITLAB_CI')) addAll(gitlab_ci.getConfiguration(env));
+    else if (env.containsKey('JENKINS_URL')) addAll(jenkins.getConfiguration(env));
+    else if (env.containsKey('SEMAPHORE')) addAll(semaphore.getConfiguration(env));
+    else if (env.containsKey('SURF_SHA1')) addAll(surf.getConfiguration(env));
+    else if (env.containsKey('TDDIUM')) addAll(solano_ci.getConfiguration(env));
+    else if (env.containsKey('WERCKER')) addAll(wercker.getConfiguration(env));
   }
 
   /// Creates a new configuration from the specified YAML [document].
-  Configuration.fromYaml(String document): this(loadYaml(document));
-  // TODO check if YAML is a Map<String, String>, otherwise throw new FormatException();
+  /// Throws a [FormatException] if a parsing error occurred.
+  Configuration.fromYaml(String document): _params = {} {
+    if (document == null || document.isEmpty) throw new FormatException('The specified YAML document is empty.', document);
+
+    try {
+      var map = loadYaml(document);
+      if (map is! Map<String, String>) throw new FormatException('The specified YAML document is invalid.', document);
+      this.addAll(map);
+    }
+
+    on YamlException {
+      throw new FormatException('The specified document is invalid YAML.', document);
+    }
+  }
 
   /// The keys of this configuration.
   @override
@@ -77,10 +98,10 @@ class Configuration extends MapBase<String, String> {
 
   /// Loads the default configuration.
   /// The default values are read from the `.coveralls.yml` file and the environment variables.
-  static Future<Configuration> loadDefaults() async {
+  static Future<Configuration> loadDefaults([String coverallsFile = '']) async {
     var defaults = new Configuration();
 
-    var file = new File('${Directory.current.path}/.coveralls.yml');
+    var file = new File(coverallsFile.isEmpty ? '${Directory.current.path}/.coveralls.yml' : coverallsFile);
     if (await file.exists()) defaults.addAll(new Configuration.fromYaml(await file.readAsString()));
 
     defaults.addAll(new Configuration.fromEnvironment());
