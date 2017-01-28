@@ -1,12 +1,12 @@
 part of coveralls;
 
-/// Represents a Git remote repository.
+/// Represents a Git commit.
 class GitCommit {
 
-  /// Creates a new remote repository.
+  /// Creates a new commit.
   GitCommit([this.id = '', this.message = '']);
 
-  /// Creates a new source file from the specified [map] in JSON format.
+  /// Creates a new commit from the specified [map] in JSON format.
   GitCommit.fromJson(Map<String, String> map):
     authorEmail = map['author_email'] ?? '',
     authorName = map['author_name'] ?? '',
@@ -15,22 +15,22 @@ class GitCommit {
     id = map['id'] ?? '',
     message = map['message'] ?? '';
 
-  /// The remote's name.
+  /// The author mail address.
   String authorEmail = '';
 
-  /// The remote's name.
+  /// The author name.
   String authorName = '';
 
-  /// The remote's name.
+  /// The committer mail address.
   String committerEmail = '';
 
-  /// The remote's name.
+  /// The committer name.
   String committerName = '';
 
-  /// The remote's name.
+  /// The commit identifier.
   String id;
 
-  /// The remote's name.
+  /// The commit message.
   String message;
 
   /// Converts this object to a map in JSON format.
