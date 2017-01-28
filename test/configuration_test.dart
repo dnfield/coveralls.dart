@@ -41,7 +41,7 @@ void main() => group('Configuration', () {
 
     test('should return an initialized instance for a non-empty environment', () {
       var config = new Configuration.fromEnvironment({
-        'CI_NAME': 'travis-ci',
+        'CI_NAME': 'travis-pro',
         'CI_PULL_REQUEST': 'PR #123',
         'COVERALLS_REPO_TOKEN': '0123456789abcdef',
         'GIT_MESSAGE': 'Hello World!',
@@ -53,7 +53,7 @@ void main() => group('Configuration', () {
       expect(config['git_message'], equals('Hello World!'));
       expect(config['repo_token'], equals('0123456789abcdef'));
       expect(config['service_branch'], equals('develop'));
-      expect(config['service_name'], equals('travis-ci'));
+      expect(config['service_name'], equals('travis-pro'));
       expect(config['service_pull_request'], equals('123'));
     });
   });
