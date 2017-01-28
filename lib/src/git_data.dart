@@ -23,7 +23,7 @@ class GitData {
 
   /// Converts this object to a map in JSON format.
   Map<String, dynamic> toJson() => {
-    'branch': name,
+    'branch': branch,
     'head': commit?.toJson(),
     'remotes': remotes.map((item) => item.toJson()).toList()
   };
