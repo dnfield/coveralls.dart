@@ -100,20 +100,19 @@ class Configuration extends MapBase<String, String> {
   void clear() => _params.clear();
 
   /// Loads the default configuration.
-  /// The default values are read from the `.coveralls.yml` file and the environment variables.
+  /// The default values are read from the environment variables and an optional `.coveralls.yml` file.
   static Future<Configuration> loadDefaults([String coverallsFile = '']) async {
-    var defaults;
+    var defaults = new Configuration.fromEnvironment();
 
     try {
       var file = new File(coverallsFile.isEmpty ? '${Directory.current.path}/.coveralls.yml' : coverallsFile);
-      if (await file.exists()) defaults = new Configuration.fromYaml(await file.readAsString());
+      if (await file.exists()) defaults.addAll(new Configuration.fromYaml(await file.readAsString()));
+      return defaults;
     }
 
     on FormatException {
-      defaults = new Configuration();
+      return defaults;
     }
-
-    return defaults..addAll(new Configuration.fromEnvironment());
   }
 
   /// Removes the specified [key] and its associated value from this configuration.
