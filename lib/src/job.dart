@@ -30,7 +30,7 @@ class Job {
 
   /// Creates a new job from the specified [map] in JSON format.
   Job.fromJson(Map<String, dynamic> map):
-    commitSha = map['commit_sha'] is String ? map['commit_sha'] : null,
+    commitSha = map['commit_sha'] is String ? map['commit_sha'] : '',
     git = map['git'] is Map<String, dynamic> ? new GitData.fromJson(map['git']) : null,
     isParallel = map['parallel'] is bool ? map['parallel'] : false,
     repoToken = map['repo_token'] is String ? map['repo_token'] : '',

@@ -75,8 +75,8 @@ void main() => group('Configuration', () {
     test('should properly initialize from a `.coveralls.yml` file', () async {
       var config = await Configuration.loadDefaults('test/.coveralls.yml');
       expect(config.length, greaterThanOrEqualTo(2));
-      expect(config['foo'], equals('bar'));
-      expect(config['bar'], equals('baz'));
+      expect(config['repo_token'], equals('yYPv4mMlfjKgUK0rJPgN0AwNXhfzXpVwt'));
+      expect(config['service_name'], equals('travis-pro'));
     });
   });
 
