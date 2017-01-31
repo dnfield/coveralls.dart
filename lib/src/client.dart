@@ -4,7 +4,15 @@ part of coveralls;
 class Client {
 
   /// The URL of the API end point.
-  static final Uri endPoint = Uri.parse('https://coveralls.io/api/v1/jobs');
+  static final Uri defaultEndPoint = Uri.parse('https://coveralls.io/api/v1/jobs');
+
+  /// Creates a new client.
+  Client([endPoint]) {
+    if (endPoint != null) this.endPoint = endPoint is Uri ? endPoint : Uri.parse(endPoint.toString());
+  }
+
+  /// The URL of the API end point.
+  Uri endPoint;
 
   /// The stream of "request" events.
   Stream<MultipartRequest> get onRequest => _onRequest.stream;
@@ -18,14 +26,17 @@ class Client {
   /// The handler of "response" events.
   final StreamController<Response> _onResponse = new StreamController<Response>.broadcast();
 
-  /// Uploads the specified code [coverage] report in LCOV format to the Coveralls service.
-  Future<Response> upload(String coverage) async {
+  /// Uploads the specified code [coverage] report to the Coveralls service.
+  Future upload(String coverage, [Configuration configuration]) async {
     assert(coverage != null);
-    var hitmap = await new Formatter().format(coverage);
-    print(hitmap);
 
+    // Parse the coverage.
+    var config = await (configuration != null ? new Future.value(configuration) : Configuration.loadDefaults());
+
+
+    // Apply the configuration settings.
     var request = new MultipartRequest('POST', endPoint);
-    request.files.add(new MultipartFile.fromString('json_file', JSON.encode(hitmap), filename: 'json_file'));
+    request.files.add(new MultipartFile.fromString('json_file', JSON.encode(job), filename: 'json_file'));
     _onRequest.add(request);
 
     var streamedResponse = await request.send();
@@ -36,12 +47,9 @@ class Client {
     return response;
   }
 
-  /// Uploads the specified code [coverage] report in LCOV format to the Coveralls service.
-  Future<Response> uploadFile(File coverage) async {
-    assert(coverage != null);
-    if (!await coverage.exists())
-      throw new ArgumentError.value(coverage, 'coverage', 'The specified file does not exist.');
-
-    return upload(await coverage.readAsString());
+  /// Uploads the specified [job] to the Coveralls service.
+  Future uploadJob(Job job) async {
+    assert(job != null);
+    // TODO
   }
 }

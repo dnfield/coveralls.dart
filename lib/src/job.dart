@@ -3,30 +3,8 @@ part of coveralls;
 /// Represents the coverage data from a single run of a test suite.
 class Job {
 
-  /// Creates a new job from the specified list of source files.
-  Job([Configuration config, List<SourceFile> sourceFiles]): sourceFiles = sourceFiles ?? [] {
-    if (config != null) {
-      var hasGitData = config.keys.any((key) => key == 'service_branch' || key.substring(0, 4) == 'git_');
-      if (!hasGitData) this.commitSha = config['commit_sha'] ?? '';
-      else {
-        var commit = new GitCommit(config['commit_sha'] ?? '', config['git_message'] ?? '');
-        commit.authorEmail = config['git_author_email'] ?? '';
-        commit.authorName = config['git_author_name'] ?? '';
-        commit.committerEmail = config['git_committer_email'] ?? '';
-        commit.committerName = config['git_committer_email'] ?? '';
-
-        this.git = new GitData(commit, config['service_branch'] ?? '');
-      }
-
-      isParallel = config['parallel'] == 'true';
-      repoToken = config['repo_token'] ?? (config['repo_secret_token'] ?? '');
-      runAt = config['run_at'] != null ? DateTime.parse(config['run_at']) : null;
-      serviceJobId = config['service_job_id'] ?? '';
-      serviceName = config['service_name'] ?? '';
-      serviceNumber = config['service_number'] ?? '';
-      servicePullRequest = config['service_pull_request'] ?? '';
-    }
-  }
+  /// Creates a new job.
+  Job([List<SourceFile> sourceFiles]): sourceFiles = sourceFiles ?? [];
 
   /// Creates a new job from the specified [map] in JSON format.
   Job.fromJson(Map<String, dynamic> map):
