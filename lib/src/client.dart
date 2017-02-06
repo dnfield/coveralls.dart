@@ -12,7 +12,7 @@ class Client {
   }
 
   /// The URL of the API end point.
-  Uri endPoint;
+  Uri endPoint = defaultEndPoint;
 
   /// The stream of "request" events.
   Stream<MultipartRequest> get onRequest => _onRequest.stream;
@@ -51,5 +51,25 @@ class Client {
   Future uploadJob(Job job) async {
     assert(job != null);
     // TODO
+  }
+
+  /// Parses the specified [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) coverage report.
+  Future<Job> _parseReport(String report) async {
+    var sourceFiles = [];
+    for (var record in Report.parse(report).records) {
+      var source;
+      try { source = await new File(record.sourceFile).readAsString(); }
+      catch (e) { throw new FileSystemException('Source file not found: ${record.sourceFile}'); }
+
+      var lines = source.split(new RegExp('\r?\n'));
+      var coverage = new List<int>(lines.length);
+      for (var lineData in record.lines.data) coverage[lineData.lineNumber - 1] = lineData.executionCount;
+
+      var filename = path.relative(record.sourceFile);
+      var digest = await md5.convert(source.codeUnits).toString();
+      sourceFiles.add(new SourceFile(filename, digest, source, coverage));
+    }
+
+    return sourceFiles;
   }
 }

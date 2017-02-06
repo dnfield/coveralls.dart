@@ -5,8 +5,10 @@ import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
+import 'package:crypto/crypto.dart';
 import 'package:http/http.dart';
 import 'package:lcov/lcov.dart';
+import 'package:path/path.dart' as path;
 import 'package:yaml/yaml.dart';
 
 import 'src/services/appveyor.dart' as appveyor;
