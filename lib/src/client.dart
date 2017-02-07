@@ -42,7 +42,7 @@ class Client {
     if (job.repoToken.isEmpty && job.serviceName.isEmpty) throw new ArgumentError.value(job, 'job', 'The job does not meet the requirements.');
 
     var request = new MultipartRequest('POST', endPoint);
-    request.files.add(new MultipartFile.fromString('json_file', JSON.encode(job), filename: 'json_file'));
+    request.files.add(new MultipartFile.fromString('json_file', JSON.encode(job)));
     _onRequest.add(request);
 
     var streamedResponse = await request.send();
