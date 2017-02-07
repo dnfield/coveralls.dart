@@ -66,7 +66,7 @@ class Client {
       for (var lineData in record.lines.data) coverage[lineData.lineNumber - 1] = lineData.executionCount;
 
       var filename = path.relative(record.sourceFile);
-      var digest = await md5.convert(source.codeUnits).toString();
+      var digest = md5.convert(source.codeUnits).toString();
       sourceFiles.add(new SourceFile(filename, digest, source, coverage));
     }
 
