@@ -27,14 +27,20 @@ class Client {
   final StreamController<Response> _onResponse = new StreamController<Response>.broadcast();
 
   /// Uploads the specified code [coverage] report to the Coveralls service.
+  /// A [configuration] object provides the environment settings.
   Future upload(String coverage, [Configuration configuration]) async {
     assert(coverage != null);
 
-    // Parse the coverage.
-    var config = await (configuration != null ? new Future.value(configuration) : Configuration.loadDefaults());
+    var job = null;
+    return uploadJob(job);
+  }
 
+  /// Uploads the specified [job] to the Coveralls service.
+  /// Throws an [ArgumentError] if the job does not meet the requirements.
+  Future uploadJob(Job job) async {
+    assert(job != null);
+    if (job.repoToken.isEmpty && job.serviceName.isEmpty) throw new ArgumentError.value(job, 'job', 'The job does not meet the requirements.');
 
-    // Apply the configuration settings.
     var request = new MultipartRequest('POST', endPoint);
     request.files.add(new MultipartFile.fromString('json_file', JSON.encode(job), filename: 'json_file'));
     _onRequest.add(request);
@@ -47,15 +53,9 @@ class Client {
     return response;
   }
 
-  /// Uploads the specified [job] to the Coveralls service.
-  Future uploadJob(Job job) async {
-    assert(job != null);
-    // TODO
-  }
-
-  /// Parses the specified [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) coverage report.
+  /// Parses the specified [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) coverage [report].
   Future<Job> _parseReport(String report) async {
-    var sourceFiles = [];
+    var sourceFiles = <SourceFile>[];
     for (var record in Report.parse(report).records) {
       var source;
       try { source = await new File(record.sourceFile).readAsString(); }
@@ -70,6 +70,29 @@ class Client {
       sourceFiles.add(new SourceFile(filename, digest, source, coverage));
     }
 
-    return sourceFiles;
+    return new Job(sourceFiles);
+  }
+
+  /// Updates the properties of the specified [job] using the given configuration parameters.
+  void _updateJob(Job job, Configuration config) {
+    var hasGitData = config.keys.any((key) => key == 'service_branch' || key.substring(0, 4) == 'git_');
+    if (!hasGitData) job.commitSha = config['commit_sha'] ?? '';
+    else {
+      var commit = new GitCommit(config['commit_sha'] ?? '', config['git_message'] ?? '');
+      commit.authorEmail = config['git_author_email'] ?? '';
+      commit.authorName = config['git_author_name'] ?? '';
+      commit.committerEmail = config['git_committer_email'] ?? '';
+      commit.committerName = config['git_committer_email'] ?? '';
+
+      job.git = new GitData(commit, config['service_branch'] ?? '');
+    }
+
+    job.isParallel = config['parallel'] == 'true';
+    job.repoToken = config['repo_token'] ?? (config['repo_secret_token'] ?? '');
+    job.runAt = config['run_at'] != null ? DateTime.parse(config['run_at']) : null;
+    job.serviceJobId = config['service_job_id'] ?? '';
+    job.serviceName = config['service_name'] ?? '';
+    job.serviceNumber = config['service_number'] ?? '';
+    job.servicePullRequest = config['service_pull_request'] ?? '';
   }
 }

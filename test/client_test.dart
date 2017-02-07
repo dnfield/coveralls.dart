@@ -20,7 +20,7 @@ void main() => group('Client', () {
         'repo_token': 'yYPv4mMlfjKgUK0rJPgN0AwNXhfzXpVwt',
         'run_at': '2017-01-29T02:43:30.000Z',
         'service_branch': 'develop'
-      }), [new SourceFile('/home/cedx/coveralls.php')]);
+      }), [new SourceFile('/home/cedx/coveralls.dart')]);
 
       expect(job.isParallel, isTrue);
       expect(job.repoToken, equals('yYPv4mMlfjKgUK0rJPgN0AwNXhfzXpVwt'));
@@ -33,7 +33,7 @@ void main() => group('Client', () {
 
       expect(job.sourceFiles, allOf(isList, hasLength(1)));
       expect(job.sourceFiles[0], new isInstanceOf<SourceFile>());
-      expect(job.sourceFiles[0].name, equals('/home/cedx/coveralls.php'));
+      expect(job.sourceFiles[0].name, equals('/home/cedx/coveralls.dart'));
     });
   });*/
 });
