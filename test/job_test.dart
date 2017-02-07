@@ -53,7 +53,7 @@ void main() => group('Job', () {
         'parallel': true,
         'repo_token': 'yYPv4mMlfjKgUK0rJPgN0AwNXhfzXpVwt',
         'run_at': '2017-01-29T02:43:30.000Z',
-        'source_files': [{'name': '/home/cedx/coveralls.php'}]
+        'source_files': [{'name': '/home/cedx/coveralls.dart'}]
       });
 
       expect(job, new isInstanceOf<Job>());
@@ -68,7 +68,7 @@ void main() => group('Job', () {
 
       expect(job.sourceFiles, allOf(isList, hasLength(1)));
       expect(job.sourceFiles[0], new isInstanceOf<SourceFile>());
-      expect(job.sourceFiles[0].name, equals('/home/cedx/coveralls.php'));
+      expect(job.sourceFiles[0].name, equals('/home/cedx/coveralls.dart'));
     });
   });
 
@@ -85,7 +85,7 @@ void main() => group('Job', () {
         ..isParallel = true
         ..repoToken = 'yYPv4mMlfjKgUK0rJPgN0AwNXhfzXpVwt'
         ..runAt = DateTime.parse('2017-01-29T02:43:30.000Z')
-        ..sourceFiles.add(new SourceFile('/home/cedx/coveralls.php'));
+        ..sourceFiles.add(new SourceFile('/home/cedx/coveralls.dart'));
 
       var map = job.toJson();
       expect(map, allOf(isMap, hasLength(5)));
@@ -98,7 +98,7 @@ void main() => group('Job', () {
 
       expect(map['source_files'], allOf(isList, hasLength(1)));
       expect(map['source_files'][0], isMap);
-      expect(map['source_files'][0]['name'], equals('/home/cedx/coveralls.php'));
+      expect(map['source_files'][0]['name'], equals('/home/cedx/coveralls.dart'));
     });
   });
 });
