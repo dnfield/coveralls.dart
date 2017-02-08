@@ -51,8 +51,8 @@ class GitData {
     commit.committerEmail = commands['committerEmail'];
     commit.committerName = commands['committerName'];
 
-    var remotes = commands['remotes'].split(new RegExp('\r?\n')).map((remote) {
-      var parts = remote.replaceAll(new RegExp('\s+'), ' ').split(' ');
+    var remotes = commands['remotes'].split(new RegExp(r'\r?\n')).map((remote) {
+      var parts = remote.replaceAll(new RegExp(r'\s+'), ' ').split(' ');
       return new GitRemote(parts[0], parts.length > 1 ? parts[1] : '');
     });
 

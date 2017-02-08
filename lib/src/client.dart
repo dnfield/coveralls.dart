@@ -61,7 +61,7 @@ class Client {
       try { source = await new File(record.sourceFile).readAsString(); }
       catch (e) { throw new FileSystemException('Source file not found: ${record.sourceFile}'); }
 
-      var lines = source.split(new RegExp('\r?\n'));
+      var lines = source.split(new RegExp(r'\r?\n'));
       var coverage = new List<int>(lines.length);
       for (var lineData in record.lines.data) coverage[lineData.lineNumber - 1] = lineData.executionCount;
 
