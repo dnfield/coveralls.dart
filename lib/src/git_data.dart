@@ -37,11 +37,11 @@ class GitData {
 
     var workingDir = path.isNotEmpty ? path : Directory.current.path;
     var futures = commands.keys.map((key) => Process.run('git', commands[key].split(' '), runInShell: true, workingDirectory: workingDir));
-    var results = await Future.wait(futures);
+    var results = (await Future.wait(futures)).map((result) => result.stdout.trim()).toList();
 
     var index = 0;
     for (var key in commands.keys) {
-      commands[key] = results[index].stdout.trim();
+      commands[key] = results[index];
       index++;
     }
 
