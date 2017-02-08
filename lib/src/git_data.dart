@@ -21,6 +21,44 @@ class GitData {
   /// The remote repositories.
   final List<GitRemote> remotes;
 
+  /// Creates a new Git data from a repository located at the specified [path] (defaulting to the current working directory).
+  /// This method relies on the availability of the Git executable in the system path.
+  static Future<GitData> fromRepository([String path = '']) async {
+    var commands = {
+      'authorEmail': "log -1 --pretty=format:'%ae'",
+      'authorName': "log -1 --pretty=format:'%aN'",
+      'branch': 'rev-parse --abbrev-ref HEAD',
+      'committerEmail': "log -1 --pretty=format:'%ce'",
+      'committerName': "log -1 --pretty=format:'%cN'",
+      'id': "log -1 --pretty=format:'%H'",
+      'message': "log -1 --pretty=format:'%s'",
+      'remotes': 'remote -v'
+    };
+
+    var workingDir = path.isNotEmpty ? path : Directory.current.path;
+    var futures = commands.keys.map((key) => Process.run('git', commands[key].split(' '), runInShell: true, workingDirectory: workingDir));
+    var results = await Future.wait(futures);
+
+    var index = 0;
+    for (var key in commands.keys) {
+      commands[key] = results[index].stdout.trim();
+      index++;
+    }
+
+    var commit = new GitCommit(commands['id'], commands['message']);
+    commit.authorEmail = commands['authorEmail'];
+    commit.authorName = commands['authorName'];
+    commit.committerEmail = commands['committerEmail'];
+    commit.committerName = commands['committerName'];
+
+    var remotes = commands['remotes'].split(new RegExp('\r?\n')).map((remote) {
+      var parts = remote.replaceAll(new RegExp('\s+'), ' ').split(' ');
+      return new GitRemote(parts[0], parts.length > 1 ? parts[1] : '');
+    });
+
+    return new GitData(commit, commands['branch'], remotes);
+  }
+
   /// Converts this object to a map in JSON format.
   Map<String, dynamic> toJson() => {
     'branch': branch,
