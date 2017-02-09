@@ -52,7 +52,7 @@ class Configuration extends MapBase<String, String> {
     // CI services.
     if (env.containsKey('TRAVIS')) {
       addAll(travis_ci.getConfiguration(env));
-      if (serviceName != 'travis-ci') this['service_name'] = serviceName;
+      if (serviceName.isNotEmpty && serviceName != 'travis-ci') this['service_name'] = serviceName;
     }
     else if (env.containsKey('APPVEYOR')) addAll(appveyor.getConfiguration(env));
     else if (env.containsKey('CIRCLECI')) addAll(circleci.getConfiguration(env));
