@@ -29,6 +29,23 @@ void main() => group('GitData', () {
     });
   });
 
+  group('.fromRepository()', () {
+    test('should retrieve the Git data from the executable output', () async {
+      var data = await GitData.fromRepository();
+      expect(data.branch, isNotEmpty);
+
+      expect(data.commit, new isInstanceOf<GitCommit>());
+      expect(data.commit.id, matches(new RegExp(r'^[a-f\d]{40}$')));
+
+      expect(data.remotes, allOf(isList, isNotEmpty));
+      expect(data.remotes[0], new isInstanceOf<GitRemote>());
+
+      var origin = data.remotes.where((remote) => remote.name == 'origin').toList();
+      expect(origin, hasLength(1));
+      expect(origin[0].url, equals(Uri.parse('https://github.com/cedx/coveralls.dart.git')));
+    });
+  });
+
   group('.toJson()', () {
     test('should return a map with default values for a newly created instance', () {
       var map = new GitData().toJson();

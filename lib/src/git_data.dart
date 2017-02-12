@@ -37,7 +37,7 @@ class GitData {
 
     var workingDir = path.isNotEmpty ? path : Directory.current.path;
     var futures = commands.keys.map((key) => Process.run('git', commands[key].split(' '), runInShell: true, workingDirectory: workingDir));
-    var results = (await Future.wait(futures)).map((result) => result.stdout.trim()).toList();
+    var results = (await Future.wait(futures)).map((result) => result.stdout.trim().replaceAll(new RegExp(r"^'+|'+$"), '')).toList();
 
     var index = 0;
     for (var key in commands.keys) {
@@ -51,10 +51,15 @@ class GitData {
     commit.committerEmail = commands['committerEmail'];
     commit.committerName = commands['committerName'];
 
-    var remotes = commands['remotes'].split(new RegExp(r'\r?\n')).map((remote) {
+    var names = [];
+    var remotes = <GitRemote>[];
+    for (var remote in commands['remotes'].split(new RegExp(r'\r?\n'))) {
       var parts = remote.replaceAll(new RegExp(r'\s+'), ' ').split(' ');
-      return new GitRemote(parts[0], parts.length > 1 ? parts[1] : '');
-    });
+      if (!names.contains(parts[0])) {
+        names.add(parts[0]);
+        remotes.add(new GitRemote(parts[0], parts.length > 1 ? parts[1] : ''));
+      }
+    }
 
     return new GitData(commit, commands['branch'], remotes);
   }
