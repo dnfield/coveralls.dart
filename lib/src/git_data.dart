@@ -55,9 +55,9 @@ class GitData {
     var remotes = <GitRemote>[];
     for (var remote in commands['remotes'].split(new RegExp(r'\r?\n'))) {
       var parts = remote.replaceAll(new RegExp(r'\s+'), ' ').split(' ');
-      if (!names.contains(parts[0])) {
-        names.add(parts[0]);
-        remotes.add(new GitRemote(parts[0], parts.length > 1 ? parts[1] : ''));
+      if (!names.contains(parts.first)) {
+        names.add(parts.first);
+        remotes.add(new GitRemote(parts.first, parts.length > 1 ? parts[1] : ''));
       }
     }
 

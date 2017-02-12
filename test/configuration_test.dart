@@ -11,7 +11,7 @@ void main() => group('Configuration', () {
     test('should return the list of keys for a non-empty configuration', () {
       var keys = new Configuration({'foo': 'bar', 'bar': 'baz'}).keys.toList();
       expect(keys, hasLength(2));
-      expect(keys[0], equals('foo'));
+      expect(keys.first, equals('foo'));
       expect(keys[1], equals('bar'));
     });
   });

@@ -24,8 +24,8 @@ void main() => group('GitData', () {
       expect(data.commit.id, equals('2ef7bde608ce5404e97d5f042f95f89f1c232871'));
 
       expect(data.remotes, allOf(isList, hasLength(1)));
-      expect(data.remotes[0], new isInstanceOf<GitRemote>());
-      expect(data.remotes[0].name, equals('origin'));
+      expect(data.remotes.first, new isInstanceOf<GitRemote>());
+      expect(data.remotes.first.name, equals('origin'));
     });
   });
 
@@ -38,11 +38,11 @@ void main() => group('GitData', () {
       expect(data.commit.id, matches(new RegExp(r'^[a-f\d]{40}$')));
 
       expect(data.remotes, allOf(isList, isNotEmpty));
-      expect(data.remotes[0], new isInstanceOf<GitRemote>());
+      expect(data.remotes.first, new isInstanceOf<GitRemote>());
 
       var origin = data.remotes.where((remote) => remote.name == 'origin').toList();
       expect(origin, hasLength(1));
-      expect(origin[0].url, equals(Uri.parse('https://github.com/cedx/coveralls.dart.git')));
+      expect(origin.first.url, equals(Uri.parse('https://github.com/cedx/coveralls.dart.git')));
     });
   });
 
@@ -62,8 +62,8 @@ void main() => group('GitData', () {
       expect(map['head']['id'], equals('2ef7bde608ce5404e97d5f042f95f89f1c232871'));
 
       expect(map['remotes'], allOf(isList, hasLength(1)));
-      expect(map['remotes'][0], isMap);
-      expect(map['remotes'][0]['name'], equals('origin'));
+      expect(map['remotes'].first, isMap);
+      expect(map['remotes'].first['name'], equals('origin'));
     });
   });
 });

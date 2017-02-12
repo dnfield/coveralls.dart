@@ -17,7 +17,7 @@ void main(List<String> arguments) {
     if (results['version']) return print('v$version');
   }
 
-  on FormatException catch(error) {
+  on ArgParserException catch(error) {
     print(error.message);
     exit(1);
   }

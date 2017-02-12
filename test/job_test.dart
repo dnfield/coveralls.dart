@@ -34,8 +34,8 @@ void main() => group('Job', () {
       expect(job.runAt.toIso8601String(), equals('2017-01-29T02:43:30.000Z'));
 
       expect(job.sourceFiles, allOf(isList, hasLength(1)));
-      expect(job.sourceFiles[0], new isInstanceOf<SourceFile>());
-      expect(job.sourceFiles[0].name, equals('/home/cedx/coveralls.dart'));
+      expect(job.sourceFiles.first, new isInstanceOf<SourceFile>());
+      expect(job.sourceFiles.first.name, equals('/home/cedx/coveralls.dart'));
     });
   });
 
@@ -64,8 +64,8 @@ void main() => group('Job', () {
       expect(map['git']['branch'], equals('develop'));
 
       expect(map['source_files'], allOf(isList, hasLength(1)));
-      expect(map['source_files'][0], isMap);
-      expect(map['source_files'][0]['name'], equals('/home/cedx/coveralls.dart'));
+      expect(map['source_files'].first, isMap);
+      expect(map['source_files'].first['name'], equals('/home/cedx/coveralls.dart'));
     });
   });
 });

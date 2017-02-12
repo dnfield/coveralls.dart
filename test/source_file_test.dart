@@ -21,7 +21,7 @@ void main() => group('SourceFile', () {
       });
 
       expect(file.coverage, allOf(isList, hasLength(7)));
-      expect(file.coverage[0], isNull);
+      expect(file.coverage.first, isNull);
       expect(file.coverage[1], equals(2));
       expect(file.name, equals('coveralls.dart'));
       expect(file.source, equals('void main() {}'));
@@ -48,7 +48,7 @@ void main() => group('SourceFile', () {
 
       expect(map, allOf(isMap, hasLength(4)));
       expect(map['coverage'], allOf(isList, hasLength(7)));
-      expect(map['coverage'][0], isNull);
+      expect(map['coverage'].first, isNull);
       expect(map['coverage'][1], equals(2));
       expect(map['name'], equals('coveralls.dart'));
       expect(map['source'], equals('void main() {}'));
