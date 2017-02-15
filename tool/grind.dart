@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:coveralls/coveralls.dart';
 import 'package:grinder/grinder.dart';
 
 /// The list of source directories.
@@ -10,6 +11,10 @@ Future main(List<String> args) => grind(args);
 /// Deletes all generated files and reset any saved state.
 @Task('Delete the generated files')
 void clean() => defaultClean();
+
+/// Uploads the code coverage report.
+// @Task('Upload the code coverage')
+// TODO Future coverage() => uploadCoverage('var/lcov.info');
 
 /// Builds the documentation.
 @Task('Build the documentation')
@@ -31,5 +36,5 @@ Future test() async {
     Pub.runAsync('coverage', script: 'collect_coverage', arguments: const ['--out=var/coverage.json', '--resume-isolates'])
   ]);
 
-  await Pub.runAsync('coverage', script: 'format_coverage', arguments: const ['--in=var/coverage.json', '--lcov', '--out=var/lcov.info']);
+  return Pub.runAsync('coverage', script: 'format_coverage', arguments: const ['--in=var/coverage.json', '--lcov', '--out=var/lcov.info']);
 }
