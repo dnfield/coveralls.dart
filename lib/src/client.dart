@@ -77,7 +77,8 @@ class Client {
     var response = await Response.fromStream(streamedResponse);
     _onResponse.add(response);
 
-    if (response.statusCode != 200) throw new HttpException(response.reasonPhrase, uri: request.url);
+    if (response.statusCode != 200)
+      throw new HttpException('${response.statusCode} ${response.reasonPhrase}', uri: request.url);
   }
 
   /// Parses the specified [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) coverage [report].
