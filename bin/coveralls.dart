@@ -28,7 +28,7 @@ Future main(List<String> arguments) async {
 
     var client = new Client(Platform.environment['COVERALLS_ENDPOINT'] ?? Client.defaultEndPoint);
     var coverage = await file.readAsString();
-    
+
     print('[Coveralls] Submitting to ${client.endPoint}');
     await client.upload(coverage);
   }
