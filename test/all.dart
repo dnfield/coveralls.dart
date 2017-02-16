@@ -1,3 +1,4 @@
+import 'client_test.dart' as client_test;
 import 'configuration_test.dart' as configuration_test;
 import 'git_commit_test.dart' as git_commit_test;
 import 'git_data_test.dart' as git_data_test;
@@ -7,6 +8,7 @@ import 'source_file_test.dart' as source_file_test;
 
 /// Tests all the features of the package.
 void main() {
+  client_test.main();
   configuration_test.main();
   git_commit_test.main();
   git_data_test.main();
