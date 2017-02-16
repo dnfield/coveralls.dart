@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:coveralls/coveralls.dart';
 import 'package:grinder/grinder.dart';
 
 /// The list of source directories.
@@ -13,8 +12,10 @@ Future main(List<String> args) => grind(args);
 void clean() => defaultClean();
 
 /// Uploads the code coverage report.
-// @Task('Upload the code coverage')
-// TODO Future coverage() => uploadCoverage('var/lcov.info');
+@Task('Upload the code coverage')
+void coverage() {
+  runDartScript('bin/coveralls.dart', arguments: ['--file=var/lcov.info']);
+}
 
 /// Builds the documentation.
 @Task('Build the documentation')
