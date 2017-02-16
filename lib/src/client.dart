@@ -86,7 +86,7 @@ class Client {
     for (var record in Report.parse(report).records) {
       var source;
       try { source = await new File(record.sourceFile).readAsString(); }
-      catch (e) { throw new FileSystemException('Source file not found: ${record.sourceFile}'); }
+      catch (e) { throw new FileSystemException('Source file not found.', record.sourceFile); }
 
       var lines = source.split(new RegExp(r'\r?\n'));
       var coverage = new List<int>(lines.length);
