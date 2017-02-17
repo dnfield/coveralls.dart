@@ -43,7 +43,7 @@ $ coveralls -f build/lcov.info
 The hard way. Add this to your package's `pubspec.yaml` file:
 
 ```yaml
-devDpendencies:
+dependencies:
   coveralls: *
 ```
 
