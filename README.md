@@ -7,34 +7,77 @@ Send [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) coverage reports to th
 The latest [Dart SDK](https://www.dartlang.org) and [Pub](https://pub.dartlang.org) versions.
 If you plan to play with the sources, you will also need the latest [Grinder](http://google.github.io/grinder.dart) version.
 
-## Installing via [Pub](https://pub.dartlang.org)
+## Usage
 
-### 1. Depend on it
-Add this to your package's `pubspec.yaml` file:
+### Command line interface
+The easy way. From a command prompt, install the `coveralls` executable:
+
+```shell
+$ pub global activate coveralls
+```
+
+> Consider adding the [`pub global`](https://www.dartlang.org/tools/pub/cmd/pub-global) executables directory to your system path.
+
+Then use it to upload your coverage reports:
+
+```shell
+$ coveralls --help
+Send a LCOV coverage report to the Coveralls service.
+
+Usage:
+pub global run coveralls [options]
+
+Options:
+-f, --file=<file>    path to the coverage report
+-h, --help           output usage information
+-v, --version        output the version number
+```
+
+For example:
+
+```shell
+$ coveralls -f build/lcov.info
+```
+
+### Programming interface
+The hard way. Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 devDpendencies:
   coveralls: *
 ```
 
-### 2. Install it
-Install this package and its dependencies from a command prompt:
+Then, from a command prompt, install the library:
 
 ```shell
 $ pub get
 ```
 
-### 3. Import it
-Now in your [Dart](https://www.dartlang.org) code, you can use:
+Now in your [Dart](https://www.dartlang.org) code, you can use the `Client` class to upload your coverage reports:
 
 ```dart
+import 'dart:async';
+import 'dart:io';
 import 'package:coveralls/coveralls.dart';
+
+Future main() async {
+  try {
+    var coverage = await new File('/path/to/coverage.report').readAsString();
+    await new Client().upload(coverage);
+    print('The report was sent successfully.');
+  }
+  
+  catch (error) {
+    print('An error occurred: $error');
+  }
+}
 ```
 
-## Usage
-TODO
+## Supported coverage formats
+Currently, this package only supports the de facto standard: the [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) format.
 
 ## Supported CI services
+This project has been tested with [Travis CI](https://travis-ci.com) service, but these services should also work with no extra effort:
 - [AppVeyor](https://www.appveyor.com)
 - [CircleCI](https://circleci.com)
 - [Codeship](https://codeship.com)
@@ -43,8 +86,23 @@ TODO
 - [Semaphore](https://semaphoreci.com)
 - [Solano CI](https://ci.solanolabs.com)
 - [Surf](https://github.com/surf-build/surf)
-- [Travis CI](https://travis-ci.com)
 - [Wercker](http://www.wercker.com)
+
+## Environment variables
+If your build system is not supported, you can still use this package.
+There are a few environment variables that are necessary for supporting your build system:
+- `COVERALLS_SERVICE_NAME` : the name of your build system.
+- `COVERALLS_REPO_TOKEN` : the secret repository token from [Coveralls](https://coveralls.io).
+
+There are optional environment variables:
+- `COVERALLS_SERVICE_JOB_ID` : a string that uniquely identifies the build job.
+- `COVERALLS_RUN_AT` : a date string for the time that the job ran. This defaults to your build system's date/time if you don't set it.
+
+The full list of supported environment variables is available in the source code of the `Configuration` class (see the `fromEnvironment()` static method).
+
+## The `.coveralls.yml` file
+This package supports the same configuration sources as the [Coveralls](https://coveralls.io) ones:  
+[Coveralls currently supports](https://coveralls.zendesk.com/hc/en-us/articles/201347419-Coveralls-currently-supports)
 
 ## See also
 - [API reference](https://cedx.github.io/coveralls.dart)
