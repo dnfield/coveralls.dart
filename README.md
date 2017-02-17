@@ -1,5 +1,5 @@
 # Coveralls for Dart
-![Release](https://img.shields.io/pub/v/coveralls.svg) ![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg) ![Build](https://travis-ci.org/cedx/coveralls.dart.svg)
+![Release](https://img.shields.io/pub/v/coveralls.svg) ![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg) ![Coverage](https://coveralls.io/repos/github/cedx/coveralls.dart/badge.svg) ![Build](https://travis-ci.org/cedx/coveralls.dart.svg)
 
 Send [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) coverage reports to the [Coveralls](https://coveralls.io) service, in [Dart](https://www.dartlang.org).
 
