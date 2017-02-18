@@ -69,7 +69,6 @@ class Client {
     if (job.repoToken.isEmpty && job.serviceName.isEmpty)
       throw new ArgumentError.value(job, 'job', 'The job does not meet the requirements.');
 
-    print(JSON.encode(job));
     var request = new MultipartRequest('POST', endPoint.resolve('/api/v1/jobs'));
     request.files.add(new MultipartFile.fromString('json_file', JSON.encode(job), filename: 'coveralls.json'));
     _onRequest.add(request);
