@@ -1,5 +1,5 @@
 name: coveralls
-version: 0.1.1
+version: 0.2.0
 
 author: Cédric Belin <cedric@belin.io>
 description: Send LCOV coverage reports to the Coveralls service.
