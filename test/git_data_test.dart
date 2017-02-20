@@ -66,4 +66,18 @@ void main() => group('GitData', () {
       expect(map['remotes'].first['name'], equals('origin'));
     });
   });
+
+  group('.toString()', () {
+    var data = new GitData(new GitCommit('2ef7bde608ce5404e97d5f042f95f89f1c232871'), 'develop', [new GitRemote('origin')]).toString();
+
+    test('should start with the class name', () {
+      expect(data.indexOf('GitData {'), equals(0));
+    });
+
+    test('should contain the instance properties', () {
+      expect(data, contains('"branch":"develop"'));
+      expect(data, contains('"head":{'));
+      expect(data, contains('"remotes":[{'));
+    });
+  });
 });

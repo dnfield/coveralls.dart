@@ -47,4 +47,22 @@ void main() => group('GitCommit', () {
       expect(map['message'], equals('Hello World!'));
     });
   });
+
+  group('.toString()', () {
+    var data = (new GitCommit('2ef7bde608ce5404e97d5f042f95f89f1c232871', 'Hello World!')
+      ..authorEmail = 'anonymous@secret.com'
+      ..authorName = 'Anonymous'
+    ).toString();
+
+    test('should start with the class name', () {
+      expect(data.indexOf('GitCommit {'), equals(0));
+    });
+
+    test('should contain the instance properties', () {
+      expect(data, contains('"author_email":"anonymous@secret.com"'));
+      expect(data, contains('"author_name":"Anonymous"'));
+      expect(data, contains('"id":"2ef7bde608ce5404e97d5f042f95f89f1c232871"'));
+      expect(data, contains('"message":"Hello World!"'));
+    });
+  });
 });

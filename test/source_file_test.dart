@@ -55,4 +55,23 @@ void main() => group('SourceFile', () {
       expect(map['source_digest'], equals('27f5ebf0f8c559b2af9419d190299a5e'));
     });
   });
+
+  group('.toString()', () {
+    var data = new SourceFile(
+      'coveralls.dart',
+      '27f5ebf0f8c559b2af9419d190299a5e',
+      'void main() {}',
+      [null, 2, 0, null, 4, 15, null]
+    ).toString();
+
+    test('should start with the class name', () {
+      expect(data.indexOf('SourceFile {'), equals(0));
+    });
+
+    test('should contain the instance properties', () {
+      expect(data, contains('"name":"coveralls.dart"'));
+      expect(data, contains('"source":"void main() {}"'));
+      expect(data, contains('"source_digest":"27f5ebf0f8c559b2af9419d190299a5e"'));
+    });
+  });
 });

@@ -34,6 +34,7 @@ void main() => group('Configuration', () {
       expect(config, hasLength(0));
     });
   });
+
   group('.fromEnvironment()', () {
     test('should return an empty configuration for an empty environment', () {
       expect(new Configuration.fromEnvironment({}), isEmpty);
@@ -100,6 +101,19 @@ void main() => group('Configuration', () {
       expect(map, allOf(isMap, hasLength(2)));
       expect(map['foo'], equals('bar'));
       expect(map['bar'], equals('baz'));
+    });
+  });
+
+  group('.toString()', () {
+    var data = new Configuration({'foo': 'bar', 'bar': 'baz'}).toString();
+
+    test('should start with the class name', () {
+      expect(data.indexOf('Configuration {'), equals(0));
+    });
+
+    test('should contain the instance properties', () {
+      expect(data, contains('"bar":"baz"'));
+      expect(data, contains('"foo":"bar"'));
     });
   });
 });

@@ -34,4 +34,17 @@ void main() => group('GitRemote', () {
       expect(map['url'], equals('https://github.com/cedx/coveralls.dart.git'));
     });
   });
+
+  group('.toString()', () {
+    var data = new GitRemote('origin', 'https://github.com/cedx/coveralls.dart.git').toString();
+
+    test('should start with the class name', () {
+      expect(data.indexOf('GitRemote {'), equals(0));
+    });
+
+    test('should contain the instance properties', () {
+      expect(data, contains('"name":"origin"'));
+      expect(data, contains('"url":"https://github.com/cedx/coveralls.dart.git"'));
+    });
+  });
 });
