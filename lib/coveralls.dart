@@ -32,4 +32,4 @@ part 'src/job.dart';
 part 'src/source_file.dart';
 
 /// The version number of this package.
-const String version = '0.2.0';
+const String version = '0.3.0';
