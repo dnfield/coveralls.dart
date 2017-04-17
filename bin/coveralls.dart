@@ -33,7 +33,7 @@ Future main(List<String> arguments) async {
     await client.upload(coverage);
   }
 
-  catch(error) {
+  catch (error) {
     print(error);
     exit(2);
   }
