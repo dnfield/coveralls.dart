@@ -1,6 +1,9 @@
 # Changelog
 This file contains highlights of what changes on each version of the [Coveralls for Dart](https://github.com/cedx/coveralls.dart) package.
 
+## Version 1.0.0
+- First stable release.
+
 ## Version 0.3.0
 - Updated the package dependencies.
 
