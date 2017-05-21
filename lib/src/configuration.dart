@@ -105,7 +105,7 @@ class Configuration extends MapBase<String, String> {
     var defaults = new Configuration.fromEnvironment();
 
     try {
-      var file = new File(coverallsFile.isEmpty ? '${Directory.current.path}/.coveralls.yml' : coverallsFile);
+      var file = new File(coverallsFile.isEmpty ? '.coveralls.yml' : coverallsFile);
       defaults.addAll(new Configuration.fromYaml(await file.readAsString()));
       return defaults;
     }
