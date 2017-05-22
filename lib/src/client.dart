@@ -3,7 +3,7 @@ part of coveralls;
 /// Uploads code coverage reports to the [Coveralls](https://coveralls.io) service.
 class Client {
 
-  /// The URL of the API end point.
+  /// The URL of the default API end point.
   static final Uri defaultEndPoint = Uri.parse('https://coveralls.io');
 
   /// Creates a new client.
