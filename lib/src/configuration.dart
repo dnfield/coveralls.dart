@@ -73,7 +73,7 @@ class Configuration extends MapBase<String, String> {
     try {
       var map = loadYaml(document);
       if (map is! Map<String, String>) throw new FormatException('The specified YAML document is invalid.', document);
-      this.addAll(map);
+      addAll(map);
     }
 
     on YamlException {
