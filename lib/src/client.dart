@@ -8,7 +8,7 @@ class Client {
 
   /// Creates a new client.
   Client([endPoint]) {
-    if (endPoint != null) endPoint = endPoint is Uri ? endPoint : Uri.parse(endPoint.toString());
+    if (endPoint != null) this.endPoint = endPoint is Uri ? endPoint : Uri.parse(endPoint.toString());
   }
 
   /// The URL of the API end point.
