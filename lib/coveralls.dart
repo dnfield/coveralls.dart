@@ -6,7 +6,7 @@ import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
 import 'package:crypto/crypto.dart';
-import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'package:lcov/lcov.dart';
 import 'package:path/path.dart' as path;
 import 'package:which/which.dart';

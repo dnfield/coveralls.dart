@@ -15,16 +15,16 @@ class Client {
   Uri endPoint = defaultEndPoint;
 
   /// The stream of "request" events.
-  Stream<MultipartRequest> get onRequest => _onRequest.stream;
+  Stream<http.MultipartRequest> get onRequest => _onRequest.stream;
 
   /// The stream of "response" events.
-  Stream<Response> get onResponse => _onResponse.stream;
+  Stream<http.Response> get onResponse => _onResponse.stream;
 
   /// The handler of "request" events.
-  final StreamController<MultipartRequest> _onRequest = new StreamController<MultipartRequest>.broadcast();
+  final StreamController<http.MultipartRequest> _onRequest = new StreamController<http.MultipartRequest>.broadcast();
 
   /// The handler of "response" events.
-  final StreamController<Response> _onResponse = new StreamController<Response>.broadcast();
+  final StreamController<http.Response> _onResponse = new StreamController<http.Response>.broadcast();
 
   /// Uploads the specified code [coverage] report to the Coveralls service.
   /// A [configuration] object provides the environment settings.
@@ -69,12 +69,11 @@ class Client {
     if (job.repoToken.isEmpty && job.serviceName.isEmpty)
       throw new ArgumentError.value(job, 'job', 'The job does not meet the requirements.');
 
-    var request = new MultipartRequest('POST', endPoint.resolve('/api/v1/jobs'));
-    request.files.add(new MultipartFile.fromString('json_file', JSON.encode(job), filename: 'coveralls.json'));
-    _onRequest.add(request);
+    var request = new http.MultipartRequest('POST', endPoint.resolve('api/v1/jobs'))
+      ..files.add(new http.MultipartFile.fromString('json_file', JSON.encode(job), filename: 'coveralls.json'));
 
-    var streamedResponse = await request.send();
-    var response = await Response.fromStream(streamedResponse);
+    _onRequest.add(request);
+    var response = await http.Response.fromStream(await request.send());
     _onResponse.add(response);
 
     if (response.statusCode != 200)
