@@ -9,7 +9,7 @@ import 'package:crypto/crypto.dart';
 import 'package:http/http.dart' as http;
 import 'package:lcov/lcov.dart';
 import 'package:path/path.dart' as path;
-import 'package:which/which.dart';
+import 'package:where/where.dart' show where;
 import 'package:yaml/yaml.dart';
 
 import 'src/services/appveyor.dart' as appveyor;

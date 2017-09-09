@@ -41,7 +41,7 @@ class Client {
     var results = await Future.wait([
       _parseReport(report),
       configuration != null ? new Future.value(configuration) : Configuration.loadDefaults(),
-      which('git', orElse: () => '')
+      where('git', onError: (_) => '')
     ]);
 
     var job = results.first;
