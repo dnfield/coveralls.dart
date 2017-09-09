@@ -22,6 +22,7 @@ Then use it to upload your coverage reports:
 
 ```shell
 $ coveralls --help
+
 Send a LCOV coverage report to the Coveralls service.
 
 Usage:
@@ -67,7 +68,7 @@ Future main() async {
     print('The report was sent successfully.');
   }
   
-  catch (error) {
+  on Exception catch (error) {
     print('An error occurred: $error');
   }
 }
