@@ -31,8 +31,6 @@ class Client {
   ///
   /// Throws an [FormatException] if the specified coverage report is empty, or if its format is not supported.
   Future upload(String coverage, [Configuration configuration]) async {
-    assert(coverage != null);
-
     var report = coverage.trim();
     if (report.isEmpty) throw new FormatException('The specified coverage report is empty.');
 
@@ -65,7 +63,6 @@ class Client {
   /// Throws an [ArgumentError] if the job does not meet the requirements.
   /// Throws a [HttpException] if the remote service does not respond successfully.
   Future uploadJob(Job job) async {
-    assert(job != null);
     if (job.repoToken.isEmpty && job.serviceName.isEmpty)
       throw new ArgumentError.value(job, 'job', 'The job does not meet the requirements.');
 
