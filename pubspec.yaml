@@ -10,7 +10,7 @@ environment:
   sdk: '>=1.24.0'
 
 executables:
-  coveralls: coveralls
+  coveralls: cli
 
 dependencies:
   args: ^1.0.0

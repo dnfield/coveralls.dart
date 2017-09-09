@@ -20,7 +20,7 @@ Future main(List<String> arguments) async {
 
     if (results['file'] == null) {
       printUsage();
-      exit(1);
+      exit(64);
     }
 
     var file = new File(results['file']);
@@ -33,9 +33,9 @@ Future main(List<String> arguments) async {
     await client.upload(coverage);
   }
 
-  catch (error) {
-    print(error);
-    exit(2);
+  on Exception catch (err) {
+    print(err);
+    exit(1);
   }
 }
 
