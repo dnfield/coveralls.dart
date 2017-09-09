@@ -6,7 +6,7 @@ void main() => group('Job', () {
   group('.fromJson()', () {
     test('should return an instance with default values for an empty map', () {
       var job = new Job.fromJson(const {});
-      expect(job, new isInstanceOf<Job>());
+      expect(job, const isInstanceOf<Job>());
       expect(job.git, isNull);
       expect(job.isParallel, isFalse);
       expect(job.repoToken, isEmpty);
@@ -23,18 +23,18 @@ void main() => group('Job', () {
         'source_files': [{'name': '/home/cedx/coveralls.dart'}]
       });
 
-      expect(job, new isInstanceOf<Job>());
+      expect(job, const isInstanceOf<Job>());
       expect(job.isParallel, isTrue);
       expect(job.repoToken, equals('yYPv4mMlfjKgUK0rJPgN0AwNXhfzXpVwt'));
 
-      expect(job.git, new isInstanceOf<GitData>());
+      expect(job.git, const isInstanceOf<GitData>());
       expect(job.git.branch, equals('develop'));
 
-      expect(job.runAt, new isInstanceOf<DateTime>());
+      expect(job.runAt, const isInstanceOf<DateTime>());
       expect(job.runAt.toIso8601String(), equals('2017-01-29T02:43:30.000Z'));
 
       expect(job.sourceFiles, allOf(isList, hasLength(1)));
-      expect(job.sourceFiles.first, new isInstanceOf<SourceFile>());
+      expect(job.sourceFiles.first, const isInstanceOf<SourceFile>());
       expect(job.sourceFiles.first.name, equals('/home/cedx/coveralls.dart'));
     });
   });

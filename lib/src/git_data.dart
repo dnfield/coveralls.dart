@@ -45,11 +45,11 @@ class GitData {
       index++;
     }
 
-    var commit = new GitCommit(commands['id'], commands['message']);
-    commit.authorEmail = commands['authorEmail'];
-    commit.authorName = commands['authorName'];
-    commit.committerEmail = commands['committerEmail'];
-    commit.committerName = commands['committerName'];
+    var commit = new GitCommit(commands['id'], commands['message'])
+      ..authorEmail = commands['authorEmail']
+      ..authorName = commands['authorName']
+      ..committerEmail = commands['committerEmail']
+      ..committerName = commands['committerName'];
 
     var names = [];
     var remotes = <GitRemote>[];

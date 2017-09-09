@@ -32,7 +32,7 @@ class Client {
   /// Throws an [FormatException] if the specified coverage report is empty, or if its format is not supported.
   Future upload(String coverage, [Configuration configuration]) async {
     var report = coverage.trim();
-    if (report.isEmpty) throw new FormatException('The specified coverage report is empty.');
+    if (report.isEmpty) throw const FormatException('The specified coverage report is empty.');
 
     var token = report.substring(0, 3);
     if (token != '${Token.testName}:' && token != '${Token.sourceFile}:')
@@ -80,10 +80,10 @@ class Client {
   /// Parses the specified [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) coverage [report].
   Future<Job> _parseReport(String report) async {
     var sourceFiles = <SourceFile>[];
-    for (var record in Report.parse(report).records) {
+    for (var record in new Report.fromCoverage(report).records) {
       var source;
       try { source = await new File(record.sourceFile).readAsString(); }
-      catch (e) { throw new FileSystemException('Source file not found.', record.sourceFile); }
+      on Exception { throw new FileSystemException('Source file not found.', record.sourceFile); }
 
       var lines = source.split(new RegExp(r'\r?\n'));
       var coverage = new List<int>(lines.length);
@@ -112,11 +112,11 @@ class Client {
     var hasGitData = config.keys.any((key) => key == 'service_branch' || key.substring(0, 4) == 'git_');
     if (!hasGitData) job.commitSha = config['commit_sha'] ?? '';
     else {
-      var commit = new GitCommit(config['commit_sha'] ?? '', config['git_message'] ?? '');
-      commit.authorEmail = config['git_author_email'] ?? '';
-      commit.authorName = config['git_author_name'] ?? '';
-      commit.committerEmail = config['git_committer_email'] ?? '';
-      commit.committerName = config['git_committer_email'] ?? '';
+      var commit = new GitCommit(config['commit_sha'] ?? '', config['git_message'] ?? '')
+        ..authorEmail = config['git_author_email'] ?? ''
+        ..authorName = config['git_author_name'] ?? ''
+        ..committerEmail = config['git_committer_email'] ?? ''
+        ..committerName = config['git_committer_email'] ?? '';
 
       job.git = new GitData(commit, config['service_branch'] ?? '');
     }

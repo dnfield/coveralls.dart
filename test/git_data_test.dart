@@ -20,11 +20,11 @@ void main() => group('GitData', () {
 
       expect(data.branch, equals('develop'));
 
-      expect(data.commit, new isInstanceOf<GitCommit>());
+      expect(data.commit, const isInstanceOf<GitCommit>());
       expect(data.commit.id, equals('2ef7bde608ce5404e97d5f042f95f89f1c232871'));
 
       expect(data.remotes, allOf(isList, hasLength(1)));
-      expect(data.remotes.first, new isInstanceOf<GitRemote>());
+      expect(data.remotes.first, const isInstanceOf<GitRemote>());
       expect(data.remotes.first.name, equals('origin'));
     });
   });
@@ -34,11 +34,11 @@ void main() => group('GitData', () {
       var data = await GitData.fromRepository();
       expect(data.branch, isNotEmpty);
 
-      expect(data.commit, new isInstanceOf<GitCommit>());
+      expect(data.commit, const isInstanceOf<GitCommit>());
       expect(data.commit.id, matches(new RegExp(r'^[a-f\d]{40}$')));
 
       expect(data.remotes, allOf(isList, isNotEmpty));
-      expect(data.remotes.first, new isInstanceOf<GitRemote>());
+      expect(data.remotes.first, const isInstanceOf<GitRemote>());
 
       var origin = data.remotes.where((remote) => remote.name == 'origin').toList();
       expect(origin, hasLength(1));

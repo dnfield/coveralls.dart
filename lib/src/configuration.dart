@@ -12,7 +12,7 @@ class Configuration extends MapBase<String, String> {
   /// Creates a new configuration from the variables of the specified environment.
   /// If [env] is not provided, it defaults to [Platform.environment].
   Configuration.fromEnvironment([Map<String, String> env]): _params = {} {
-    if (env == null) env = Platform.environment;
+    env ??= Platform.environment;
 
     // Standard.
     var serviceName = env['CI_NAME'] ?? '';
@@ -68,7 +68,7 @@ class Configuration extends MapBase<String, String> {
   /// Creates a new configuration from the specified YAML [document].
   /// Throws a [FormatException] if a parsing error occurred.
   Configuration.fromYaml(String document): _params = {} {
-    if (document == null || document.isEmpty) throw new FormatException('The specified YAML document is empty.');
+    if (document == null || document.isEmpty) throw const FormatException('The specified YAML document is empty.');
 
     try {
       var map = loadYaml(document);
