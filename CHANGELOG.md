@@ -3,6 +3,7 @@ This file contains highlights of what changes on each version of the [Coveralls 
 
 ## Version 2.0.0
 - Breaking change: raised the required [Dart](https://www.dartlang.org) version.
+- Breaking change: replaced the `-f|--file` named argument of the CLI script by an anonymous argument (e.g. `coveralls lcov.info` instead of `coveralls -f lcov.info`)
 - Changed licensing for the [MIT License](https://opensource.org/licenses/MIT).
 - Updated the package dependencies.
 

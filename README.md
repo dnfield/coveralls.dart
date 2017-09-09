@@ -26,10 +26,9 @@ $ coveralls --help
 Send a LCOV coverage report to the Coveralls service.
 
 Usage:
-pub global run coveralls [options]
+pub global run coveralls [options] <file>
 
 Options:
--f, --file=<file>    path to the coverage report
 -h, --help           output usage information
 -v, --version        output the version number
 ```
@@ -37,7 +36,7 @@ Options:
 For example:
 
 ```shell
-$ coveralls -f build/lcov.info
+$ coveralls build/lcov.info
 ```
 
 ### Programming interface

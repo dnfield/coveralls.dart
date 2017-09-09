@@ -7,7 +7,6 @@ import 'package:coveralls/coveralls.dart';
 
 /// The command line argument parser.
 final ArgParser _parser = new ArgParser()
-  ..addOption('file', abbr: 'f', help: 'path to the coverage report', valueHelp: 'file')
   ..addFlag('help', abbr: 'h', help: 'output usage information', negatable: false)
   ..addFlag('version', abbr: 'v', help: 'output the version number', negatable: false);
 
@@ -18,19 +17,15 @@ Future main(List<String> arguments) async {
     if (results['help']) return printUsage();
     if (results['version']) return print(version);
 
-    if (results['file'] == null) {
+    if (results.rest.isEmpty) {
       printUsage();
       exit(64);
     }
 
-    var file = new File(results['file']);
-    if (!await file.exists()) throw new FileSystemException('The specified file is not found.', file.path);
-
     var client = new Client(Platform.environment['COVERALLS_ENDPOINT'] ?? Client.defaultEndPoint);
-    var coverage = await file.readAsString();
-
+    var coverage = await new File(results.rest.first).readAsString();
     print('[Coveralls] Submitting to ${client.endPoint}');
-    await client.upload(coverage);
+    return client.upload(coverage);
   }
 
   on Exception catch (err) {
@@ -44,7 +39,7 @@ void printUsage() => print(new StringBuffer()
   ..writeln('Send a LCOV coverage report to the Coveralls service.')
   ..writeln()
   ..writeln('Usage:')
-  ..writeln('pub global run coveralls [options]')
+  ..writeln('pub global run coveralls [options] <file>')
   ..writeln()
   ..writeln('Options:')
   ..write(_parser.usage));
