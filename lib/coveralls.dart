@@ -30,6 +30,3 @@ part 'src/git_data.dart';
 part 'src/git_remote.dart';
 part 'src/job.dart';
 part 'src/source_file.dart';
-
-/// The version number of this package.
-const String version = '2.0.0';
