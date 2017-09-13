@@ -4,7 +4,7 @@ part of coveralls;
 class GitData {
 
   /// Creates a new data.
-  GitData([this.commit, this.branch = '', List<GitRemote> remotes]): remotes = remotes ?? [];
+  GitData(this.commit, {this.branch = '', List<GitRemote> remotes}): remotes = remotes ?? [];
 
   /// Creates a new data from the specified [map] in JSON format.
   GitData.fromJson(Map<String, dynamic> map):
@@ -45,11 +45,14 @@ class GitData {
       index++;
     }
 
-    var commit = new GitCommit(commands['id'], commands['message'])
-      ..authorEmail = commands['authorEmail']
-      ..authorName = commands['authorName']
-      ..committerEmail = commands['committerEmail']
-      ..committerName = commands['committerName'];
+    var commit = new GitCommit(
+      commands['id'],
+      authorEmail: commands['authorEmail'],
+      authorName: commands['authorName'],
+      committerEmail: commands['committerEmail'],
+      committerName: commands['committerName'],
+      message: commands['message']
+    );
 
     var names = [];
     var remotes = <GitRemote>[];
@@ -57,11 +60,11 @@ class GitData {
       var parts = remote.replaceAll(new RegExp(r'\s+'), ' ').split(' ');
       if (!names.contains(parts.first)) {
         names.add(parts.first);
-        remotes.add(new GitRemote(parts.first, parts.length > 1 ? parts[1] : ''));
+        remotes.add(new GitRemote(parts.first, parts.length > 1 ? Uri.parse(parts[1]) : null));
       }
     }
 
-    return new GitData(commit, commands['branch'], remotes);
+    return new GitData(commit, branch: commands['branch'], remotes: remotes);
   }
 
   /// Converts this object to a map in JSON format.

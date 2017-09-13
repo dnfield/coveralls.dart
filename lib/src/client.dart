@@ -6,10 +6,14 @@ class Client {
   /// The URL of the default API end point.
   static final Uri defaultEndPoint = Uri.parse('https://coveralls.io');
 
+  /// The handler of "request" events.
+  final StreamController<http.MultipartRequest> _onRequest = new StreamController<http.MultipartRequest>.broadcast();
+
+  /// The handler of "response" events.
+  final StreamController<http.Response> _onResponse = new StreamController<http.Response>.broadcast();
+
   /// Creates a new client.
-  Client([endPoint]) {
-    if (endPoint != null) this.endPoint = endPoint is Uri ? endPoint : Uri.parse(endPoint.toString());
-  }
+  Client([Uri endPoint]): endPoint = endPoint ?? defaultEndPoint;
 
   /// The URL of the API end point.
   Uri endPoint = defaultEndPoint;
@@ -19,12 +23,6 @@ class Client {
 
   /// The stream of "response" events.
   Stream<http.Response> get onResponse => _onResponse.stream;
-
-  /// The handler of "request" events.
-  final StreamController<http.MultipartRequest> _onRequest = new StreamController<http.MultipartRequest>.broadcast();
-
-  /// The handler of "response" events.
-  final StreamController<http.Response> _onResponse = new StreamController<http.Response>.broadcast();
 
   /// Uploads the specified code [coverage] report to the Coveralls service.
   /// A [configuration] object provides the environment settings.
@@ -91,10 +89,10 @@ class Client {
 
       var filename = path.relative(record.sourceFile);
       var digest = md5.convert(source.codeUnits).toString();
-      sourceFiles.add(new SourceFile(filename, digest, source, coverage));
+      sourceFiles.add(new SourceFile(filename, digest, coverage: coverage, source: source));
     }
 
-    return new Job(sourceFiles);
+    return new Job(sourceFiles: sourceFiles);
   }
 
   /// Updates the properties of the specified [job] using the given configuration parameters.
@@ -112,13 +110,16 @@ class Client {
     var hasGitData = config.keys.any((key) => key == 'service_branch' || key.substring(0, 4) == 'git_');
     if (!hasGitData) job.commitSha = config['commit_sha'] ?? '';
     else {
-      var commit = new GitCommit(config['commit_sha'] ?? '', config['git_message'] ?? '')
-        ..authorEmail = config['git_author_email'] ?? ''
-        ..authorName = config['git_author_name'] ?? ''
-        ..committerEmail = config['git_committer_email'] ?? ''
-        ..committerName = config['git_committer_email'] ?? '';
+      var commit = new GitCommit(
+        config['commit_sha'] ?? '',
+        authorEmail: config['git_author_email'] ?? '',
+        authorName: config['git_author_name'] ?? '',
+        committerEmail: config['git_committer_email'] ?? '',
+        committerName: config['git_committer_email'] ?? '',
+        message: config['git_message'] ?? ''
+      );
 
-      job.git = new GitData(commit, config['service_branch'] ?? '');
+      job.git = new GitData(commit, branch: config['service_branch'] ?? '');
     }
   }
 }

@@ -38,8 +38,8 @@ LH:9
 end_of_record
 
 SF:lib/src/git_commit.dart
-FN:5,GitCommit.toJSON
-FNDA:2,GitCommit.toJSON
+FN:5,GitCommit.toJson
+FNDA:2,GitCommit.toJson
 FNF:1
 FNH:1
 BRDA:8,0,0,2

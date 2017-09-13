@@ -29,18 +29,20 @@ void main() => group('GitCommit', () {
 
   group('.toJson()', () {
     test('should return a map with default values for a newly created instance', () {
-      var map = new GitCommit().toJson();
-      expect(map, allOf(isMap, hasLength(1)));
+      var map = const GitCommit('').toJson();
+      expect(map, hasLength(1));
       expect(map['id'], isEmpty);
     });
 
     test('should return a non-empty map for an initialized instance', () {
-      var map = (new GitCommit('2ef7bde608ce5404e97d5f042f95f89f1c232871', 'Hello World!')
-        ..authorEmail = 'anonymous@secret.com'
-        ..authorName = 'Anonymous'
+      var map = const GitCommit(
+        '2ef7bde608ce5404e97d5f042f95f89f1c232871',
+        authorEmail: 'anonymous@secret.com',
+        authorName: 'Anonymous',
+        message: 'Hello World!'
       ).toJson();
 
-      expect(map, allOf(isMap, hasLength(4)));
+      expect(map, hasLength(4));
       expect(map['author_email'], equals('anonymous@secret.com'));
       expect(map['author_name'], equals('Anonymous'));
       expect(map['id'], equals('2ef7bde608ce5404e97d5f042f95f89f1c232871'));
@@ -49,9 +51,11 @@ void main() => group('GitCommit', () {
   });
 
   group('.toString()', () {
-    var data = (new GitCommit('2ef7bde608ce5404e97d5f042f95f89f1c232871', 'Hello World!')
-      ..authorEmail = 'anonymous@secret.com'
-      ..authorName = 'Anonymous'
+    var data = const GitCommit(
+      '2ef7bde608ce5404e97d5f042f95f89f1c232871',
+      authorEmail: 'anonymous@secret.com',
+      authorName: 'Anonymous',
+      message: 'Hello World!'
     ).toString();
 
     test('should start with the class name', () {

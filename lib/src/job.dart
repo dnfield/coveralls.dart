@@ -4,7 +4,7 @@ part of coveralls;
 class Job {
 
   /// Creates a new job.
-  Job([List<SourceFile> sourceFiles]): sourceFiles = sourceFiles ?? [];
+  Job({this.repoToken = '', this.serviceJobId = '', this.serviceName = '', List<SourceFile> sourceFiles}): sourceFiles = sourceFiles ?? [];
 
   /// Creates a new job from the specified [map] in JSON format.
   Job.fromJson(Map<String, dynamic> map):

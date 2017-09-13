@@ -4,9 +4,7 @@ part of coveralls;
 class GitRemote {
 
   /// Creates a new remote repository.
-  GitRemote([this.name = '', url]) {
-    if (url != null) this.url = url is Uri ? url : Uri.parse(url.toString());
-  }
+  GitRemote(this.name, [this.url]);
 
   /// Creates a new source file from the specified [map] in JSON format.
   GitRemote.fromJson(Map<String, String> map):

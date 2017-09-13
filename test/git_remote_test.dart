@@ -23,20 +23,20 @@ void main() => group('GitRemote', () {
 
   group('.toJson()', () {
     test('should return a map with default values for a newly created instance', () {
-      var map = new GitRemote().toJson();
+      var map = new GitRemote('').toJson();
       expect(map['name'], isEmpty);
       expect(map['url'], isNull);
     });
 
     test('should return a non-empty map for an initialized instance', () {
-      var map = new GitRemote('origin', 'https://github.com/cedx/coveralls.dart.git').toJson();
+      var map = new GitRemote('origin', Uri.parse('https://github.com/cedx/coveralls.dart.git')).toJson();
       expect(map['name'], equals('origin'));
       expect(map['url'], equals('https://github.com/cedx/coveralls.dart.git'));
     });
   });
 
   group('.toString()', () {
-    var data = new GitRemote('origin', 'https://github.com/cedx/coveralls.dart.git').toString();
+    var data = new GitRemote('origin', Uri.parse('https://github.com/cedx/coveralls.dart.git')).toString();
 
     test('should start with the class name', () {
       expect(data.indexOf('GitRemote {'), equals(0));

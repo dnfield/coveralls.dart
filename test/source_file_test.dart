@@ -6,7 +6,7 @@ void main() => group('SourceFile', () {
   group('.fromJson()', () {
     test('should return an instance with default values for an empty map', () {
       var file = new SourceFile.fromJson(const {});
-      expect(file.coverage, allOf(isList, isEmpty));
+      expect(file.coverage, isEmpty);
       expect(file.name, isEmpty);
       expect(file.source, isEmpty);
       expect(file.sourceDigest, isEmpty);
@@ -20,7 +20,7 @@ void main() => group('SourceFile', () {
         'source_digest': '27f5ebf0f8c559b2af9419d190299a5e'
       });
 
-      expect(file.coverage, allOf(isList, hasLength(7)));
+      expect(file.coverage, hasLength(7));
       expect(file.coverage.first, isNull);
       expect(file.coverage[1], equals(2));
       expect(file.name, equals('coveralls.dart'));
@@ -31,22 +31,20 @@ void main() => group('SourceFile', () {
 
   group('.toJson()', () {
     test('should return a map with default values for a newly created instance', () {
-      var map = new SourceFile().toJson();
-      expect(map, allOf(isMap, hasLength(3)));
+      var map = new SourceFile('', '').toJson();
+      expect(map, hasLength(3));
       expect(map['coverage'], allOf(isList, isEmpty));
       expect(map['name'], isEmpty);
       expect(map['source_digest'], isEmpty);
     });
 
     test('should return a non-empty map for an initialized instance', () {
-      var map = new SourceFile(
-        'coveralls.dart',
-        '27f5ebf0f8c559b2af9419d190299a5e',
-        'void main() {}',
-        [null, 2, 0, null, 4, 15, null]
+      var map = new SourceFile('coveralls.dart', '27f5ebf0f8c559b2af9419d190299a5e',
+        coverage: [null, 2, 0, null, 4, 15, null],
+        source: 'void main() {}'
       ).toJson();
 
-      expect(map, allOf(isMap, hasLength(4)));
+      expect(map, hasLength(4));
       expect(map['coverage'], allOf(isList, hasLength(7)));
       expect(map['coverage'].first, isNull);
       expect(map['coverage'][1], equals(2));
@@ -57,11 +55,9 @@ void main() => group('SourceFile', () {
   });
 
   group('.toString()', () {
-    var data = new SourceFile(
-      'coveralls.dart',
-      '27f5ebf0f8c559b2af9419d190299a5e',
-      'void main() {}',
-      [null, 2, 0, null, 4, 15, null]
+    var data = new SourceFile('coveralls.dart', '27f5ebf0f8c559b2af9419d190299a5e',
+      coverage: [null, 2, 0, null, 4, 15, null],
+      source: 'void main() {}'
     ).toString();
 
     test('should start with the class name', () {

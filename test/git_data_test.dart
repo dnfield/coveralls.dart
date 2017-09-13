@@ -8,7 +8,7 @@ void main() => group('GitData', () {
       var data = new GitData.fromJson(const {});
       expect(data.branch, isEmpty);
       expect(data.commit, isNull);
-      expect(data.remotes, allOf(isList, isEmpty));
+      expect(data.remotes, isEmpty);
     });
 
     test('should return an initialized instance for a non-empty map', () {
@@ -23,7 +23,7 @@ void main() => group('GitData', () {
       expect(data.commit, const isInstanceOf<GitCommit>());
       expect(data.commit.id, equals('2ef7bde608ce5404e97d5f042f95f89f1c232871'));
 
-      expect(data.remotes, allOf(isList, hasLength(1)));
+      expect(data.remotes, hasLength(1));
       expect(data.remotes.first, const isInstanceOf<GitRemote>());
       expect(data.remotes.first.name, equals('origin'));
     });
@@ -37,7 +37,7 @@ void main() => group('GitData', () {
       expect(data.commit, const isInstanceOf<GitCommit>());
       expect(data.commit.id, matches(new RegExp(r'^[a-f\d]{40}$')));
 
-      expect(data.remotes, allOf(isList, isNotEmpty));
+      expect(data.remotes, isNotEmpty);
       expect(data.remotes.first, const isInstanceOf<GitRemote>());
 
       var origin = data.remotes.where((remote) => remote.name == 'origin').toList();
@@ -48,19 +48,22 @@ void main() => group('GitData', () {
 
   group('.toJson()', () {
     test('should return a map with default values for a newly created instance', () {
-      var map = new GitData().toJson();
+      var map = new GitData(null).toJson();
       expect(map['branch'], isEmpty);
       expect(map['head'], isNull);
       expect(map['remotes'], allOf(isList, isEmpty));
     });
 
     test('should return a non-empty map for an initialized instance', () {
-      var map = new GitData(new GitCommit('2ef7bde608ce5404e97d5f042f95f89f1c232871'), 'develop', [new GitRemote('origin')]).toJson();
-      expect(map['branch'], equals('develop'));
+      var map = new GitData(
+        const GitCommit('2ef7bde608ce5404e97d5f042f95f89f1c232871'),
+        branch: 'develop',
+        remotes: [new GitRemote('origin')]
+      ).toJson();
 
+      expect(map['branch'], equals('develop'));
       expect(map['head'], isMap);
       expect(map['head']['id'], equals('2ef7bde608ce5404e97d5f042f95f89f1c232871'));
-
       expect(map['remotes'], allOf(isList, hasLength(1)));
       expect(map['remotes'].first, isMap);
       expect(map['remotes'].first['name'], equals('origin'));
@@ -68,7 +71,11 @@ void main() => group('GitData', () {
   });
 
   group('.toString()', () {
-    var data = new GitData(new GitCommit('2ef7bde608ce5404e97d5f042f95f89f1c232871'), 'develop', [new GitRemote('origin')]).toString();
+    var data = new GitData(
+      const GitCommit('2ef7bde608ce5404e97d5f042f95f89f1c232871'),
+      branch: 'develop',
+      remotes: [new GitRemote('origin')]
+    ).toString();
 
     test('should start with the class name', () {
       expect(data.indexOf('GitData {'), equals(0));

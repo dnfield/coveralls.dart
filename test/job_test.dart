@@ -11,7 +11,7 @@ void main() => group('Job', () {
       expect(job.isParallel, isFalse);
       expect(job.repoToken, isEmpty);
       expect(job.runAt, isNull);
-      expect(job.sourceFiles, allOf(isList, isEmpty));
+      expect(job.sourceFiles, isEmpty);
     });
 
     test('should return an initialized instance for a non-empty map', () {
@@ -33,7 +33,7 @@ void main() => group('Job', () {
       expect(job.runAt, const isInstanceOf<DateTime>());
       expect(job.runAt.toIso8601String(), equals('2017-01-29T02:43:30.000Z'));
 
-      expect(job.sourceFiles, allOf(isList, hasLength(1)));
+      expect(job.sourceFiles, hasLength(1));
       expect(job.sourceFiles.first, const isInstanceOf<SourceFile>());
       expect(job.sourceFiles.first.name, equals('/home/cedx/coveralls.dart'));
     });
@@ -42,20 +42,19 @@ void main() => group('Job', () {
   group('.toJson()', () {
     test('should return a map with default values for a newly created instance', () {
       var map = new Job().toJson();
-      expect(map, allOf(isMap, hasLength(1)));
+      expect(map, hasLength(1));
       expect(map['source_files'], allOf(isList, isEmpty));
     });
 
     test('should return a non-empty map for an initialized instance', () {
-      var job = new Job()
-        ..git = new GitData(null, 'develop')
+      var job = new Job(repoToken: 'yYPv4mMlfjKgUK0rJPgN0AwNXhfzXpVwt')
+        ..git = new GitData(null, branch: 'develop')
         ..isParallel = true
-        ..repoToken = 'yYPv4mMlfjKgUK0rJPgN0AwNXhfzXpVwt'
         ..runAt = DateTime.parse('2017-01-29T02:43:30.000Z')
-        ..sourceFiles.add(new SourceFile('/home/cedx/coveralls.dart'));
+        ..sourceFiles.add(new SourceFile('/home/cedx/coveralls.dart', ''));
 
       var map = job.toJson();
-      expect(map, allOf(isMap, hasLength(5)));
+      expect(map, hasLength(5));
       expect(map['parallel'], isTrue);
       expect(map['repo_token'], equals('yYPv4mMlfjKgUK0rJPgN0AwNXhfzXpVwt'));
       expect(map['run_at'], equals('2017-01-29T02:43:30.000Z'));
@@ -70,12 +69,11 @@ void main() => group('Job', () {
   });
 
   group('.toString()', () {
-    var job = new Job()
-      ..git = new GitData(null, 'develop')
+    var job = new Job(repoToken: 'yYPv4mMlfjKgUK0rJPgN0AwNXhfzXpVwt')
+      ..git = new GitData(null, branch: 'develop')
       ..isParallel = true
-      ..repoToken = 'yYPv4mMlfjKgUK0rJPgN0AwNXhfzXpVwt'
       ..runAt = DateTime.parse('2017-01-29T02:43:30.000Z')
-      ..sourceFiles.add(new SourceFile('/home/cedx/coveralls.dart'));
+      ..sourceFiles.add(new SourceFile('/home/cedx/coveralls.dart', ''));
 
     var data = job.toString();
     test('should start with the class name', () {

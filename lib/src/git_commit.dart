@@ -4,7 +4,7 @@ part of coveralls;
 class GitCommit {
 
   /// Creates a new commit.
-  GitCommit([this.id = '', this.message = '']);
+  const GitCommit(this.id, {this.authorEmail = '', this.authorName = '', this.committerEmail = '', this.committerName = '', this.message = ''});
 
   /// Creates a new commit from the specified [map] in JSON format.
   GitCommit.fromJson(Map<String, String> map):
