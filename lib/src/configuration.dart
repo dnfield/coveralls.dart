@@ -68,7 +68,7 @@ class Configuration extends MapBase<String, String> {
   /// Creates a new configuration from the specified YAML [document].
   /// Throws a [FormatException] if the specified document is invalid.
   Configuration.fromYaml(String document): _params = {} {
-    if (document == null || document.isEmpty) throw const FormatException('The specified YAML document is empty.');
+    if (document == null || document.trim().isEmpty) throw const FormatException('The specified YAML document is empty.');
 
     try {
       var map = loadYaml(document);
@@ -77,7 +77,7 @@ class Configuration extends MapBase<String, String> {
     }
 
     on YamlException {
-      throw new FormatException('The specified document is invalid YAML.', document);
+      throw new FormatException('The specified YAML document is invalid.', document);
     }
   }
 
