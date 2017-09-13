@@ -36,23 +36,20 @@ class Client {
     if (token != '${Token.testName}:' && token != '${Token.sourceFile}:')
       throw new FormatException('The specified coverage format is not supported.', report);
 
-    var results = await Future.wait([
-      _parseReport(report),
-      configuration != null ? new Future.value(configuration) : Configuration.loadDefaults(),
-      where('git', onError: (_) => '')
-    ]);
+    var job = await _parseReport(report);
+    _updateJob(job, configuration ?? await Configuration.loadDefaults());
+    job.runAt ??= new DateTime.now();
 
-    var job = results.first;
-    _updateJob(job, results[1]);
-    if (!job.runAt) job.runAt = new DateTime.now();
-
-    if (results[2].isNotEmpty) {
-      var git = await GitData.fromRepository();
-      var branch = job.git != null ? job.git.branch : '';
-      if (git.branch == 'HEAD' && branch.isNotEmpty) git.branch = branch;
-      job.git = git;
+    try {
+      if ((await where('git')).isNotEmpty) {
+        var git = await GitData.fromRepository();
+        var branch = job.git != null ? job.git.branch : '';
+        if (git.branch == 'HEAD' && branch.isNotEmpty) git.branch = branch;
+        job.git = git;
+      }
     }
 
+    on Exception { /* Noop */ }
     return uploadJob(job);
   }
 

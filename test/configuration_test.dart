@@ -61,6 +61,7 @@ void main() => group('Configuration', () {
 
   group('.fromYaml()', () {
     test('should throws an exception with a non-object value', () {
+      expect(() => new Configuration.fromYaml('**123/456**'), throwsFormatException);
       expect(() => new Configuration.fromYaml('foo'), throwsFormatException);
     });
 

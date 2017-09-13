@@ -25,46 +25,29 @@ class GitData {
   /// This method relies on the availability of the Git executable in the system path.
   static Future<GitData> fromRepository([String path = '']) async {
     var commands = {
-      'authorEmail': "log -1 --pretty=format:'%ae'",
-      'authorName': "log -1 --pretty=format:'%aN'",
+      'authorEmail': "log -1 --pretty=format:%ae",
+      'authorName': "log -1 --pretty=format:%aN",
       'branch': 'rev-parse --abbrev-ref HEAD',
-      'committerEmail': "log -1 --pretty=format:'%ce'",
-      'committerName': "log -1 --pretty=format:'%cN'",
-      'id': "log -1 --pretty=format:'%H'",
-      'message': "log -1 --pretty=format:'%s'",
+      'committerEmail': "log -1 --pretty=format:%ce",
+      'committerName': "log -1 --pretty=format:%cN",
+      'id': "log -1 --pretty=format:%H",
+      'message': "log -1 --pretty=format:%s",
       'remotes': 'remote -v'
     };
 
     var workingDir = path.isNotEmpty ? path : Directory.current.path;
-    var futures = commands.keys.map((key) => Process.run('git', commands[key].split(' '), runInShell: true, workingDirectory: workingDir));
-    var results = (await Future.wait(futures)).map((result) => result.stdout.trim().replaceAll(new RegExp(r"^'+|'+$"), '')).toList();
-
-    var index = 0;
     for (var key in commands.keys) {
-      commands[key] = results[index];
-      index++;
+      var result = await Process.run('git', commands[key].split(' '), workingDirectory: workingDir);
+      commands[key] = result.stdout.trim();
     }
 
-    var commit = new GitCommit(
-      commands['id'],
-      authorEmail: commands['authorEmail'],
-      authorName: commands['authorName'],
-      committerEmail: commands['committerEmail'],
-      committerName: commands['committerName'],
-      message: commands['message']
-    );
-
-    var names = [];
-    var remotes = <GitRemote>[];
+    var remotes = {};
     for (var remote in commands['remotes'].split(new RegExp(r'\r?\n'))) {
       var parts = remote.replaceAll(new RegExp(r'\s+'), ' ').split(' ');
-      if (!names.contains(parts.first)) {
-        names.add(parts.first);
-        remotes.add(new GitRemote(parts.first, parts.length > 1 ? Uri.parse(parts[1]) : null));
-      }
+      if (!remotes.containsKey(parts.first)) remotes[parts.first] = new GitRemote(parts.first, parts.length > 1 ? Uri.parse(parts[1]) : null);
     }
 
-    return new GitData(commit, branch: commands['branch'], remotes: remotes);
+    return new GitData(new GitCommit.fromJson(commands), branch: commands['branch'], remotes: remotes.values.toList());
   }
 
   /// Converts this object to a map in JSON format.

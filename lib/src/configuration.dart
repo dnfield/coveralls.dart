@@ -66,7 +66,7 @@ class Configuration extends MapBase<String, String> {
   }
 
   /// Creates a new configuration from the specified YAML [document].
-  /// Throws a [FormatException] if a parsing error occurred.
+  /// Throws a [FormatException] if the specified document is invalid.
   Configuration.fromYaml(String document): _params = {} {
     if (document == null || document.isEmpty) throw const FormatException('The specified YAML document is empty.');
 
@@ -99,12 +99,11 @@ class Configuration extends MapBase<String, String> {
 
   /// Loads the default configuration.
   /// The default values are read from the environment variables and an optional `.coveralls.yml` file.
-  static Future<Configuration> loadDefaults([String coverallsFile = '']) async {
+  static Future<Configuration> loadDefaults([String coverallsFile = '.coveralls.yml']) async {
     var defaults = new Configuration.fromEnvironment();
 
     try {
-      var file = new File(coverallsFile.isEmpty ? '.coveralls.yml' : coverallsFile);
-      defaults.addAll(new Configuration.fromYaml(await file.readAsString()));
+      defaults.addAll(new Configuration.fromYaml(await new File(coverallsFile).readAsString()));
       return defaults;
     }
 
