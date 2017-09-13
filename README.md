@@ -67,8 +67,8 @@ Future main() async {
     print('The report was sent successfully.');
   }
   
-  on Exception catch (error) {
-    print('An error occurred: $error');
+  on Exception catch (err) {
+    print('An error occurred: $err');
   }
 }
 ```

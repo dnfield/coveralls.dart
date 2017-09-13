@@ -91,9 +91,7 @@ class Configuration extends MapBase<String, String> {
 
   /// Associates the [key] with the given [value].
   @override
-  void operator []=(String key, String value) {
-    _params[key] = value;
-  }
+  void operator []=(String key, String value) => _params[key] = value;
 
   /// Removes all pairs from this configuration.
   @override
