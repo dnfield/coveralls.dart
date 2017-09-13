@@ -12,7 +12,7 @@ void main() => group('Configuration', () {
       var keys = new Configuration({'foo': 'bar', 'bar': 'baz'}).keys.toList();
       expect(keys, hasLength(2));
       expect(keys.first, equals('foo'));
-      expect(keys[1], equals('bar'));
+      expect(keys.last, equals('bar'));
     });
   });
 
@@ -60,7 +60,7 @@ void main() => group('Configuration', () {
   });
 
   group('.fromYaml()', () {
-    test('should throws an exception with a non-object value', () {
+    test('should throw an exception with a non-object value', () {
       expect(() => new Configuration.fromYaml('**123/456**'), throwsFormatException);
       expect(() => new Configuration.fromYaml('foo'), throwsFormatException);
     });
@@ -79,6 +79,13 @@ void main() => group('Configuration', () {
       expect(config.length, greaterThanOrEqualTo(2));
       expect(config['repo_token'], equals('yYPv4mMlfjKgUK0rJPgN0AwNXhfzXpVwt'));
       expect(config['service_name'], equals('travis-pro'));
+    });
+
+    test('should use the environment defaults if the `.coveralls.yml` file is not found', () async {
+      var defaults = new Configuration.fromEnvironment();
+      var config = await Configuration.loadDefaults('.dummy/config.yml');
+      expect(config.length, equals(defaults.length));
+      for (var key in config.keys) expect(config[key], equals(defaults[key]));
     });
   });
 
