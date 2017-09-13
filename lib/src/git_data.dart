@@ -16,7 +16,7 @@ class GitData {
   String branch;
 
   /// The Git commit.
-  GitCommit commit;
+  final GitCommit commit;
 
   /// The remote repositories.
   final List<GitRemote> remotes;

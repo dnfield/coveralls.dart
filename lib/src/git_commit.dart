@@ -16,22 +16,22 @@ class GitCommit {
     message = map['message'] ?? '';
 
   /// The author mail address.
-  String authorEmail = '';
+  final String authorEmail;
 
   /// The author name.
-  String authorName = '';
+  final String authorName;
 
   /// The committer mail address.
-  String committerEmail = '';
+  final String committerEmail;
 
   /// The committer name.
-  String committerName = '';
+  final String committerName;
 
   /// The commit identifier.
-  String id;
+  final String id;
 
   /// The commit message.
-  String message;
+  final String message;
 
   /// Converts this object to a map in JSON format.
   Map<String, dynamic> toJson() {

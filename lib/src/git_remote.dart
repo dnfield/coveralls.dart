@@ -12,10 +12,10 @@ class GitRemote {
     url = map['url'] != null ? Uri.parse(map['url']) : null;
 
   /// The remote's name.
-  String name;
+  final String name;
 
   /// The remote's URL.
-  Uri url;
+  final Uri url;
 
   /// Converts this object to a map in JSON format.
   Map<String, dynamic> toJson() => {

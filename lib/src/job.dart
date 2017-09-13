@@ -29,16 +29,16 @@ class Job {
   bool isParallel = false;
 
   /// The secret token for the repository.
-  String repoToken = '';
+  String repoToken;
 
   /// A timestamp of when the job ran.
   DateTime runAt;
 
   /// A unique identifier of the job on the CI service.
-  String serviceJobId = '';
+  String serviceJobId;
 
   /// The CI service or other environment in which the test suite was run.
-  String serviceName = '';
+  String serviceName;
 
   /// The build number.
   String serviceNumber = '';

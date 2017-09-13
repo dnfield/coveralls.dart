@@ -16,7 +16,7 @@ class Client {
   Client([Uri endPoint]): endPoint = endPoint ?? defaultEndPoint;
 
   /// The URL of the API end point.
-  Uri endPoint = defaultEndPoint;
+  final Uri endPoint;
 
   /// The stream of "request" events.
   Stream<http.MultipartRequest> get onRequest => _onRequest.stream;

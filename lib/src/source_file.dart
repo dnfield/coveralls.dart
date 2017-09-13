@@ -17,13 +17,13 @@ class SourceFile {
   final List<int> coverage;
 
   /// The file path of this source file.
-  String name;
+  final String name;
 
   /// The contents of this source file.
-  String source;
+  final String source;
 
   /// The MD5 digest of the full source code of this file.
-  String sourceDigest;
+  final String sourceDigest;
 
   /// Converts this object to a map in JSON format.
   Map<String, dynamic> toJson() {
