@@ -69,7 +69,7 @@ class Client {
     _onResponse.add(response);
 
     if (response.statusCode != 200)
-      throw new HttpException('${response.statusCode} ${response.reasonPhrase}', uri: request.url);
+      throw new HttpException('An error occurred while uploading the report.', uri: request.url);
   }
 
   /// Parses the specified [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) coverage [report].
