@@ -72,26 +72,6 @@ class Client {
       throw new HttpException('An error occurred while uploading the report.', uri: request.url);
   }
 
-  /// Parses the specified [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) coverage [report].
-  Future<Job> _parseReport(String report) async {
-    var sourceFiles = <SourceFile>[];
-    for (var record in new Report.fromCoverage(report).records) {
-      var source;
-      try { source = await new File(record.sourceFile).readAsString(); }
-      on Exception { throw new FileSystemException('Source file not found.', record.sourceFile); }
-
-      var lines = source.split(new RegExp(r'\r?\n'));
-      var coverage = new List<int>(lines.length);
-      for (var lineData in record.lines.data) coverage[lineData.lineNumber - 1] = lineData.executionCount;
-
-      var filename = path.relative(record.sourceFile);
-      var digest = md5.convert(source.codeUnits).toString();
-      sourceFiles.add(new SourceFile(filename, digest, coverage: coverage, source: source));
-    }
-
-    return new Job(sourceFiles: sourceFiles);
-  }
-
   /// Updates the properties of the specified [job] using the given configuration parameters.
   void _updateJob(Job job, Configuration config) {
     if (config.containsKey('repo_token')) job.repoToken = config['repo_token'];

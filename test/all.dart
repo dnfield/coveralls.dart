@@ -6,6 +6,8 @@ import 'git_remote_test.dart' as git_remote_test;
 import 'job_test.dart' as job_test;
 import 'source_file_test.dart' as source_file_test;
 
+import 'parsers/lcov_test.dart' as lcov_test;
+
 /// Tests all the features of the package.
 void main() {
   client_test.main();
@@ -15,4 +17,6 @@ void main() {
   git_remote_test.main();
   job_test.main();
   source_file_test.main();
+
+  lcov_test.main();
 }
