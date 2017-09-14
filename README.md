@@ -1,7 +1,7 @@
 # Coveralls for Dart
 ![Runtime](https://img.shields.io/badge/dart-%3E%3D1.24-brightgreen.svg) ![Release](https://img.shields.io/pub/v/coveralls.svg) ![License](https://img.shields.io/badge/license-MIT-blue.svg) ![Coverage](https://coveralls.io/repos/github/cedx/coveralls.dart/badge.svg) ![Build](https://travis-ci.org/cedx/coveralls.dart.svg)
 
-Send [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) coverage reports to the [Coveralls](https://coveralls.io) service, in [Dart](https://www.dartlang.org).
+Send [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) and [Clover](https://www.atlassian.com/software/clover) coverage reports to the [Coveralls](https://coveralls.io) service, in [Dart](https://www.dartlang.org).
 
 ## Requirements
 The latest [Dart SDK](https://www.dartlang.org) and [Pub](https://pub.dartlang.org) versions.
@@ -23,7 +23,7 @@ Then use it to upload your coverage reports:
 ```shell
 $ coveralls --help
 
-Send a LCOV coverage report to the Coveralls service.
+Send a coverage report to the Coveralls service.
 
 Usage:
 pub global run coveralls [options] <file>
@@ -74,7 +74,9 @@ Future main() async {
 ```
 
 ## Supported coverage formats
-Currently, this package only supports the de facto standard: the [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) format.
+Currently, this package supports two formats of coverage reports:
+- [LCOV](http://ltp.sourceforge.net/coverage/lcov.php): the de facto standard.
+- [Clover](https://www.atlassian.com/software/clover): a common format produced by [Java](https://www.java.com) and [PHP](https://secure.php.net) test frameworks.
 
 ## Supported CI services
 This project has been tested with [Travis CI](https://travis-ci.com) service, but these services should also work with no extra effort:

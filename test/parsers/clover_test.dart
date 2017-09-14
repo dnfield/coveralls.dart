@@ -1,13 +1,13 @@
 import 'dart:io';
-import 'package:coveralls/src/parsers/lcov.dart';
+import 'package:coveralls/src/parsers/clover.dart';
 import 'package:path/path.dart' as path;
 import 'package:test/test.dart';
 
-/// Tests the features of the LCOV parser.
-void main() => group('Lcov', () {
+/// Tests the features of the Clover parser.
+void main() => group('Clover', () {
   group('parseReport()', () {
-    test('should properly parse LCOV reports', () async {
-      var job = await parseReport(await new File('test/fixtures/lcov.info').readAsString());
+    test('should properly parse Clover reports', () async {
+      var job = await parseReport(await new File('test/fixtures/clover.xml').readAsString());
       expect(job.sourceFiles, hasLength(3));
 
       expect(job.sourceFiles.first.name, equals(path.join('lib', 'src', 'client.dart')));

@@ -7,6 +7,10 @@ void main() => group('Client', () {
     test('should throw an exception with an empty coverage report', () {
       expect(new Client().upload(''), throwsFormatException);
     });
+
+    test('should throw an exception with an invalid coverage report', () {
+      expect(new Client().upload('end_of_record'), throwsFormatException);
+    });
   });
 
   group('.uploadJob()', () {

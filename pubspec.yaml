@@ -2,7 +2,7 @@ name: coveralls
 version: 2.0.0
 
 author: Cédric Belin <cedric@belin.io>
-description: Send LCOV coverage reports to the Coveralls service.
+description: Send LCOV and Clover coverage reports to the Coveralls service.
 documentation: https://cedx.github.io/coveralls.dart
 homepage: https://github.com/cedx/coveralls.dart
 
@@ -19,6 +19,7 @@ dependencies:
   lcov: ^3.0.0
   path: ^1.4.2
   where: ^2.1.0
+  xml: ^2.6.0
   yaml: ^2.1.12
 
 dev_dependencies:

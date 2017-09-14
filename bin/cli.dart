@@ -15,7 +15,7 @@ final ArgParser _parser = new ArgParser()
 
 /// The usage information.
 final String usage = (new StringBuffer()
-  ..writeln('Send a LCOV coverage report to the Coveralls service.')
+  ..writeln('Send a coverage report to the Coveralls service.')
   ..writeln()
   ..writeln('Usage:')
   ..writeln('pub global run coveralls [options] <file>')

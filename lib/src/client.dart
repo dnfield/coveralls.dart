@@ -32,11 +32,20 @@ class Client {
     var report = coverage.trim();
     if (report.isEmpty) throw const FormatException('The specified coverage report is empty.');
 
-    var token = report.substring(0, 3);
-    if (token != '${Token.testName}:' && token != '${Token.sourceFile}:')
-      throw new FormatException('The specified coverage format is not supported.', report);
+    var job;
+    if (report.substring(0, 5) == '<?xml' || report.substring(0, 10) == '<coverage') {
+      await clover.loadLibrary();
+      job = await clover.parseReport(report);
+    }
+    else {
+      var token = report.substring(0, 3);
+      if (token == 'TN:' || token == 'SF:') {
+        await lcov.loadLibrary();
+        job = await lcov.parseReport(report);
+      }
+    }
 
-    var job = await _parseReport(report);
+    if (job == null) throw new FormatException('The specified coverage format is not supported.', report);
     _updateJob(job, configuration ?? await Configuration.loadDefaults());
     job.runAt ??= new DateTime.now();
 

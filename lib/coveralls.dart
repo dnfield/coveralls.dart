@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 import 'package:where/where.dart' show where;
 import 'package:yaml/yaml.dart';
 
+import 'src/parsers/clover.dart' deferred as clover;
 import 'src/parsers/lcov.dart' deferred as lcov;
 
 import 'src/services/appveyor.dart' as appveyor;

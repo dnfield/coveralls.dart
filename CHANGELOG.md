@@ -7,6 +7,7 @@ This file contains highlights of what changes on each version of the [Coveralls 
 - Breaking change: raised the required [Dart](https://www.dartlang.org) version.
 - Breaking change: replaced the `-f|--file` named argument of the CLI script by an anonymous argument (e.g. `coveralls lcov.info` instead of `coveralls -f lcov.info`)
 - Breaking change: the `version` property is now private.
+- Added support for [Clover](https://www.atlassian.com/software/clover) reports.
 - Changed licensing for the [MIT License](https://opensource.org/licenses/MIT).
 - Replaced the [`which`](https://pub.dartlang.org/packages/which) module by [`where`](https://pub.dartlang.org/packages/where).
 - Updated the package dependencies.
