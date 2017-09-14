@@ -7,4 +7,4 @@ language: dart
 dart: stable
 
 script: pub run grinder test
-after_script: dart bin/cli.dart var/lcov.info
+after_success: dart bin/cli.dart var/lcov.info
