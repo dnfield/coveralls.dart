@@ -1,6 +1,9 @@
 # Changelog
 This file contains highlights of what changes on each version of the [Coveralls for Dart](https://github.com/cedx/coveralls.dart) package.
 
+## Version 2.0.1
+- Fixed a bug: the CLI script doesn't run when using the `pub global run` command.
+
 ## Version 2.0.0
 - Breaking change: changed the signature of most class constructors.
 - Breaking change: most class properties are now `final`.
