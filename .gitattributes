@@ -1,15 +1,11 @@
 * text=auto
 
-.*ignore text
-.*rc text
-.editorconfig text
-.gitattributes text
-.travis.yml text
-
+.* text
 *.dart text
-*.ico binary
 *.info text
 *.md text
-*.png binary
 *.txt text
 *.yaml text
+
+*.ico binary
+*.png binary
