@@ -23,7 +23,7 @@ void main() => group('Clover', () {
       expect(job.sourceFiles[2].coverage, containsAllInOrder([null, 2, 2, 2, 2, 2, 0, 0, 2, 2, null]));
     });
 
-    test('should throw an excepton if the Clover report is invalid', () async {
+    test('should throw an excepton if the Clover report is invalid', () {
       expect(parseReport('<coverage><foo /></coverage>'), throwsFormatException);
     });
   });
