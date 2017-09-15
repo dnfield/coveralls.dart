@@ -12,10 +12,13 @@ import 'package:xml/xml.dart' as xml;
 /// Parses the specified [Clover](https://www.atlassian.com/software/clover) coverage report.
 /// Throws a [FormatException] if a parsing error occurred.
 Future<Job> parseReport(String report) async {
+  var coverage = xml.parse(report);
+  if (coverage.findAllElements('project').isEmpty) throw new FormatException('The specified Clover report is invalid.', report);
+
   var sourceFiles = <SourceFile>[];
   for (var file in xml.parse(report).findAllElements('file')) {
     var sourceFile = file.getAttribute('name');
-    if (sourceFile == null) throw new FormatException('Invalid file data: ${file.toXmlString()}', report);
+    if (sourceFile == null || sourceFile.isEmpty) throw new FormatException('Invalid file data: ${file.toXmlString()}', report);
 
     var source = await new File(sourceFile).readAsString();
     var coverage = new List<int>(source.split(new RegExp(r'\r?\n')).length);
