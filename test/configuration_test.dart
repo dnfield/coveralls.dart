@@ -99,7 +99,7 @@ void main() => group('Configuration', () {
   });
 
   group('.toJson()', () {
-    test('should return empty map for a newly created instance', () {
+    test('should return an empty map for a newly created instance', () {
       expect(new Configuration().toJson(), isEmpty);
     });
 
