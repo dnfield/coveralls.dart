@@ -1,10 +1,10 @@
 # Changelog
 This file contains highlights of what changes on each version of the [Coveralls for Dart](https://github.com/cedx/coveralls.dart) package.
 
-## Version 2.0.1
+## Version [2.0.1](https://github.com/cedx/coveralls.dart/compare/v2.0.0...v2.0.1)
 - Fixed a bug: the CLI script doesn't run when using the `pub global run` command.
 
-## Version 2.0.0
+## Version [2.0.0](https://github.com/cedx/coveralls.dart/compare/v1.0.0...v2.0.0)
 - Breaking change: changed the signature of most class constructors.
 - Breaking change: most class properties are now `final`.
 - Breaking change: raised the required [Dart](https://www.dartlang.org) version.
@@ -15,16 +15,16 @@ This file contains highlights of what changes on each version of the [Coveralls 
 - Replaced the [`which`](https://pub.dartlang.org/packages/which) module by [`where`](https://pub.dartlang.org/packages/where).
 - Updated the package dependencies.
 
-## Version 1.0.0
+## Version [1.0.0](https://github.com/cedx/coveralls.dart/compare/v0.3.0...v1.0.0)
 - First stable release.
 
-## Version 0.3.0
+## Version [0.3.0](https://github.com/cedx/coveralls.dart/compare/v0.2.0...v0.3.0)
 - Updated the package dependencies.
 
-## Version 0.2.0
+## Version [0.2.0](https://github.com/cedx/coveralls.dart/compare/v0.1.1...v0.2.0)
 - Updated the package dependencies.
 
-## Version 0.1.1
+## Version [0.1.1](https://github.com/cedx/coveralls.dart/compare/v0.1.0...v0.1.1)
 - Updated the documentation.
 
 ## Version 0.1.0
