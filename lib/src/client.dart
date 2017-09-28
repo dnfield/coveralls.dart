@@ -27,7 +27,7 @@ class Client {
   /// Uploads the specified code [coverage] report to the Coveralls service.
   /// A [configuration] object provides the environment settings.
   ///
-  /// Throws an [FormatException] if the specified coverage report is empty, or if its format is not supported.
+  /// Throws a [FormatException] if the specified coverage report is empty, or if its format is not supported.
   Future upload(String coverage, [Configuration configuration]) async {
     var report = coverage.trim();
     if (report.isEmpty) throw const FormatException('The specified coverage report is empty.');
