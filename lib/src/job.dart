@@ -51,8 +51,7 @@ class Job {
 
   /// Converts this object to a map in JSON format.
   Map<String, dynamic> toJson() {
-    var map = <String, dynamic>{};
-
+    var map = {};
     if (repoToken.isNotEmpty) map['repo_token'] = repoToken;
     if (serviceName.isNotEmpty) map['service_name'] = serviceName;
     if (serviceNumber.isNotEmpty) map['service_number'] = serviceNumber;
