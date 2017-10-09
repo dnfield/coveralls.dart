@@ -51,7 +51,9 @@ Future main(List<String> arguments) async {
 
   // Run the program.
   try {
-    var client = new Client(Platform.environment.containsKey('COVERALLS_ENDPOINT') ? Uri.parse(Platform.environment['COVERALLS_ENDPOINT']) : Client.defaultEndPoint);
+    var endPoint = const String.fromEnvironment('endpoint') ?? Platform.environment['COVERALLS_ENDPOINT'];
+    var client = new Client(endPoint != null ? Uri.parse(endPoint) : Client.defaultEndPoint);
+
     var coverage = await new File(results.rest.first).readAsString();
     print('[Coveralls] Submitting to ${client.endPoint}');
     return client.upload(coverage);
