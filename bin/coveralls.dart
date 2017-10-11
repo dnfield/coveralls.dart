@@ -51,7 +51,7 @@ Future main(List<String> arguments) async {
 
   // Run the program.
   try {
-    var endPoint = const String.fromEnvironment('endpoint') ?? Platform.environment['COVERALLS_ENDPOINT'];
+    var endPoint = const String.fromEnvironment('coveralls_endpoint') ?? Platform.environment['COVERALLS_ENDPOINT'];
     var client = new Client(endPoint != null ? Uri.parse(endPoint) : Client.defaultEndPoint);
 
     var coverage = await new File(results.rest.first).readAsString();
