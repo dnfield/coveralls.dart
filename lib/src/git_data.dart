@@ -4,7 +4,7 @@ part of coveralls;
 class GitData {
 
   /// Creates a new data.
-  GitData(this.commit, {this.branch = '', List<GitRemote> remotes}): remotes = remotes ?? [];
+  GitData(this.commit, {this.branch = '', List<GitRemote> remotes}): remotes = new List.from(remotes ?? const []);
 
   /// Creates a new data from the specified [map] in JSON format.
   GitData.fromJson(Map<String, dynamic> map):

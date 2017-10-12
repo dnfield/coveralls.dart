@@ -9,10 +9,10 @@ void main() => group('Configuration', () {
     });
 
     test('should return the list of keys for a non-empty configuration', () {
-      var keys = new Configuration({'foo': 'bar', 'bar': 'baz'}).keys.toList();
+      var keys = new Configuration({'foo': 'bar', 'baz': 'qux'}).keys.toList();
       expect(keys, hasLength(2));
       expect(keys.first, equals('foo'));
-      expect(keys.last, equals('bar'));
+      expect(keys.last, equals('baz'));
     });
   });
 
@@ -28,7 +28,7 @@ void main() => group('Configuration', () {
 
   group('.clear()', () {
     test('should be empty when there is no CI environment variables', () {
-      var config = new Configuration({'foo': 'bar', 'bar': 'baz'});
+      var config = new Configuration({'foo': 'bar', 'baz': 'qux'});
       expect(config, hasLength(2));
       config.clear();
       expect(config, hasLength(0));
@@ -112,15 +112,17 @@ void main() => group('Configuration', () {
   });
 
   group('.toString()', () {
-    var data = new Configuration({'foo': 'bar', 'bar': 'baz'}).toString();
+    var data = new Configuration({'foo': 'bar', 'baz': 'qux'}).toString();
 
     test('should start with the class name', () {
       expect(data.indexOf('Configuration {'), equals(0));
     });
 
     test('should contain the instance properties', () {
-      expect(data, contains('"bar":"baz"'));
-      expect(data, contains('"foo":"bar"'));
+      expect(data, allOf(
+        contains('"foo":"bar"'),
+        contains('"baz":"qux"')
+      ));
     });
   });
 });

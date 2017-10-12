@@ -7,7 +7,7 @@ class Configuration extends MapBase<String, String> {
   final Map<String, String> _params;
 
   /// Creates a new configuration from the specified [map].
-  Configuration([Map<String, String> map]): _params = map ?? {};
+  Configuration([Map<String, String> map]): _params = new Map.from(map ?? const {});
 
   /// Creates a new configuration from the variables of the specified environment.
   /// If [env] is not provided, it defaults to [Platform.environment].
