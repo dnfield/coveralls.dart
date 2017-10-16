@@ -65,7 +65,7 @@ class Client {
   /// Uploads the specified [job] to the Coveralls service.
   ///
   /// Throws an [ArgumentError] if the job does not meet the requirements.
-  /// Throws a [HttpException] if the remote service does not respond successfully.
+  /// Throws an [http.ClientException] if the remote service does not respond successfully.
   Future uploadJob(Job job) async {
     if (job.repoToken.isEmpty && job.serviceName.isEmpty)
       throw new ArgumentError.value(job, 'job', 'The job does not meet the requirements.');
@@ -77,8 +77,8 @@ class Client {
     var response = await http.Response.fromStream(await request.send());
     _onResponse.add(response);
 
-    if (response.statusCode != 200)
-      throw new HttpException('An error occurred while uploading the report.', uri: request.url);
+    if ((response.statusCode / 100).truncate() != 2)
+      throw new http.ClientException('An error occurred while uploading the report.', request.url);
   }
 
   /// Updates the properties of the specified [job] using the given configuration parameters.
