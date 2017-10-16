@@ -44,7 +44,7 @@ class GitData {
     var remotes = {};
     for (var remote in commands['remotes'].split(new RegExp(r'\r?\n'))) {
       var parts = remote.replaceAll(new RegExp(r'\s+'), ' ').split(' ');
-      if (!remotes.containsKey(parts.first)) remotes[parts.first] = new GitRemote(parts.first, parts.length > 1 ? Uri.parse(parts[1]) : null);
+      remotes.putIfAbsent(parts.first, () => new GitRemote(parts.first, parts.length > 1 ? Uri.parse(parts[1]) : null));
     }
 
     return new GitData(new GitCommit.fromJson(commands), branch: commands['branch'], remotes: remotes.values.toList());
