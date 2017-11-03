@@ -65,7 +65,7 @@ class Client {
   /// Uploads the specified [job] to the Coveralls service.
   ///
   /// Throws an [ArgumentError] if the job does not meet the requirements.
-  /// Throws an [http.ClientException] if the remote service does not respond successfully.
+  /// Throws a [http.ClientException] if the remote service does not respond successfully.
   Future uploadJob(Job job) async {
     if (job.repoToken.isEmpty && job.serviceName.isEmpty)
       throw new ArgumentError.value(job, 'job', 'The job does not meet the requirements.');
