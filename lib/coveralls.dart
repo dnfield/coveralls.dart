@@ -4,7 +4,6 @@ library coveralls;
 import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
-import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:where/where.dart' show where;
 import 'package:yaml/yaml.dart';
