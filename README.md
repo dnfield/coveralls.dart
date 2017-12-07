@@ -77,7 +77,7 @@ This package supports the [Node.js](https://nodejs.org) platform.
 A JavaScript executable can be generated using the following [Grinder](http://google.github.io/grinder.dart) command:
 
 ```shell
-$ grind
+$ pub run grinder
 ```
 
 This command will build a `coveralls.js` file in the `bin` folder of this package.

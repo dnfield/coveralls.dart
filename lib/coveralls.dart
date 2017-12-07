@@ -7,7 +7,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:where/where.dart' show where;
 import 'package:yaml/yaml.dart';
-
 import 'io.dart'
   if (dart.library.io) 'src/io/vm.dart'
   if (node) 'src/io/node.dart';
@@ -28,7 +27,8 @@ import 'src/services/wercker.dart' as wercker;
 // ignore: directives_ordering
 export 'io.dart'
   if (dart.library.io) 'src/io/vm.dart'
-  if (node) 'src/io/node.dart';
+  if (node) 'src/io/node.dart'
+  show arguments, exitCode, fileSystem, platform;
 
 part 'src/client.dart';
 part 'src/configuration.dart';
