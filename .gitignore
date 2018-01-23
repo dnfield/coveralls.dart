@@ -6,4 +6,5 @@
 /*.iml
 /**/.DS_Store
 /.packages
+/bin/*.js
 /pubspec.lock

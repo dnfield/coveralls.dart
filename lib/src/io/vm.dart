@@ -15,11 +15,11 @@ set exitCode(int value) => io.exitCode = value;
 /// A reference to the file system.
 const FileSystem fileSystem = const LocalFileSystem();
 
-/// A reference to the HTTP client.
-final http.Client httpClient = new http.Client();
-
 /// A reference to the platform.
 const Platform platform = const LocalPlatform();
 
 /// A reference to the process manager.
 const ProcessManager processManager = const LocalProcessManager();
+
+/// Creates a new HTTP client.
+http.Client newHttpClient() => new http.IOClient();

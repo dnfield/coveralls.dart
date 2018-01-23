@@ -16,11 +16,11 @@ set exitCode(int value) => null;
 /// A reference to the file system.
 const FileSystem fileSystem = null;
 
-/// A reference to the HTTP client.
-final http.Client httpClient = null;
-
 /// A reference to the platform.
 const Platform platform = null;
 
 /// A reference to the process manager.
 const ProcessManager processManager = null;
+
+/// Creates a new HTTP client.
+http.Client newHttpClient() => null;

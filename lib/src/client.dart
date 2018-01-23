@@ -70,12 +70,14 @@ class Client {
     if (job.repoToken.isEmpty && job.serviceName.isEmpty)
       throw new ArgumentError.value(job, 'job', 'The job does not meet the requirements.');
 
+    var httpClient = newHttpClient();
     var request = new http.MultipartRequest('POST', endPoint.resolve('api/v1/jobs'))
       ..files.add(new http.MultipartFile.fromString('json_file', JSON.encode(job), filename: 'coveralls.json'));
 
     _onRequest.add(request);
     var response = await http.Response.fromStream(await httpClient.send(request));
     _onResponse.add(response);
+    httpClient.close();
 
     if ((response.statusCode / 100).truncate() != 2)
       throw new http.ClientException('An error occurred while uploading the report.', request.url);

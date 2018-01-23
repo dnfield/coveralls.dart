@@ -14,11 +14,11 @@ set exitCode(int value) => node.exitCode = value;
 /// A reference to the file system.
 const FileSystem fileSystem = const node.FileSystem();
 
-/// A reference to the HTTP client.
-final http.Client httpClient = null; // TODO: new node.HttpClient();
-
 /// A reference to the platform.
 const Platform platform = const node.Platform();
 
 /// A reference to the process manager.
 const ProcessManager processManager = const node.ProcessManager();
+
+/// Creates a new HTTP client.
+http.Client newHttpClient() => null; // TODO: new node.Client();

@@ -13,20 +13,26 @@ executables:
   coveralls: coveralls
 
 dependencies:
-  args: '>=0.13.7 <2.0.0'
+  args: ^1.2.0
   crypto: ^2.0.2
-  file: ^2.3.4
+  file: ^2.3.5
   http: ^0.11.3
   lcov: ^3.1.0
-  nodejs_interop: ^0.7.0
+  nodejs_interop: ^0.8.0
   platform: ^2.1.1
-  process: ^2.0.6
+  process: ^2.0.7
   where: ^3.1.0
   xml: ^2.6.0
   yaml: ^2.1.13
 
+dependency_overrides:
+  nodejs_interop:
+    path: ../nodejs-interop.dart
+  where:
+    path: ../where.dart
+
 dev_dependencies:
-  coverage: ^0.9.3
+  coverage: ^0.10.0
   node_preamble: ^1.4.0
-  grinder: ^0.8.0
-  test: ^0.12.29
+  grinder: ^0.8.1
+  test: ^0.12.30
