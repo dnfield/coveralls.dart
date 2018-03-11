@@ -25,5 +25,5 @@ class GitRemote {
 
   /// Returns a [String] representation of this object.
   @override
-  String toString() => 'GitRemote ${JSON.encode(this)}';
+  String toString() => 'GitRemote ${json.encode(this)}';
 }

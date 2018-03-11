@@ -70,5 +70,5 @@ class Job {
 
   /// Returns a [String] representation of this object.
   @override
-  String toString() => 'Job ${JSON.encode(this)}';
+  String toString() => 'Job ${json.encode(this)}';
 }

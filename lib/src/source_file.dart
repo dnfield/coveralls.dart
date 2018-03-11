@@ -40,5 +40,5 @@ class SourceFile {
 
   /// Returns a [String] representation of this object.
   @override
-  String toString() => 'SourceFile ${JSON.encode(this)}';
+  String toString() => 'SourceFile ${json.encode(this)}';
 }

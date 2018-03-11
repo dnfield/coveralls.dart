@@ -59,5 +59,5 @@ class GitData {
 
   /// Returns a [String] representation of this object.
   @override
-  String toString() => 'GitData ${JSON.encode(this)}';
+  String toString() => 'GitData ${json.encode(this)}';
 }

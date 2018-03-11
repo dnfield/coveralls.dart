@@ -17,7 +17,7 @@ void main() => group('GitRemote', () {
       });
 
       expect(remote.name, equals('origin'));
-      expect(remote.url, equals(Uri.parse('https://github.com/cedx/coveralls.dart.git')));
+      expect(remote.url, equals(new Uri.https('github.com', '/cedx/coveralls.dart.git')));
     });
   });
 
@@ -29,14 +29,14 @@ void main() => group('GitRemote', () {
     });
 
     test('should return a non-empty map for an initialized instance', () {
-      var map = new GitRemote('origin', Uri.parse('https://github.com/cedx/coveralls.dart.git')).toJson();
+      var map = new GitRemote('origin', new Uri.https('github.com', '/cedx/coveralls.dart.git')).toJson();
       expect(map['name'], equals('origin'));
       expect(map['url'], equals('https://github.com/cedx/coveralls.dart.git'));
     });
   });
 
   group('.toString()', () {
-    var data = new GitRemote('origin', Uri.parse('https://github.com/cedx/coveralls.dart.git')).toString();
+    var data = new GitRemote('origin', new Uri.https('github.com', '/cedx/coveralls.dart.git')).toString();
 
     test('should start with the class name', () {
       expect(data.indexOf('GitRemote {'), equals(0));

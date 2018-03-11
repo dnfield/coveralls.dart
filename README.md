@@ -4,7 +4,7 @@
 Send [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) and [Clover](https://www.atlassian.com/software/clover) coverage reports to the [Coveralls](https://coveralls.io) service, in [Dart](https://www.dartlang.org).
 
 ## Requirements
-The latest [Dart SDK](https://www.dartlang.org) and [Pub](https://pub.dartlang.org) versions.
+The latest [Dart SDK](https://www.dartlang.org/tools/sdk) and [Pub](https://www.dartlang.org/tools/pub) versions.
 If you plan to play with the sources, you will also need the latest [Grinder](http://google.github.io/grinder.dart) version.
 
 ## Usage
@@ -40,7 +40,7 @@ $ coveralls build/lcov.info
 ```
 
 ### Programming interface
-The hard way. Add this to your package's `pubspec.yaml` file:
+The hard way. Add this to your project's `pubspec.yaml` file:
 
 ```yaml
 dependencies:

@@ -4,7 +4,7 @@ part of coveralls;
 class Client {
 
   /// The URL of the default API end point.
-  static final Uri defaultEndPoint = Uri.parse('https://coveralls.io');
+  static final Uri defaultEndPoint = new Uri.https('coveralls.io', '/');
 
   /// The handler of "request" events.
   final StreamController<http.MultipartRequest> _onRequest = new StreamController<http.MultipartRequest>.broadcast();
@@ -72,7 +72,7 @@ class Client {
 
     var httpClient = newHttpClient();
     var request = new http.MultipartRequest('POST', endPoint.resolve('api/v1/jobs'))
-      ..files.add(new http.MultipartFile.fromString('json_file', JSON.encode(job), filename: 'coveralls.json'));
+      ..files.add(new http.MultipartFile.fromString('json_file', json.encode(job), filename: 'coveralls.json'));
 
     _onRequest.add(request);
     var response = await http.Response.fromStream(await httpClient.send(request));

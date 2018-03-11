@@ -46,5 +46,5 @@ class GitCommit {
 
   /// Returns a [String] representation of this object.
   @override
-  String toString() => 'GitCommit ${JSON.encode(this)}';
+  String toString() => 'GitCommit ${json.encode(this)}';
 }

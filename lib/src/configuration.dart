@@ -122,5 +122,5 @@ class Configuration extends MapBase<String, String> {
 
   /// Returns a [String] representation of this object.
   @override
-  String toString() => 'Configuration ${JSON.encode(this)}';
+  String toString() => 'Configuration ${json.encode(this)}';
 }

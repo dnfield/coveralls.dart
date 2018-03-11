@@ -42,7 +42,7 @@ void main() => group('GitData', () {
 
       var origin = data.remotes.where((remote) => remote.name == 'origin').toList();
       expect(origin, hasLength(1));
-      expect(origin.first.url, equals(Uri.parse('https://github.com/cedx/coveralls.dart.git')));
+      expect(origin.first.url, equals(new Uri.https('github.com', '/cedx/coveralls.dart.git')));
     });
   });
 
