@@ -59,7 +59,7 @@ Now in your [Dart](https://www.dartlang.org) code, you can use the `Client` clas
 import 'dart:async';
 import 'package:coveralls/coveralls.dart';
 
-Future main() async {
+Future<void> main() async {
   try {
     var coverage = fileSystem.file('/path/to/coverage.report');
     await new Client().upload(await coverage.readAsString());

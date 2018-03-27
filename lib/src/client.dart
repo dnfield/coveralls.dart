@@ -28,7 +28,7 @@ class Client {
   /// A [configuration] object provides the environment settings.
   ///
   /// Completes with a [FormatException] if the specified coverage report is empty, or if its format is not supported.
-  Future<Null> upload(String coverage, [Configuration configuration]) async {
+  Future<void> upload(String coverage, [Configuration configuration]) async {
     var report = coverage.trim();
     if (report.isEmpty) throw const FormatException('The specified coverage report is empty.');
 
@@ -66,7 +66,7 @@ class Client {
   ///
   /// Completes with an [ArgumentError] if the job does not meet the requirements.
   /// Completes with a [http.ClientException] if the remote service does not respond successfully.
-  Future<Null> uploadJob(Job job) async {
+  Future<void> uploadJob(Job job) async {
     if (job.repoToken.isEmpty && job.serviceName.isEmpty)
       throw new ArgumentError.value(job, 'job', 'The job does not meet the requirements.');
 

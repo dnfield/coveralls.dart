@@ -31,7 +31,7 @@ Future<String> get version async {
 }
 
 /// Application entry point.
-Future main(List<String> args) async {
+Future<void> main(List<String> args) async {
   // Parse the command line arguments.
   ArgResults results;
 
