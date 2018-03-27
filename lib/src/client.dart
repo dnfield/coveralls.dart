@@ -79,7 +79,7 @@ class Client {
     _onResponse.add(response);
     httpClient.close();
 
-    if ((response.statusCode / 100).truncate() != 2)
+    if ((response.statusCode ~/ 100) != 2)
       throw new http.ClientException('An error occurred while uploading the report.', request.url);
   }
 
