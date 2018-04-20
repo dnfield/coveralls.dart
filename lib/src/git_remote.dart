@@ -9,7 +9,7 @@ class GitRemote {
   /// Creates a new source file from the specified [map] in JSON format.
   GitRemote.fromJson(Map<String, String> map):
     name = map['name'] ?? '',
-    url = map['url'] != null ? Uri.parse(map['url']) : null;
+    url = map['url'] != null ? Uri.tryParse(map['url']) : null;
 
   /// The remote's name.
   final String name;
