@@ -13,7 +13,7 @@ executables:
   coveralls: coveralls
 
 dependencies:
-  args: ^1.4.2
+  args: ^1.4.3
   crypto: ^2.0.2
   file: ^5.0.0
   http: ^0.11.3
@@ -33,6 +33,6 @@ dependency_overrides:
 
 dev_dependencies:
   coverage: ^0.11.0
-  node_preamble: ^1.4.0
+  node_preamble: ^1.4.1
   grinder: ^0.8.1
-  test: ^0.12.34
+  test: ^0.12.35
