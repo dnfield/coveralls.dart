@@ -3,11 +3,11 @@ version: 3.0.0
 
 author: Cédric Belin <cedric@belin.io>
 description: Send LCOV and Clover coverage reports to the Coveralls service.
-documentation: https://cedx.github.io/coveralls.dart
+documentation: https://dev.belin.io/coveralls.dart
 homepage: https://github.com/cedx/coveralls.dart
 
 environment:
-  sdk: '>=2.0.0-dev.55 <2.0.0'
+  sdk: '>=2.0.0-dev.60 <2.0.0'
 
 executables:
   coveralls: coveralls
@@ -15,15 +15,15 @@ executables:
 dependencies:
   args: ^1.4.3
   crypto: ^2.0.3
-  file: ^5.0.0
+  file: ^5.0.1
   http: ^0.11.3
-  lcov: ^4.1.0
+  lcov: ^4.0.0
   nodejs_interop: ^0.10.0
   platform: ^2.1.2
   process: ^3.0.1
-  where: ^4.0.1
+  where: ^4.0.0
   xml: ^3.0.0
-  yaml: ^2.1.13
+  yaml: ^2.1.14
 
 dependency_overrides:
   nodejs_interop:
@@ -33,6 +33,6 @@ dependency_overrides:
 
 dev_dependencies:
   coverage: ^0.11.0
-  node_preamble: ^1.4.1
+  node_preamble: ^1.4.2
   grinder: ^0.8.2
-  test: ^0.12.38
+  test: ^0.12.40

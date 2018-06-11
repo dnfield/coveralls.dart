@@ -1,5 +1,5 @@
 # Coveralls for Dart
-![Runtime](https://img.shields.io/badge/dart-%3E%3D1.24-brightgreen.svg) ![Release](https://img.shields.io/pub/v/coveralls.svg) ![License](https://img.shields.io/badge/license-MIT-blue.svg) ![Coverage](https://coveralls.io/repos/github/cedx/coveralls.dart/badge.svg) ![Build](https://travis-ci.org/cedx/coveralls.dart.svg)
+![Runtime](https://img.shields.io/badge/dart-%3E%3D1.24-brightgreen.svg) ![Release](https://img.shields.io/pub/v/coveralls.svg) ![License](https://img.shields.io/badge/license-MIT-blue.svg) ![Coverage](https://coveralls.io/repos/github/cedx/coveralls.dart/badge.svg) ![Build](https://travis-ci.com/cedx/coveralls.dart.svg)
 
 Send [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) and [Clover](https://www.atlassian.com/software/clover) coverage reports to the [Coveralls](https://coveralls.io) service, in [Dart](https://www.dartlang.org).
 
@@ -126,9 +126,9 @@ This package supports the same configuration sources as the [Coveralls](https://
 [Coveralls currently supports](https://coveralls.zendesk.com/hc/en-us/articles/201347419-Coveralls-currently-supports)
 
 ## See also
-- [API reference](https://cedx.github.io/coveralls.dart)
+- [API reference](https://dev.belin.io/coveralls.dart)
 - [Code coverage](https://coveralls.io/github/cedx/coveralls.dart)
-- [Continuous integration](https://travis-ci.org/cedx/coveralls.dart)
+- [Continuous integration](https://travis-ci.com/cedx/coveralls.dart)
 
 ## License
 [Coveralls for Dart](https://github.com/cedx/coveralls.dart) is distributed under the MIT License.
