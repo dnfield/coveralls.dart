@@ -37,7 +37,7 @@ LF:9
 LH:9
 end_of_record
 
-SF:lib/src/git_commit.dart
+SF:lib/src/git.dart
 FN:5,GitCommit.toJson
 FNDA:2,GitCommit.toJson
 FNF:1

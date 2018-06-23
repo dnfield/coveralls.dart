@@ -18,7 +18,7 @@ void main() => group('Lcov', () {
       expect(job.sourceFiles[1].sourceDigest, isNotEmpty);
       expect(job.sourceFiles[1].coverage, containsAllInOrder([null, 4, 4, 2, 2, 4, 2, 2, 4, 4, null]));
 
-      expect(job.sourceFiles[2].name, equals(p.join('lib', 'src', 'git_commit.dart')));
+      expect(job.sourceFiles[2].name, equals(p.join('lib', 'src', 'git.dart')));
       expect(job.sourceFiles[2].sourceDigest, isNotEmpty);
       expect(job.sourceFiles[2].coverage, containsAllInOrder([null, 2, 2, 2, 2, 2, 0, 0, 2, 2, null]));
     });

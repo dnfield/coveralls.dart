@@ -26,8 +26,6 @@ export 'package:http/http.dart' show ClientException;
 
 part 'src/client.dart';
 part 'src/configuration.dart';
-part 'src/git_commit.dart';
-part 'src/git_data.dart';
-part 'src/git_remote.dart';
+part 'src/git.dart';
 part 'src/job.dart';
 part 'src/source_file.dart';
