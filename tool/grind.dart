@@ -21,7 +21,7 @@ void coverage() => Dart.run('bin/coveralls.dart', arguments: ['var/lcov.info']);
 @Task('Build the documentation')
 void doc() {
   DartDoc.doc();
-  // TODO: run('mkdocs', arguments: ['build']);
+  run('mkdocs', arguments: ['build']);
 }
 
 /// Fixes the coding standards issues.
