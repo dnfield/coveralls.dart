@@ -5,7 +5,7 @@ Send [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) and [Clover](https://w
 Append the following line to your project's `pubspec.yaml` file:
 
 ```yaml
-dev_dependencies:
+dependencies:
   coveralls: *
 ```
 
