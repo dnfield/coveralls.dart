@@ -22,6 +22,8 @@ import 'src/services/surf.dart' as surf;
 import 'src/services/travis_ci.dart' as travis_ci;
 import 'src/services/wercker.dart' as wercker;
 
+export 'package:http/http.dart' show ClientException;
+
 part 'src/client.dart';
 part 'src/configuration.dart';
 part 'src/git_commit.dart';
