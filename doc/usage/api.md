@@ -13,12 +13,12 @@ Future<void> main() async {
     print('The report was sent successfully.');
   }
 
-  on ClientException catch (err) {
+  on Exception catch (err) {
     print('An error occurred: $err');
   }
 }
 ```
 
-The `Client#upload()` method returns a [`Future`](https://api.dartlang.org/stable/dart-async/Future-class.html) that completes when the message has been sent.
+The `Client#upload()` method returns a [`Future`](https://api.dartlang.org/stable/dart-async/Future-class.html) that completes when the coverage report has been uploaded.
 
-The future completes with a `ClientException` if any error occurred while uploading the report.
+The future completes with a `FormatException` if the input report is invalid. It completes with a `ClientException` if any error occurred while uploading the report.
