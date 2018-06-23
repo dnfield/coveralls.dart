@@ -7,7 +7,7 @@ docs_dir: doc
 site_dir: web
 
 repo_name: GitHub
-repo_url: https://github.com/cedx/lcov.dart
+repo_url: https://github.com/cedx/coveralls.dart
 edit_uri: ''
 
 copyright: Copyright &copy; 2017 - 2018 Cédric Belin

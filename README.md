@@ -3,9 +3,11 @@
 
 Send [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) and [Clover](https://www.atlassian.com/software/clover) coverage reports to the [Coveralls](https://coveralls.io) service, in [Dart](https://www.dartlang.org).
 
-## Requirements
-The latest [Dart SDK](https://www.dartlang.org/tools/sdk) and [Pub](https://www.dartlang.org/tools/pub) versions.
-If you plan to play with the sources, you will also need the latest [Grinder](http://google.github.io/grinder.dart) version.
+## Resources
+- [Documentation](https://dev.belin.io/coveralls.dart)
+- [API reference](https://dev.belin.io/coveralls.dart/api)
+- [Pub package](https://pub.dartlang.org/packages/coveralls)
+- [GitHub repository](https://github.com/cedx/coveralls.dart)
 
 ## Usage
 
@@ -106,11 +108,6 @@ The full list of supported environment variables is available in the source code
 ### The `.coveralls.yml` file
 This package supports the same configuration sources as the [Coveralls](https://coveralls.io) ones:  
 [Coveralls currently supports](https://coveralls.zendesk.com/hc/en-us/articles/201347419-Coveralls-currently-supports)
-
-## See also
-- [API reference](https://dev.belin.io/coveralls.dart)
-- [Code coverage](https://coveralls.io/github/cedx/coveralls.dart)
-- [Continuous integration](https://travis-ci.com/cedx/coveralls.dart)
 
 ## License
 [Coveralls for Dart](https://dev.belin.io/coveralls.dart) is distributed under the MIT License.
