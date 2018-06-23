@@ -1,22 +1,22 @@
 #!/usr/bin/env dart
 
 import 'dart:async';
+import 'dart:io';
 import 'dart:isolate';
 import 'package:args/args.dart';
 import 'package:coveralls/coveralls.dart';
 import 'package:yaml/yaml.dart';
 
 /// The command line argument parser.
-final ArgParser _parser = new ArgParser()
-  ..addFlag('help', abbr: 'h', help: 'output usage information', negatable: false)
-  ..addFlag('version', abbr: 'v', help: 'output the version number', negatable: false);
+final ArgParser _parser = ArgParser()
+  ..addFlag('help', abbr: 'h', help: 'Output usage information.', negatable: false)
+  ..addFlag('version', abbr: 'v', help: 'Output the version number.', negatable: false);
 
 /// The usage information.
-final String usage = (new StringBuffer()
+final String usage = (StringBuffer()
   ..writeln('Send a coverage report to the Coveralls service.')
   ..writeln()
-  ..writeln('Usage:')
-  ..writeln('coveralls [options] <file>')
+  ..writeln('Usage: coveralls [options] <file>')
   ..writeln()
   ..writeln('Options:')
   ..write(_parser.usage))
@@ -24,9 +24,8 @@ final String usage = (new StringBuffer()
 
 /// The version number of this package.
 Future<String> get version async {
-  var path = const bool.fromEnvironment('node') ? '../../pubspec.yaml' : '../pubspec.yaml';
-  var uri = (await Isolate.resolvePackageUri(Uri.parse('package:coveralls/'))).resolve(path);
-  var pubspec = loadYaml(await fileSystem.file(uri.toFilePath(windows: platform.isWindows)).readAsString());
+  var package = await Isolate.resolvePackageUri(Uri.parse('package:coveralls/'));
+  var pubspec = loadYaml(await File(package.resolve('../pubspec.yaml').toFilePath()).readAsString());
   return pubspec['version'];
 }
 
@@ -36,7 +35,7 @@ Future<void> main(List<String> args) async {
   ArgResults results;
 
   try {
-    results = _parser.parse(const bool.fromEnvironment('node') ? arguments : args);
+    results = _parser.parse(args);
     if (results['help']) {
       print(usage);
       return;
@@ -47,7 +46,7 @@ Future<void> main(List<String> args) async {
       return;
     }
 
-    if (results.rest.isEmpty) throw new ArgParserException('A coverage report must be provided.');
+    if (results.rest.isEmpty) throw ArgParserException('A coverage report must be provided.');
   }
 
   on ArgParserException {
@@ -58,10 +57,10 @@ Future<void> main(List<String> args) async {
 
   // Run the program.
   try {
-    var endPoint = const String.fromEnvironment('coveralls_endpoint') ?? platform.environment['COVERALLS_ENDPOINT'];
-    var client = new Client(endPoint != null ? Uri.parse(endPoint) : Client.defaultEndPoint);
+    var endPoint = const String.fromEnvironment('coveralls_endpoint') ?? Platform.environment['COVERALLS_ENDPOINT'];
+    var client = Client(endPoint != null ? Uri.parse(endPoint) : Client.defaultEndPoint);
 
-    var coverage = await fileSystem.file(results.rest.first).readAsString();
+    var coverage = await File(results.rest.first).readAsString();
     print('[Coveralls] Submitting to ${client.endPoint}');
     await client.upload(coverage);
   }

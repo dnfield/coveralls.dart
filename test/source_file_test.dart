@@ -5,7 +5,7 @@ import 'package:test/test.dart';
 void main() => group('SourceFile', () {
   group('.fromJson()', () {
     test('should return an instance with default values for an empty map', () {
-      var file = new SourceFile.fromJson(const {});
+      var file = SourceFile.fromJson({});
       expect(file.coverage, isEmpty);
       expect(file.name, isEmpty);
       expect(file.source, isEmpty);
@@ -13,7 +13,7 @@ void main() => group('SourceFile', () {
     });
 
     test('should return an initialized instance for a non-empty map', () {
-      var file = new SourceFile.fromJson({
+      var file = SourceFile.fromJson({
         'coverage': [null, 2, 0, null, 4, 15, null],
         'name': 'coveralls.dart',
         'source': 'void main() {}',
@@ -31,7 +31,7 @@ void main() => group('SourceFile', () {
 
   group('.toJson()', () {
     test('should return a map with default values for a newly created instance', () {
-      var map = new SourceFile('', '').toJson();
+      var map = SourceFile('', '').toJson();
       expect(map, hasLength(3));
       expect(map['coverage'], allOf(isList, isEmpty));
       expect(map['name'], isEmpty);
@@ -39,7 +39,7 @@ void main() => group('SourceFile', () {
     });
 
     test('should return a non-empty map for an initialized instance', () {
-      var map = new SourceFile('coveralls.dart', '27f5ebf0f8c559b2af9419d190299a5e',
+      var map = SourceFile('coveralls.dart', '27f5ebf0f8c559b2af9419d190299a5e',
         coverage: [null, 2, 0, null, 4, 15, null],
         source: 'void main() {}'
       ).toJson();
@@ -55,7 +55,7 @@ void main() => group('SourceFile', () {
   });
 
   group('.toString()', () {
-    var data = new SourceFile('coveralls.dart', '27f5ebf0f8c559b2af9419d190299a5e',
+    var data = SourceFile('coveralls.dart', '27f5ebf0f8c559b2af9419d190299a5e',
       coverage: [null, 2, 0, null, 4, 15, null],
       source: 'void main() {}'
     ).toString();

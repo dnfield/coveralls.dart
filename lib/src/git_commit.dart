@@ -35,7 +35,7 @@ class GitCommit {
 
   /// Converts this object to a [Map] in JSON format.
   Map<String, dynamic> toJson() {
-    var map = {'id': id};
+    var map = <String, dynamic>{'id': id};
     if (authorEmail.isNotEmpty) map['author_email'] = authorEmail;
     if (authorName.isNotEmpty) map['author_name'] = authorName;
     if (committerEmail.isNotEmpty) map['committer_email'] = committerEmail;

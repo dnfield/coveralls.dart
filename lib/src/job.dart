@@ -4,13 +4,13 @@ part of coveralls;
 class Job {
 
   /// Creates a new job.
-  Job({this.repoToken = '', this.serviceJobId = '', this.serviceName = '', List<SourceFile> sourceFiles}):
-    sourceFiles = new List.from(sourceFiles ?? const []);
+  Job({this.repoToken = '', this.serviceJobId = '', this.serviceName = '', Iterable<SourceFile> sourceFiles}):
+    sourceFiles = List<SourceFile>.from(sourceFiles ?? const <SourceFile>[]);
 
   /// Creates a new job from the specified [map] in JSON format.
   Job.fromJson(Map<String, dynamic> map):
     commitSha = map['commit_sha'] is String ? map['commit_sha'] : '',
-    git = map['git'] is Map<String, dynamic> ? new GitData.fromJson(map['git']) : null,
+    git = map['git'] is Map<String, dynamic> ? GitData.fromJson(map['git']) : null,
     isParallel = map['parallel'] is bool ? map['parallel'] : false,
     repoToken = map['repo_token'] is String ? map['repo_token'] : '',
     runAt = map['run_at'] is String ? DateTime.parse(map['run_at']) : null,
@@ -18,7 +18,7 @@ class Job {
     serviceName = map['service_name'] is String ? map['service_name'] : '',
     serviceNumber = map['service_number'] is String ? map['service_number'] : '',
     servicePullRequest = map['service_pull_request'] is String ? map['service_pull_request'] : '',
-    sourceFiles = map['source_files'] is List<Map> ? map['source_files'].map((item) => new SourceFile.fromJson(item)).toList() : [];
+    sourceFiles = map['source_files'] is List<Map<String, dynamic>> ? map['source_files'].map((item) => SourceFile.fromJson(item)).cast<SourceFile>().toList() : <SourceFile>[];
 
   /// The current SHA of the commit being built to override the [git] property.
   String commitSha = '';
@@ -52,7 +52,7 @@ class Job {
 
   /// Converts this object to a [Map] in JSON format.
   Map<String, dynamic> toJson() {
-    var map = {};
+    var map = <String, dynamic>{};
     if (repoToken.isNotEmpty) map['repo_token'] = repoToken;
     if (serviceName.isNotEmpty) map['service_name'] = serviceName;
     if (serviceNumber.isNotEmpty) map['service_number'] = serviceNumber;

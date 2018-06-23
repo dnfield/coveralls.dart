@@ -5,7 +5,7 @@ import 'package:test/test.dart';
 void main() => group('GitCommit', () {
   group('.fromJson()', () {
     test('should return an instance with default values for an empty map', () {
-      var commit = new GitCommit.fromJson(const {});
+      var commit = GitCommit.fromJson({});
       expect(commit.authorEmail, isEmpty);
       expect(commit.authorName, isEmpty);
       expect(commit.id, isEmpty);
@@ -13,7 +13,7 @@ void main() => group('GitCommit', () {
     });
 
     test('should return an initialized instance for a non-empty map', () {
-      var commit = new GitCommit.fromJson({
+      var commit = GitCommit.fromJson({
         'author_email': 'anonymous@secret.com',
         'author_name': 'Anonymous',
         'id': '2ef7bde608ce5404e97d5f042f95f89f1c232871',

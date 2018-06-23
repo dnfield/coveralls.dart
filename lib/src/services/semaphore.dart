@@ -1,7 +1,7 @@
 import 'package:coveralls/coveralls.dart';
 
 /// Gets the configuration parameters from the specified environment.
-Configuration getConfiguration(Map<String, String> env) => new Configuration({
+Configuration getConfiguration(Map<String, String> env) => Configuration({
   'commit_sha': env['REVISION'],
   'service_branch': env['BRANCH_NAME'],
   'service_name': 'semaphore',

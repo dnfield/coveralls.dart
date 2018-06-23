@@ -1,22 +1,24 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:math' as math;
 import 'package:coveralls/coveralls.dart';
 import 'package:crypto/crypto.dart';
+import 'package:path/path.dart' as p;
 import 'package:xml/xml.dart' as xml;
 
 /// Parses the specified [Clover](https://www.atlassian.com/software/clover) coverage report.
 /// Throws a [FormatException] if a parsing error occurred.
 Future<Job> parseReport(String report) async {
   var coverage = xml.parse(report);
-  if (coverage.findAllElements('project').isEmpty) throw new FormatException('The specified Clover report is invalid.', report);
+  if (coverage.findAllElements('project').isEmpty) throw FormatException('The specified Clover report is invalid.', report);
 
   var sourceFiles = <SourceFile>[];
   for (var file in xml.parse(report).findAllElements('file')) {
     var sourceFile = file.getAttribute('name');
-    if (sourceFile == null || sourceFile.isEmpty) throw new FormatException('Invalid file data: ${file.toXmlString()}', report);
+    if (sourceFile == null || sourceFile.isEmpty) throw FormatException('Invalid file data: ${file.toXmlString()}', report);
 
-    var source = await fileSystem.file(sourceFile).readAsString();
-    var coverage = new List<int>(source.split(new RegExp(r'\r?\n')).length);
+    var source = await File(sourceFile).readAsString();
+    var coverage = List<int>(source.split(RegExp(r'\r?\n')).length);
 
     for (var line in file.findAllElements('line')) {
       if (line.getAttribute('type') != 'stmt') continue;
@@ -24,10 +26,10 @@ Future<Job> parseReport(String report) async {
       coverage[lineNumber - 1] = math.max(0, int.parse(line.getAttribute('count'), radix: 10));
     }
 
-    var filename = fileSystem.path.relative(sourceFile);
+    var filename = p.relative(sourceFile);
     var digest = md5.convert(source.codeUnits).toString();
-    sourceFiles.add(new SourceFile(filename, digest, coverage: coverage, source: source));
+    sourceFiles.add(SourceFile(filename, digest, coverage: coverage, source: source));
   }
 
-  return new Job(sourceFiles: sourceFiles);
+  return Job(sourceFiles: sourceFiles);
 }

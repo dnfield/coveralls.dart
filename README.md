@@ -61,8 +61,8 @@ import 'package:coveralls/coveralls.dart';
 
 Future<void> main() async {
   try {
-    var coverage = fileSystem.file('/path/to/coverage.report');
-    await new Client().upload(await coverage.readAsString());
+    var coverage = File('/path/to/coverage.report');
+    await Client().upload(await coverage.readAsString());
     print('The report was sent successfully.');
   }
 
@@ -71,24 +71,6 @@ Future<void> main() async {
   }
 }
 ```
-
-### Node.js support
-This package supports the [Node.js](https://nodejs.org) platform.
-A JavaScript executable can be generated using the following [Grinder](http://google.github.io/grinder.dart) command:
-
-```shell
-$ pub run grinder
-```
-
-This command will build a `coveralls.js` file in the `bin` folder of this package.
-The generated executable has the same features as the [Dart](https://www.dartlang.org) command line:
-
-```shell
-$ node bin/coveralls.js --help
-$ node bin/coveralls.js build/lcov.info
-```
-
-> Node.js support is provided through the [`nodejs_interop`](https://pub.dartlang.org/packages/nodejs_interop) library.
 
 ## Features
 

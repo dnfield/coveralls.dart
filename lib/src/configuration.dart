@@ -7,12 +7,12 @@ class Configuration extends MapBase<String, String> {
   final Map<String, String> _params;
 
   /// Creates a new configuration from the specified [map].
-  Configuration([Map<String, String> map]): _params = new Map.from(map ?? const {});
+  Configuration([Map<String, String> map]): _params = Map<String, String>.from(map ?? const <String, String>{});
 
   /// Creates a new configuration from the variables of the specified environment.
-  /// If [env] is not provided, it defaults to `platform.environment`.
-  Configuration.fromEnvironment([Map<String, String> env]): _params = {} {
-    env ??= platform.environment;
+  /// If [env] is not provided, it defaults to `Platform.environment`.
+  Configuration.fromEnvironment([Map<String, String> env]): _params = <String, String>{} {
+    env ??= Platform.environment;
 
     // Standard.
     var serviceName = env['CI_NAME'] ?? '';
@@ -25,7 +25,7 @@ class Configuration extends MapBase<String, String> {
     if (env.containsKey('CI_JOB_ID')) this['service_job_id'] = env['CI_JOB_ID'];
 
     if (env.containsKey('CI_PULL_REQUEST')) {
-      var matches = new RegExp(r'(\d+)$').allMatches(env['CI_PULL_REQUEST']);
+      var matches = RegExp(r'(\d+)$').allMatches(env['CI_PULL_REQUEST']);
       if (matches.isNotEmpty && matches.first.groupCount >= 1) this['service_pull_request'] = matches.first[1];
     }
 
@@ -67,17 +67,17 @@ class Configuration extends MapBase<String, String> {
 
   /// Creates a new configuration from the specified YAML [document].
   /// Throws a [FormatException] if the specified document is invalid.
-  Configuration.fromYaml(String document): _params = {} {
+  Configuration.fromYaml(String document): _params = <String, String>{} {
     if (document == null || document.trim().isEmpty) throw const FormatException('The specified YAML document is empty.');
 
     try {
       var map = loadYaml(document);
-      if (map is! Map<String, String>) throw new FormatException('The specified YAML document is invalid.', document);
-      addAll(map);
+      if (map is! Map) throw FormatException('The specified YAML document is invalid.', document);
+      addAll(map.cast<String, String>());
     }
 
     on YamlException {
-      throw new FormatException('The specified YAML document is invalid.', document);
+      throw FormatException('The specified YAML document is invalid.', document);
     }
   }
 
@@ -100,10 +100,10 @@ class Configuration extends MapBase<String, String> {
   /// Loads the default configuration.
   /// The default values are read from the environment variables and an optional `.coveralls.yml` file.
   static Future<Configuration> loadDefaults([String coverallsFile = '.coveralls.yml']) async {
-    var defaults = new Configuration.fromEnvironment();
+    var defaults = Configuration.fromEnvironment();
 
     try {
-      defaults.addAll(new Configuration.fromYaml(await fileSystem.file(coverallsFile).readAsString()));
+      defaults.addAll(Configuration.fromYaml(await File(coverallsFile).readAsString()));
       return defaults;
     }
 

@@ -4,12 +4,10 @@ library coveralls;
 import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:where/where.dart' show where;
 import 'package:yaml/yaml.dart';
-import 'io.dart'
-  if (dart.library.io) 'src/io/vm.dart'
-  if (node) 'src/io/node.dart';
 
 import 'src/parsers/clover.dart' deferred as clover;
 import 'src/parsers/lcov.dart' deferred as lcov;
@@ -23,12 +21,6 @@ import 'src/services/solano_ci.dart' as solano_ci;
 import 'src/services/surf.dart' as surf;
 import 'src/services/travis_ci.dart' as travis_ci;
 import 'src/services/wercker.dart' as wercker;
-
-// ignore: directives_ordering
-export 'io.dart'
-  if (dart.library.io) 'src/io/vm.dart'
-  if (node) 'src/io/node.dart'
-  show arguments, exitCode, fileSystem, platform;
 
 part 'src/client.dart';
 part 'src/configuration.dart';

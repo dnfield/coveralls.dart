@@ -4,13 +4,13 @@ part of coveralls;
 class GitData {
 
   /// Creates a new data.
-  GitData(this.commit, {this.branch = '', List<GitRemote> remotes}): remotes = new List.from(remotes ?? const []);
+  GitData(this.commit, {this.branch = '', Iterable<GitRemote> remotes}): remotes = List<GitRemote>.from(remotes ?? const <GitRemote>[]);
 
   /// Creates a new data from the specified [map] in JSON format.
   GitData.fromJson(Map<String, dynamic> map):
     branch = map['branch'] is String ? map['branch'] : '',
-    commit = map['head'] is Map<String, String> ? new GitCommit.fromJson(map['head']) : null,
-    remotes = map['remotes'] is List<Map<String, String>> ? map['remotes'].map((item) => new GitRemote.fromJson(item)).toList() : [];
+    commit = map['head'] is Map<String, String> ? GitCommit.fromJson(map['head']) : null,
+    remotes = map['remotes'] is List<Map<String, String>> ? map['remotes'].map((item) => GitRemote.fromJson(item)).cast<GitRemote>().toList() : <GitRemote>[];
 
   /// The branch name.
   String branch;
@@ -35,19 +35,19 @@ class GitData {
       'remotes': 'remote -v'
     };
 
-    var workingDir = path.isNotEmpty ? path : fileSystem.currentDirectory.path;
+    var workingDir = path.isNotEmpty ? path : Directory.current.path;
     for (var key in commands.keys) {
-      var result = await processManager.run(['git']..addAll(commands[key].split(' ')), workingDirectory: workingDir);
+      var result = await Process.run('git', commands[key].split(' '), workingDirectory: workingDir);
       commands[key] = result.stdout.trim();
     }
 
-    var remotes = {};
-    for (var remote in commands['remotes'].split(new RegExp(r'\r?\n'))) {
-      var parts = remote.replaceAll(new RegExp(r'\s+'), ' ').split(' ');
-      remotes.putIfAbsent(parts.first, () => new GitRemote(parts.first, parts.length > 1 ? Uri.parse(parts[1]) : null));
+    var remotes = <String, GitRemote>{};
+    for (var remote in commands['remotes'].split(RegExp(r'\r?\n'))) {
+      var parts = remote.replaceAll(RegExp(r'\s+'), ' ').split(' ');
+      remotes.putIfAbsent(parts.first, () => GitRemote(parts.first, parts.length > 1 ? Uri.parse(parts[1]) : null));
     }
 
-    return new GitData(new GitCommit.fromJson(commands), branch: commands['branch'], remotes: remotes.values.toList());
+    return GitData(GitCommit.fromJson(commands), branch: commands['branch'], remotes: remotes.values);
   }
 
   /// Converts this object to a [Map] in JSON format.

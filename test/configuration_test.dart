@@ -5,11 +5,11 @@ import 'package:test/test.dart';
 void main() => group('Configuration', () {
   group('.keys', () {
     test('should return an empty array for an empty configuration', () {
-      expect(new Configuration().keys, isEmpty);
+      expect(Configuration().keys, isEmpty);
     });
 
     test('should return the list of keys for a non-empty configuration', () {
-      var keys = new Configuration({'foo': 'bar', 'baz': 'qux'}).keys.toList();
+      var keys = Configuration({'foo': 'bar', 'baz': 'qux'}).keys.toList();
       expect(keys, hasLength(2));
       expect(keys.first, equals('foo'));
       expect(keys.last, equals('baz'));
@@ -18,7 +18,7 @@ void main() => group('Configuration', () {
 
   group('operator []', () {
     test('should properly get and set the configuration entries', () {
-      var config = new Configuration();
+      var config = Configuration();
       expect(config['foo'], isNull);
 
       config['foo'] = 'bar';
@@ -28,7 +28,7 @@ void main() => group('Configuration', () {
 
   group('.clear()', () {
     test('should be empty when there is no CI environment variables', () {
-      var config = new Configuration({'foo': 'bar', 'baz': 'qux'});
+      var config = Configuration({'foo': 'bar', 'baz': 'qux'});
       expect(config, hasLength(2));
       config.clear();
       expect(config, hasLength(0));
@@ -37,11 +37,11 @@ void main() => group('Configuration', () {
 
   group('.fromEnvironment()', () {
     test('should return an empty configuration for an empty environment', () {
-      expect(new Configuration.fromEnvironment({}), isEmpty);
+      expect(Configuration.fromEnvironment({}), isEmpty);
     });
 
     test('should return an initialized instance for a non-empty environment', () {
-      var config = new Configuration.fromEnvironment({
+      var config = Configuration.fromEnvironment({
         'CI_NAME': 'travis-pro',
         'CI_PULL_REQUEST': 'PR #123',
         'COVERALLS_REPO_TOKEN': '0123456789abcdef',
@@ -61,12 +61,12 @@ void main() => group('Configuration', () {
 
   group('.fromYaml()', () {
     test('should throw an exception with a non-object value', () {
-      expect(() => new Configuration.fromYaml('**123/456**'), throwsFormatException);
-      expect(() => new Configuration.fromYaml('foo'), throwsFormatException);
+      expect(() => Configuration.fromYaml('**123/456**'), throwsFormatException);
+      expect(() => Configuration.fromYaml('foo'), throwsFormatException);
     });
 
     test('should return an initialized instance for a non-empty map', () {
-      var config = new Configuration.fromYaml('repo_token: 0123456789abcdef\nservice_name: travis-ci');
+      var config = Configuration.fromYaml('repo_token: 0123456789abcdef\nservice_name: travis-ci');
       expect(config, hasLength(2));
       expect(config['repo_token'], equals('0123456789abcdef'));
       expect(config['service_name'], equals('travis-ci'));
@@ -82,7 +82,7 @@ void main() => group('Configuration', () {
     });
 
     test('should use the environment defaults if the `.coveralls.yml` file is not found', () async {
-      var defaults = new Configuration.fromEnvironment();
+      var defaults = Configuration.fromEnvironment();
       var config = await Configuration.loadDefaults('.dummy/config.yml');
       expect(config.length, equals(defaults.length));
       for (var key in config.keys) expect(config[key], equals(defaults[key]));
@@ -91,7 +91,7 @@ void main() => group('Configuration', () {
 
   group('.remove()', () {
     test('should be empty when there is no CI environment variables', () {
-      var config = new Configuration({'foo': 'bar', 'bar': 'baz'});
+      var config = Configuration({'foo': 'bar', 'bar': 'baz'});
       expect(config, contains('foo'));
       config.remove('foo');
       expect(config, isNot(contains('foo')));
@@ -100,11 +100,11 @@ void main() => group('Configuration', () {
 
   group('.toJson()', () {
     test('should return an empty map for a newly created instance', () {
-      expect(new Configuration().toJson(), isEmpty);
+      expect(Configuration().toJson(), isEmpty);
     });
 
     test('should return a non-empty map for an initialized instance', () {
-      var map = new Configuration({'foo': 'bar', 'bar': 'baz'}).toJson();
+      var map = Configuration({'foo': 'bar', 'bar': 'baz'}).toJson();
       expect(map, hasLength(2));
       expect(map['foo'], equals('bar'));
       expect(map['bar'], equals('baz'));
@@ -112,7 +112,7 @@ void main() => group('Configuration', () {
   });
 
   group('.toString()', () {
-    var data = new Configuration({'foo': 'bar', 'baz': 'qux'}).toString();
+    var data = Configuration({'foo': 'bar', 'baz': 'qux'}).toString();
 
     test('should start with the class name', () {
       expect(data.indexOf('Configuration {'), equals(0));

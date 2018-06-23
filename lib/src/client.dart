@@ -4,13 +4,13 @@ part of coveralls;
 class Client {
 
   /// The URL of the default API end point.
-  static final Uri defaultEndPoint = new Uri.https('coveralls.io', '/');
+  static final Uri defaultEndPoint = Uri.https('coveralls.io', '/');
 
   /// The handler of "request" events.
-  final StreamController<http.MultipartRequest> _onRequest = new StreamController<http.MultipartRequest>.broadcast();
+  final StreamController<http.MultipartRequest> _onRequest = StreamController<http.MultipartRequest>.broadcast();
 
   /// The handler of "response" events.
-  final StreamController<http.Response> _onResponse = new StreamController<http.Response>.broadcast();
+  final StreamController<http.Response> _onResponse = StreamController<http.Response>.broadcast();
 
   /// Creates a new client.
   Client([Uri endPoint]): endPoint = endPoint ?? defaultEndPoint;
@@ -32,7 +32,7 @@ class Client {
     var report = coverage.trim();
     if (report.isEmpty) throw const FormatException('The specified coverage report is empty.');
 
-    var job;
+    Job job;
     if (report.substring(0, 5) == '<?xml' || report.substring(0, 10) == '<coverage') {
       await clover.loadLibrary();
       job = await clover.parseReport(report);
@@ -45,9 +45,9 @@ class Client {
       }
     }
 
-    if (job == null) throw new FormatException('The specified coverage format is not supported.', report);
+    if (job == null) throw FormatException('The specified coverage format is not supported.', report);
     _updateJob(job, configuration ?? await Configuration.loadDefaults());
-    job.runAt ??= new DateTime.now();
+    job.runAt ??= DateTime.now();
 
     try {
       if ((await where('git')).isNotEmpty) {
@@ -68,11 +68,11 @@ class Client {
   /// Completes with a [http.ClientException] if the remote service does not respond successfully.
   Future<void> uploadJob(Job job) async {
     if (job.repoToken.isEmpty && job.serviceName.isEmpty)
-      throw new ArgumentError.value(job, 'job', 'The job does not meet the requirements.');
+      throw ArgumentError.value(job, 'job', 'The job does not meet the requirements.');
 
-    var httpClient = newHttpClient();
-    var request = new http.MultipartRequest('POST', endPoint.resolve('api/v1/jobs'))
-      ..files.add(new http.MultipartFile.fromString('json_file', json.encode(job), filename: 'coveralls.json'));
+    var httpClient = http.Client();
+    var request = http.MultipartRequest('POST', endPoint.resolve('api/v1/jobs'))
+      ..files.add(http.MultipartFile.fromString('json_file', json.encode(job), filename: 'coveralls.json'));
 
     _onRequest.add(request);
     var response = await http.Response.fromStream(await httpClient.send(request));
@@ -80,7 +80,7 @@ class Client {
     httpClient.close();
 
     if ((response.statusCode ~/ 100) != 2)
-      throw new http.ClientException('An error occurred while uploading the report.', request.url);
+      throw http.ClientException('An error occurred while uploading the report.', request.url);
   }
 
   /// Updates the properties of the specified [job] using the given configuration parameters.
@@ -98,7 +98,7 @@ class Client {
     var hasGitData = config.keys.any((key) => key == 'service_branch' || key.substring(0, 4) == 'git_');
     if (!hasGitData) job.commitSha = config['commit_sha'] ?? '';
     else {
-      var commit = new GitCommit(
+      var commit = GitCommit(
         config['commit_sha'] ?? '',
         authorEmail: config['git_author_email'] ?? '',
         authorName: config['git_author_name'] ?? '',
@@ -107,7 +107,7 @@ class Client {
         message: config['git_message'] ?? ''
       );
 
-      job.git = new GitData(commit, branch: config['service_branch'] ?? '');
+      job.git = GitData(commit, branch: config['service_branch'] ?? '');
     }
   }
 }

@@ -4,8 +4,8 @@ part of coveralls;
 class SourceFile {
 
   /// Creates a new source file.
-  SourceFile(this.name, this.sourceDigest, {List<int> coverage, this.source = ''}):
-    coverage = new List.from(coverage ?? const []);
+  SourceFile(this.name, this.sourceDigest, {Iterable<int> coverage, this.source = ''}):
+    coverage = List<int>.from(coverage ?? const <int>[]);
 
   /// Creates a new source file from the specified [map] in JSON format.
   SourceFile.fromJson(Map<String, dynamic> map):
@@ -28,7 +28,7 @@ class SourceFile {
 
   /// Converts this object to a [Map] in JSON format.
   Map<String, dynamic> toJson() {
-    var map = {
+    var map = <String, dynamic>{
       'name': name,
       'source_digest': sourceDigest,
       'coverage': coverage

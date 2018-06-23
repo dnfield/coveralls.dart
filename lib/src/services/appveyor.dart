@@ -5,7 +5,7 @@ Configuration getConfiguration(Map<String, String> env) {
   var repoName = env['APPVEYOR_REPO_NAME'];
   var serviceNumber = env['APPVEYOR_BUILD_VERSION'];
 
-  return new Configuration({
+  return Configuration({
     'commit_sha': env['APPVEYOR_REPO_COMMIT'],
     'git_author_email': env['APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL'],
     'git_author_name': env['APPVEYOR_REPO_COMMIT_AUTHOR'],

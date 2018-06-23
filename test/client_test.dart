@@ -5,17 +5,17 @@ import 'package:test/test.dart';
 void main() => group('Client', () {
   group('.upload()', () {
     test('should throw an exception with an empty coverage report', () {
-      expect(new Client().upload(''), throwsFormatException);
+      expect(Client().upload(''), throwsFormatException);
     });
 
     test('should throw an exception with an invalid coverage report', () {
-      expect(new Client().upload('end_of_record'), throwsFormatException);
+      expect(Client().upload('end_of_record'), throwsFormatException);
     });
   });
 
   group('.uploadJob()', () {
     test('should throw an exception with an empty coverage job', () {
-      expect(new Client().uploadJob(new Job()), throwsArgumentError);
+      expect(Client().uploadJob(Job()), throwsArgumentError);
     });
   });
 });

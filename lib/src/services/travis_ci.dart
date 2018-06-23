@@ -2,7 +2,7 @@ import 'package:coveralls/coveralls.dart';
 
 /// Gets the configuration parameters from the specified environment.
 Configuration getConfiguration(Map<String, String> env) {
-  var config = new Configuration({
+  var config = Configuration({
     'commit_sha': 'HEAD',
     'service_branch': env['TRAVIS_BRANCH'],
     'service_job_id': env['TRAVIS_JOB_ID'],
