@@ -1,4 +1,6 @@
 # Coveralls <small>for Dart</small>
+![Coveralls](img/coveralls.png)
+
 Send [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) and [Clover](https://www.atlassian.com/software/clover) coverage reports to the [Coveralls](https://coveralls.io) service, in [Dart](https://www.dartlang.org).
 
 ## Quick start
