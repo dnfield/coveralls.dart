@@ -4,8 +4,8 @@ The easy way. From a command prompt, install the `coveralls` executable:
 ```shell
 pub global activate coveralls
 ```
-
-> Consider adding the [`pub global`](https://www.dartlang.org/tools/pub/cmd/pub-global) executables directory to your system path.
+!!! tip
+    Consider adding the [`pub global`](https://www.dartlang.org/tools/pub/cmd/pub-global) executables directory to your system path.
 
 Then use it to upload your coverage reports:
 
