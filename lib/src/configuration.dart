@@ -1,7 +1,7 @@
 part of coveralls;
 
 /// Provides access to the coverage settings.
-class Configuration extends MapBase<String, String> {
+class Configuration extends Object with MapMixin<String, String> {
 
   /// The coverage parameters.
   final Map<String, String> _params;
