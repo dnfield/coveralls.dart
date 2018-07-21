@@ -2,6 +2,9 @@
 
 ## Version [3.1.0](https://github.com/cedx/coveralls.dart/compare/v3.0.0...v3.1.0)
 - Added a user guide based on [MkDocs](http://www.mkdocs.org).
+- Added an example code.
+- Raised the [Dart SDK](https://www.dartlang.org/tools/sdk) constraint.
+- Updated the package dependencies.
 
 ## Version [3.0.0](https://github.com/cedx/coveralls.dart/compare/v2.1.0...v3.0.0)
 - Breaking change: starting to use and support the [Dart 2 SDK](https://www.dartlang.org/tools/sdk).
