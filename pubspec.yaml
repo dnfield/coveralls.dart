@@ -7,7 +7,7 @@ documentation: https://dev.belin.io/coveralls.dart/api
 homepage: https://dev.belin.io/coveralls.dart
 
 environment:
-  sdk: '>=2.0.0-dev.69 <2.0.0'
+  sdk: '>=2.0.0-dev.69 <3.0.0'
 
 executables:
   coveralls: coveralls
@@ -16,7 +16,7 @@ dependencies:
   args: ^1.4.4
   crypto: ^2.0.6
   http: ^0.11.3
-  lcov: ^4.1.0
+  lcov: ^4.2.0
   path: ^1.6.2
   where: ^4.1.0
   xml: ^3.0.0
