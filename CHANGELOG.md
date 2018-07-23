@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [3.2.0](https://github.com/cedx/coveralls.dart/compare/v3.1.0...v3.2.0)
+- Added the `Options` class, used by the command line interface.
+
 ## Version [3.1.0](https://github.com/cedx/coveralls.dart/compare/v3.0.0...v3.1.0)
 - Added a user guide based on [MkDocs](http://www.mkdocs.org).
 - Added an example code.
