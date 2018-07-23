@@ -1,6 +1,6 @@
 TN:Example
 
-SF:lib/src/client.dart
+SF:lib/src/io/client.dart
 FN:4,Client.upload
 FNDA:2,Client.upload
 FNF:1
@@ -13,7 +13,7 @@ LF:4
 LH:4
 end_of_record
 
-SF:lib/src/configuration.dart
+SF:lib/src/io/configuration.dart
 FN:5,Configuration.fromEnvironment
 FNDA:4,Configuration.fromEnvironment
 FNF:1
@@ -37,7 +37,7 @@ LF:9
 LH:9
 end_of_record
 
-SF:lib/src/git.dart
+SF:lib/src/io/git.dart
 FN:5,GitCommit.toJson
 FNDA:2,GitCommit.toJson
 FNF:1
