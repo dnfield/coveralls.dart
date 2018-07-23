@@ -3,14 +3,8 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:isolate';
-import 'package:args/args.dart';
 import 'package:coveralls/coveralls.dart';
 import 'package:yaml/yaml.dart';
-
-/// The command line argument parser.
-final ArgParser _parser = ArgParser()
-  ..addFlag('help', abbr: 'h', help: 'Output usage information.', negatable: false)
-  ..addFlag('version', abbr: 'v', help: 'Output the version number.', negatable: false);
 
 /// The usage information.
 final String usage = (StringBuffer()
@@ -19,7 +13,7 @@ final String usage = (StringBuffer()
   ..writeln('Usage: coveralls [options] <file>')
   ..writeln()
   ..writeln('Options:')
-  ..write(_parser.usage))
+  ..write(argParser.usage))
   .toString();
 
 /// The version number of this package.
@@ -32,24 +26,24 @@ Future<String> get version async {
 /// Application entry point.
 Future<void> main(List<String> args) async {
   // Parse the command line arguments.
-  ArgResults results;
+  Options options;
 
   try {
-    results = _parser.parse(args);
-    if (results['help']) {
+    options = parseOptions(args);
+    if (options.help) {
       print(usage);
       return;
     }
 
-    if (results['version']) {
+    if (options.version) {
       print(await version);
       return;
     }
 
-    if (results.rest.isEmpty) throw ArgParserException('A coverage report must be provided.');
+    if (options.rest.isEmpty) throw const FormatException('A coverage report must be provided.');
   }
 
-  on ArgParserException {
+  on FormatException {
     print(usage);
     exitCode = 64;
     return;
@@ -60,7 +54,7 @@ Future<void> main(List<String> args) async {
     var endPoint = const String.fromEnvironment('coveralls_endpoint') ?? Platform.environment['COVERALLS_ENDPOINT'];
     var client = Client(endPoint != null ? Uri.parse(endPoint) : Client.defaultEndPoint);
 
-    var coverage = await File(results.rest.first).readAsString();
+    var coverage = await File(options.rest.first).readAsString();
     print('[Coveralls] Submitting to ${client.endPoint}');
     await client.upload(coverage);
   }

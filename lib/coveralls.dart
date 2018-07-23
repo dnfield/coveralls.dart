@@ -25,6 +25,7 @@ import 'src/services/wercker.dart' as wercker;
 
 export 'package:http/http.dart' show ClientException;
 
+part 'coveralls.g.dart';
 part 'src/cli.dart';
 part 'src/client.dart';
 part 'src/configuration.dart';
