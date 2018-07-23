@@ -5,6 +5,7 @@ import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
+import 'package:build_cli_annotations/build_cli_annotations.dart';
 import 'package:http/http.dart' as http;
 import 'package:where/where.dart' show where;
 import 'package:yaml/yaml.dart';
@@ -24,6 +25,7 @@ import 'src/services/wercker.dart' as wercker;
 
 export 'package:http/http.dart' show ClientException;
 
+part 'src/cli.dart';
 part 'src/client.dart';
 part 'src/configuration.dart';
 part 'src/git.dart';
