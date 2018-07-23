@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:coveralls/src/parsers/lcov.dart';
+import 'package:coveralls/src/io/parsers/lcov.dart';
 import 'package:path/path.dart' as p;
 import 'package:test/test.dart';
 

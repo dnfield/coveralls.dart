@@ -1,4 +1,4 @@
-part of coveralls;
+part of coveralls.io;
 
 /// Uploads code coverage reports to the [Coveralls](https://coveralls.io) service.
 class Client {

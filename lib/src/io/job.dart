@@ -1,4 +1,4 @@
-part of coveralls;
+part of coveralls.io;
 
 /// Represents the coverage data from a single run of a test suite.
 class Job {

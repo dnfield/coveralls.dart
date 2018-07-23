@@ -1,4 +1,4 @@
-part of coveralls;
+part of coveralls.io;
 
 /// Represents a source code file and its coverage data for a single job.
 class SourceFile {

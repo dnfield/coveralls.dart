@@ -1,4 +1,4 @@
-part of coveralls;
+part of coveralls.io;
 
 /// Represents a Git commit.
 class GitCommit {
