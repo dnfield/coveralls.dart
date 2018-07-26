@@ -5,15 +5,11 @@ part of coveralls.io;
 class SourceFile {
 
   /// Creates a new source file.
-  SourceFile(this.name, this.sourceDigest, {Iterable<int> coverage, this.source = ''}):
+  SourceFile(this.name, this.sourceDigest, {Iterable<int> coverage, this.source}):
     coverage = List<int>.from(coverage ?? const <int>[]);
 
   /// Creates a new source file from the specified [map] in JSON format.
-  SourceFile.fromJson(Map<String, dynamic> map):
-    coverage = map['coverage'] is List<int> ? map['coverage'] : [],
-    name = map['name'] is String ? map['name'] : '',
-    source = map['source'] is String ? map['source'] : '',
-    sourceDigest = map['source_digest'] is String ? map['source_digest'] : '';
+  factory SourceFile.fromJson(Map<String, dynamic> map) => _$SourceFileFromJson(map);
 
   /// The coverage data for this file's job.
   final List<int> coverage;
@@ -23,24 +19,15 @@ class SourceFile {
   final String name;
 
   /// The contents of this source file.
-  @JsonKey(defaultValue: '')
+  @JsonKey(includeIfNull: false)
   final String source;
 
   /// The MD5 digest of the full source code of this file.
-  @JsonKey(defaultValue: '')
+  @JsonKey(defaultValue: '', name: 'source_digest')
   final String sourceDigest;
 
   /// Converts this object to a [Map] in JSON format.
-  Map<String, dynamic> toJson() {
-    var map = <String, dynamic>{
-      'name': name,
-      'source_digest': sourceDigest,
-      'coverage': coverage
-    };
-
-    if (source.isNotEmpty) map['source'] = source;
-    return map;
-  }
+  Map<String, dynamic> toJson() => _$SourceFileToJson(this);
 
   /// Returns a [String] representation of this object.
   @override
