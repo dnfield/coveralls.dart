@@ -8,7 +8,7 @@ void main() => group('SourceFile', () {
       var file = SourceFile.fromJson({});
       expect(file.coverage, isEmpty);
       expect(file.name, isEmpty);
-      expect(file.source, isEmpty);
+      expect(file.source, isNull);
       expect(file.sourceDigest, isEmpty);
     });
 

@@ -7,10 +7,10 @@ void main() => group('GitCommit', () {
     group('.fromJson()', () {
       test('should return an instance with default values for an empty map', () {
         var commit = GitCommit.fromJson({});
-        expect(commit.authorEmail, isEmpty);
-        expect(commit.authorName, isEmpty);
-        expect(commit.id, isEmpty);
-        expect(commit.message, isEmpty);
+        expect(commit.authorEmail, isNull);
+        expect(commit.authorName, isNull);
+        expect(commit.id, isNull);
+        expect(commit.message, isNull);
       });
 
       test('should return an initialized instance for a non-empty map', () {

@@ -8,8 +8,8 @@ void main() => group('Job', () {
       var job = Job.fromJson({});
       expect(job, const TypeMatcher<Job>());
       expect(job.git, isNull);
-      expect(job.isParallel, isFalse);
-      expect(job.repoToken, isEmpty);
+      expect(job.isParallel, isNull);
+      expect(job.repoToken, isNull);
       expect(job.runAt, isNull);
       expect(job.sourceFiles, isEmpty);
     });
