@@ -1,6 +1,7 @@
 part of coveralls.io;
 
 /// Represents the coverage data from a single run of a test suite.
+@JsonSerializable()
 class Job {
 
   /// Creates a new job.
@@ -21,30 +22,37 @@ class Job {
     sourceFiles = map['source_files'] is List<Map<String, dynamic>> ? map['source_files'].map((item) => SourceFile.fromJson(item)).cast<SourceFile>().toList() : <SourceFile>[];
 
   /// The current SHA of the commit being built to override the [git] property.
+  @JsonKey(defaultValue: '')
   String commitSha = '';
 
   /// A map of Git data that can be used to display more information to users.
   GitData git;
 
   /// Value indicating whether the build will not be considered done until a webhook has been sent to Coveralls.
+  @JsonKey(defaultValue: false)
   bool isParallel = false;
 
   /// The secret token for the repository.
+  @JsonKey(defaultValue: '')
   String repoToken;
 
   /// A timestamp of when the job ran.
   DateTime runAt;
 
   /// A unique identifier of the job on the CI service.
+  @JsonKey(defaultValue: '')
   String serviceJobId;
 
   /// The CI service or other environment in which the test suite was run.
+  @JsonKey(defaultValue: '')
   String serviceName;
 
   /// The build number.
+  @JsonKey(defaultValue: '')
   String serviceNumber = '';
 
   /// The associated pull request ID of the build.
+  @JsonKey(defaultValue: '')
   String servicePullRequest = '';
 
   /// The list of source files.

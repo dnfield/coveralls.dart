@@ -1,6 +1,7 @@
 part of coveralls.io;
 
 /// Represents a source code file and its coverage data for a single job.
+@JsonSerializable()
 class SourceFile {
 
   /// Creates a new source file.
@@ -18,12 +19,15 @@ class SourceFile {
   final List<int> coverage;
 
   /// The file path of this source file.
+  @JsonKey(defaultValue: '')
   final String name;
 
   /// The contents of this source file.
+  @JsonKey(defaultValue: '')
   final String source;
 
   /// The MD5 digest of the full source code of this file.
+  @JsonKey(defaultValue: '')
   final String sourceDigest;
 
   /// Converts this object to a [Map] in JSON format.

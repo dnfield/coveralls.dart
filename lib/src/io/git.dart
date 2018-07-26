@@ -1,6 +1,7 @@
 part of coveralls.io;
 
 /// Represents a Git commit.
+@JsonSerializable()
 class GitCommit {
 
   /// Creates a new commit.
@@ -16,21 +17,27 @@ class GitCommit {
     message = map['message'] ?? '';
 
   /// The author mail address.
+  @JsonKey(defaultValue: '')
   final String authorEmail;
 
   /// The author name.
+  @JsonKey(defaultValue: '')
   final String authorName;
 
   /// The committer mail address.
+  @JsonKey(defaultValue: '')
   final String committerEmail;
 
   /// The committer name.
+  @JsonKey(defaultValue: '')
   final String committerName;
 
   /// The commit identifier.
+  @JsonKey(defaultValue: '')
   final String id;
 
   /// The commit message.
+  @JsonKey(defaultValue: '')
   final String message;
 
   /// Converts this object to a [Map] in JSON format.
@@ -50,6 +57,7 @@ class GitCommit {
 }
 
 /// Represents Git data that can be used to display more information to users.
+@JsonSerializable()
 class GitData {
 
   /// Creates a new data.
@@ -62,6 +70,7 @@ class GitData {
     remotes = map['remotes'] is List<Map<String, String>> ? map['remotes'].map((item) => GitRemote.fromJson(item)).cast<GitRemote>().toList() : <GitRemote>[];
 
   /// The branch name.
+  @JsonKey(defaultValue: '')
   String branch;
 
   /// The Git commit.
@@ -112,27 +121,24 @@ class GitData {
 }
 
 /// Represents a Git remote repository.
+@JsonSerializable()
 class GitRemote {
 
   /// Creates a new remote repository.
   GitRemote(this.name, [this.url]);
 
   /// Creates a new source file from the specified [map] in JSON format.
-  GitRemote.fromJson(Map<String, String> map):
-    name = map['name'] ?? '',
-    url = map['url'] != null ? Uri.tryParse(map['url']) : null;
+  factory GitRemote.fromJson(Map<String, dynamic> map) => _$GitRemoteFromJson(map);
 
   /// The remote's name.
+  @JsonKey(defaultValue: '')
   final String name;
 
   /// The remote's URL.
   final Uri url;
 
   /// Converts this object to a [Map] in JSON format.
-  Map<String, dynamic> toJson() => {
-    'name': name,
-    'url': url?.toString()
-  };
+  Map<String, dynamic> toJson() => _$GitRemoteToJson(this);
 
   /// Returns a [String] representation of this object.
   @override

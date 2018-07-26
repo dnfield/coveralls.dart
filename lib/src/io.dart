@@ -6,6 +6,7 @@ import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:json_annotation/json_annotation.dart';
 import 'package:where/where.dart' show where;
 import 'package:yaml/yaml.dart';
 
@@ -22,6 +23,7 @@ import 'io/services/surf.dart' as surf;
 import 'io/services/travis_ci.dart' as travis_ci;
 import 'io/services/wercker.dart' as wercker;
 
+part 'io.g.dart';
 part 'io/client.dart';
 part 'io/configuration.dart';
 part 'io/git.dart';
