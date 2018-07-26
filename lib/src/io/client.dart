@@ -67,7 +67,7 @@ class Client {
   /// Completes with an [ArgumentError] if the job does not meet the requirements.
   /// Completes with a [http.ClientException] if the remote service does not respond successfully.
   Future<void> uploadJob(Job job) async {
-    if ((job.repoToken == null || job.repoToken.isEmpty) && (job.serviceName == null || job.serviceName.isEmpty))
+    if (job.repoToken == null && job.serviceName == null)
       throw ArgumentError.value(job, 'job', 'The job does not meet the requirements.');
 
     var httpClient = http.Client();
