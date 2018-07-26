@@ -1,5 +1,11 @@
 part of coveralls.io;
 
+/// Converts the specified [GitCommit] instance to a JSON object.
+Map<String, dynamic> _gitCommitToJson(GitCommit commit) => commit.toJson();
+
+/// Converts the specified list of [GitRemote] instances to a list of JSON objects.
+List<Map<String, dynamic>> _gitRemotesToJson(List<GitRemote> items) => items.map((item) => item.toJson()).toList();
+
 /// Represents a Git commit.
 @JsonSerializable()
 class GitCommit {
@@ -74,9 +80,11 @@ class GitData {
   String branch;
 
   /// The Git commit.
+  @JsonKey(toJson: _gitCommitToJson)
   final GitCommit commit;
 
   /// The remote repositories.
+  @JsonKey(toJson: _gitRemotesToJson)
   final List<GitRemote> remotes;
 
   /// Creates a new Git data from a repository located at the specified [path] (defaulting to the current working directory).
@@ -109,11 +117,7 @@ class GitData {
   }
 
   /// Converts this object to a [Map] in JSON format.
-  Map<String, dynamic> toJson() => {
-    'branch': branch,
-    'head': commit?.toJson(),
-    'remotes': remotes.map((item) => item.toJson()).toList()
-  };
+  Map<String, dynamic> toJson() => _$GitDataToJson(this);
 
   /// Returns a [String] representation of this object.
   @override
