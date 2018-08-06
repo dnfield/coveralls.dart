@@ -15,7 +15,7 @@ class Configuration extends Object with MapMixin<String, String> {
     env ??= Platform.environment;
 
     // Standard.
-    var serviceName = env['CI_NAME'] ?? '';
+    final serviceName = env['CI_NAME'] ?? '';
     if (serviceName.isNotEmpty) this['service_name'] = serviceName;
 
     if (env.containsKey('CI_BRANCH')) this['service_branch'] = env['CI_BRANCH'];
@@ -25,7 +25,7 @@ class Configuration extends Object with MapMixin<String, String> {
     if (env.containsKey('CI_JOB_ID')) this['service_job_id'] = env['CI_JOB_ID'];
 
     if (env.containsKey('CI_PULL_REQUEST')) {
-      var matches = RegExp(r'(\d+)$').allMatches(env['CI_PULL_REQUEST']);
+      final matches = RegExp(r'(\d+)$').allMatches(env['CI_PULL_REQUEST']);
       if (matches.isNotEmpty && matches.first.groupCount >= 1) this['service_pull_request'] = matches.first[1];
     }
 
@@ -71,7 +71,7 @@ class Configuration extends Object with MapMixin<String, String> {
     if (document == null || document.trim().isEmpty) throw const FormatException('The specified YAML document is empty.');
 
     try {
-      var map = loadYaml(document);
+      final map = loadYaml(document);
       if (map is! Map) throw FormatException('The specified YAML document is invalid.', document);
       addAll(map.cast<String, String>());
     }
@@ -100,7 +100,7 @@ class Configuration extends Object with MapMixin<String, String> {
   /// Loads the default configuration.
   /// The default values are read from the environment variables and an optional `.coveralls.yml` file.
   static Future<Configuration> loadDefaults([String coverallsFile = '.coveralls.yml']) async {
-    var defaults = Configuration.fromEnvironment();
+    final defaults = Configuration.fromEnvironment();
 
     try {
       defaults.addAll(Configuration.fromYaml(await File(coverallsFile).readAsString()));

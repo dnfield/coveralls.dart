@@ -5,7 +5,7 @@ import 'package:test/test.dart';
 void main() => group('Job', () {
   group('.fromJson()', () {
     test('should return an instance with default values for an empty map', () {
-      var job = Job.fromJson({});
+      final job = Job.fromJson({});
       expect(job, const TypeMatcher<Job>());
       expect(job.git, isNull);
       expect(job.isParallel, isNull);
@@ -15,7 +15,7 @@ void main() => group('Job', () {
     });
 
     test('should return an initialized instance for a non-empty map', () {
-      var job = Job.fromJson({
+      final job = Job.fromJson({
         'git': {'branch': 'develop'},
         'parallel': true,
         'repo_token': 'yYPv4mMlfjKgUK0rJPgN0AwNXhfzXpVwt',
@@ -41,19 +41,19 @@ void main() => group('Job', () {
 
   group('.toJson()', () {
     test('should return a map with default values for a newly created instance', () {
-      var map = Job().toJson();
+      final map = Job().toJson();
       expect(map, hasLength(1));
       expect(map['source_files'], allOf(isList, isEmpty));
     });
 
     test('should return a non-empty map for an initialized instance', () {
-      var job = Job(repoToken: 'yYPv4mMlfjKgUK0rJPgN0AwNXhfzXpVwt')
+      final job = Job(repoToken: 'yYPv4mMlfjKgUK0rJPgN0AwNXhfzXpVwt')
         ..git = GitData(null, branch: 'develop')
         ..isParallel = true
         ..runAt = DateTime.parse('2017-01-29T02:43:30.000Z')
         ..sourceFiles.add(SourceFile('/home/cedx/coveralls.dart', ''));
 
-      var map = job.toJson();
+      final map = job.toJson();
       expect(map, hasLength(5));
       expect(map['parallel'], isTrue);
       expect(map['repo_token'], equals('yYPv4mMlfjKgUK0rJPgN0AwNXhfzXpVwt'));
@@ -69,13 +69,13 @@ void main() => group('Job', () {
   });
 
   group('.toString()', () {
-    var job = Job(repoToken: 'yYPv4mMlfjKgUK0rJPgN0AwNXhfzXpVwt')
+    final job = Job(repoToken: 'yYPv4mMlfjKgUK0rJPgN0AwNXhfzXpVwt')
       ..git = GitData(null, branch: 'develop')
       ..isParallel = true
       ..runAt = DateTime.parse('2017-01-29T02:43:30.000Z')
       ..sourceFiles.add(SourceFile('/home/cedx/coveralls.dart', ''));
 
-    var data = job.toString();
+    final data = job.toString();
     test('should start with the class name', () {
       expect(data.indexOf('Job {'), equals(0));
     });

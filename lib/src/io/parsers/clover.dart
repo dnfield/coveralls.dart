@@ -9,25 +9,25 @@ import 'package:xml/xml.dart' as xml;
 /// Parses the specified [Clover](https://www.atlassian.com/software/clover) coverage report.
 /// Throws a [FormatException] if a parsing error occurred.
 Future<Job> parseReport(String report) async {
-  var coverage = xml.parse(report);
+  final coverage = xml.parse(report);
   if (coverage.findAllElements('project').isEmpty) throw FormatException('The specified Clover report is invalid.', report);
 
-  var sourceFiles = <SourceFile>[];
-  for (var file in xml.parse(report).findAllElements('file')) {
-    var sourceFile = file.getAttribute('name');
+  final sourceFiles = <SourceFile>[];
+  for (final file in xml.parse(report).findAllElements('file')) {
+    final sourceFile = file.getAttribute('name');
     if (sourceFile == null || sourceFile.isEmpty) throw FormatException('Invalid file data: ${file.toXmlString()}', report);
 
-    var source = await File(sourceFile).readAsString();
-    var coverage = List<int>(source.split(RegExp(r'\r?\n')).length);
+    final source = await File(sourceFile).readAsString();
+    final coverage = List<int>(source.split(RegExp(r'\r?\n')).length);
 
-    for (var line in file.findAllElements('line')) {
+    for (final line in file.findAllElements('line')) {
       if (line.getAttribute('type') != 'stmt') continue;
-      var lineNumber = math.max(1, int.parse(line.getAttribute('num'), radix: 10));
+      final lineNumber = math.max(1, int.parse(line.getAttribute('num'), radix: 10));
       coverage[lineNumber - 1] = math.max(0, int.parse(line.getAttribute('count'), radix: 10));
     }
 
-    var filename = p.relative(sourceFile);
-    var digest = md5.convert(source.codeUnits).toString();
+    final filename = p.relative(sourceFile);
+    final digest = md5.convert(source.codeUnits).toString();
     sourceFiles.add(SourceFile(filename, digest, coverage: coverage, source: source));
   }
 

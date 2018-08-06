@@ -5,7 +5,7 @@ import 'package:coveralls/coveralls.dart';
 /// Uploads a coverage report.
 Future<void> main() async {
   try {
-    var coverage = File('/path/to/coverage.report');
+    final coverage = File('/path/to/coverage.report');
     await Client().upload(await coverage.readAsString());
     print('The report was sent successfully.');
   }

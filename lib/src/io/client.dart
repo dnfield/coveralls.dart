@@ -29,7 +29,7 @@ class Client {
   ///
   /// Completes with a [FormatException] if the specified coverage report is empty, or if its format is not supported.
   Future<void> upload(String coverage, [Configuration configuration]) async {
-    var report = coverage.trim();
+    final report = coverage.trim();
     if (report.isEmpty) throw const FormatException('The specified coverage report is empty.');
 
     Job job;
@@ -38,7 +38,7 @@ class Client {
       job = await clover.parseReport(report);
     }
     else {
-      var token = report.substring(0, 3);
+      final token = report.substring(0, 3);
       if (token == 'TN:' || token == 'SF:') {
         await lcov.loadLibrary();
         job = await lcov.parseReport(report);
@@ -51,8 +51,8 @@ class Client {
 
     try {
       if ((await where('git')).isNotEmpty) {
-        var git = await GitData.fromRepository();
-        var branch = job.git != null ? job.git.branch : '';
+        final git = await GitData.fromRepository();
+        final branch = job.git != null ? job.git.branch : '';
         if (git.branch == 'HEAD' && branch.isNotEmpty) git.branch = branch;
         job.git = git;
       }
@@ -70,12 +70,12 @@ class Client {
     if (job.repoToken == null && job.serviceName == null)
       throw ArgumentError.value(job, 'job', 'The job does not meet the requirements.');
 
-    var httpClient = http.Client();
-    var request = http.MultipartRequest('POST', endPoint.resolve('api/v1/jobs'))
+    final httpClient = http.Client();
+    final request = http.MultipartRequest('POST', endPoint.resolve('api/v1/jobs'))
       ..files.add(http.MultipartFile.fromString('json_file', json.encode(job), filename: 'coveralls.json'));
 
     _onRequest.add(request);
-    var response = await http.Response.fromStream(await httpClient.send(request));
+    final response = await http.Response.fromStream(await httpClient.send(request));
     _onResponse.add(response);
     httpClient.close();
 
@@ -95,10 +95,10 @@ class Client {
     if (config.containsKey('service_number')) job.serviceNumber = config['service_number'];
     if (config.containsKey('service_pull_request')) job.servicePullRequest = config['service_pull_request'];
 
-    var hasGitData = config.keys.any((key) => key == 'service_branch' || key.substring(0, 4) == 'git_');
+    final hasGitData = config.keys.any((key) => key == 'service_branch' || key.substring(0, 4) == 'git_');
     if (!hasGitData) job.commitSha = config['commit_sha'] ?? '';
     else {
-      var commit = GitCommit(
+      final commit = GitCommit(
         config['commit_sha'] ?? '',
         authorEmail: config['git_author_email'] ?? '',
         authorName: config['git_author_name'] ?? '',

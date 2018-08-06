@@ -9,7 +9,7 @@ void main() => group('Configuration', () {
     });
 
     test('should return the list of keys for a non-empty configuration', () {
-      var keys = Configuration({'foo': 'bar', 'baz': 'qux'}).keys.toList();
+      final keys = Configuration({'foo': 'bar', 'baz': 'qux'}).keys.toList();
       expect(keys, hasLength(2));
       expect(keys.first, equals('foo'));
       expect(keys.last, equals('baz'));
@@ -18,7 +18,7 @@ void main() => group('Configuration', () {
 
   group('operator []', () {
     test('should properly get and set the configuration entries', () {
-      var config = Configuration();
+      final config = Configuration();
       expect(config['foo'], isNull);
 
       config['foo'] = 'bar';
@@ -28,7 +28,7 @@ void main() => group('Configuration', () {
 
   group('.clear()', () {
     test('should be empty when there is no CI environment variables', () {
-      var config = Configuration({'foo': 'bar', 'baz': 'qux'});
+      final config = Configuration({'foo': 'bar', 'baz': 'qux'});
       expect(config, hasLength(2));
       config.clear();
       expect(config, hasLength(0));
@@ -41,7 +41,7 @@ void main() => group('Configuration', () {
     });
 
     test('should return an initialized instance for a non-empty environment', () {
-      var config = Configuration.fromEnvironment({
+      final config = Configuration.fromEnvironment({
         'CI_NAME': 'travis-pro',
         'CI_PULL_REQUEST': 'PR #123',
         'COVERALLS_REPO_TOKEN': '0123456789abcdef',
@@ -66,7 +66,7 @@ void main() => group('Configuration', () {
     });
 
     test('should return an initialized instance for a non-empty map', () {
-      var config = Configuration.fromYaml('repo_token: 0123456789abcdef\nservice_name: travis-ci');
+      final config = Configuration.fromYaml('repo_token: 0123456789abcdef\nservice_name: travis-ci');
       expect(config, hasLength(2));
       expect(config['repo_token'], equals('0123456789abcdef'));
       expect(config['service_name'], equals('travis-ci'));
@@ -75,23 +75,23 @@ void main() => group('Configuration', () {
 
   group('.loadDefaults()', () {
     test('should properly initialize from a `.coveralls.yml` file', () async {
-      var config = await Configuration.loadDefaults('test/fixtures/.coveralls.yml');
+      final config = await Configuration.loadDefaults('test/fixtures/.coveralls.yml');
       expect(config.length, greaterThanOrEqualTo(2));
       expect(config['repo_token'], equals('yYPv4mMlfjKgUK0rJPgN0AwNXhfzXpVwt'));
       expect(config['service_name'], equals('travis-pro'));
     });
 
     test('should use the environment defaults if the `.coveralls.yml` file is not found', () async {
-      var defaults = Configuration.fromEnvironment();
-      var config = await Configuration.loadDefaults('.dummy/config.yml');
+      final defaults = Configuration.fromEnvironment();
+      final config = await Configuration.loadDefaults('.dummy/config.yml');
       expect(config.length, equals(defaults.length));
-      for (var key in config.keys) expect(config[key], equals(defaults[key]));
+      for (final key in config.keys) expect(config[key], equals(defaults[key]));
     });
   });
 
   group('.remove()', () {
     test('should be empty when there is no CI environment variables', () {
-      var config = Configuration({'foo': 'bar', 'bar': 'baz'});
+      final config = Configuration({'foo': 'bar', 'bar': 'baz'});
       expect(config, contains('foo'));
       config.remove('foo');
       expect(config, isNot(contains('foo')));
@@ -104,7 +104,7 @@ void main() => group('Configuration', () {
     });
 
     test('should return a non-empty map for an initialized instance', () {
-      var map = Configuration({'foo': 'bar', 'bar': 'baz'}).toJson();
+      final map = Configuration({'foo': 'bar', 'bar': 'baz'}).toJson();
       expect(map, hasLength(2));
       expect(map['foo'], equals('bar'));
       expect(map['bar'], equals('baz'));
@@ -112,7 +112,7 @@ void main() => group('Configuration', () {
   });
 
   group('.toString()', () {
-    var data = Configuration({'foo': 'bar', 'baz': 'qux'}).toString();
+    final data = Configuration({'foo': 'bar', 'baz': 'qux'}).toString();
 
     test('should start with the class name', () {
       expect(data.indexOf('Configuration {'), equals(0));

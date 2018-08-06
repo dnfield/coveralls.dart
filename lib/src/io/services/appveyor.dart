@@ -2,8 +2,8 @@ import 'package:coveralls/coveralls.dart';
 
 /// Gets the configuration parameters from the specified environment.
 Configuration getConfiguration(Map<String, String> env) {
-  var repoName = env['APPVEYOR_REPO_NAME'];
-  var serviceNumber = env['APPVEYOR_BUILD_VERSION'];
+  final repoName = env['APPVEYOR_REPO_NAME'];
+  final serviceNumber = env['APPVEYOR_BUILD_VERSION'];
 
   return Configuration({
     'commit_sha': env['APPVEYOR_REPO_COMMIT'],

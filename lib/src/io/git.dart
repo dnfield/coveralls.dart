@@ -71,7 +71,7 @@ class GitData {
   /// Creates a new Git data from a repository located at the specified [path] (defaulting to the current working directory).
   /// This method relies on the availability of the Git executable in the system path.
   static Future<GitData> fromRepository([String path = '']) async {
-    var commands = {
+    final commands = {
       'authorEmail': 'log -1 --pretty=format:%ae',
       'authorName': 'log -1 --pretty=format:%aN',
       'branch': 'rev-parse --abbrev-ref HEAD',
@@ -82,15 +82,15 @@ class GitData {
       'remotes': 'remote -v'
     };
 
-    var workingDir = path.isNotEmpty ? path : Directory.current.path;
-    for (var key in commands.keys) {
-      var result = await Process.run('git', commands[key].split(' '), workingDirectory: workingDir);
+    final workingDir = path.isNotEmpty ? path : Directory.current.path;
+    for (final key in commands.keys) {
+      final result = await Process.run('git', commands[key].split(' '), workingDirectory: workingDir);
       commands[key] = result.stdout.trim();
     }
 
-    var remotes = <String, GitRemote>{};
-    for (var remote in commands['remotes'].split(RegExp(r'\r?\n'))) {
-      var parts = remote.replaceAll(RegExp(r'\s+'), ' ').split(' ');
+    final remotes = <String, GitRemote>{};
+    for (final remote in commands['remotes'].split(RegExp(r'\r?\n'))) {
+      final parts = remote.replaceAll(RegExp(r'\s+'), ' ').split(' ');
       remotes.putIfAbsent(parts.first, () => GitRemote(parts.first, parts.length > 1 ? Uri.parse(parts[1]) : null));
     }
 

@@ -7,7 +7,7 @@ import 'package:test/test.dart';
 void main() => group('Clover', () {
   group('parseReport()', () {
     test('should properly parse Clover reports', () async {
-      var job = await parseReport(await File('test/fixtures/clover.xml').readAsString());
+      final job = await parseReport(await File('test/fixtures/clover.xml').readAsString());
       expect(job.sourceFiles, hasLength(3));
 
       expect(job.sourceFiles.first.name, equals(p.join('lib', 'src', 'io', 'client.dart')));

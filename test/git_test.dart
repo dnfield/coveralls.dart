@@ -6,7 +6,7 @@ void main() => group('GitCommit', () {
   group('GitCommit', () {
     group('.fromJson()', () {
       test('should return an instance with default values for an empty map', () {
-        var commit = GitCommit.fromJson({});
+        final commit = GitCommit.fromJson({});
         expect(commit.authorEmail, isNull);
         expect(commit.authorName, isNull);
         expect(commit.id, isNull);
@@ -14,7 +14,7 @@ void main() => group('GitCommit', () {
       });
 
       test('should return an initialized instance for a non-empty map', () {
-        var commit = GitCommit.fromJson({
+        final commit = GitCommit.fromJson({
           'author_email': 'anonymous@secret.com',
           'author_name': 'Anonymous',
           'id': '2ef7bde608ce5404e97d5f042f95f89f1c232871',
@@ -30,13 +30,13 @@ void main() => group('GitCommit', () {
 
     group('.toJson()', () {
       test('should return a map with default values for a newly created instance', () {
-        var map = const GitCommit('').toJson();
+        final map = const GitCommit('').toJson();
         expect(map, hasLength(1));
         expect(map['id'], isEmpty);
       });
 
       test('should return a non-empty map for an initialized instance', () {
-        var map = const GitCommit(
+        final map = const GitCommit(
           '2ef7bde608ce5404e97d5f042f95f89f1c232871',
           authorEmail: 'anonymous@secret.com',
           authorName: 'Anonymous',
@@ -52,7 +52,7 @@ void main() => group('GitCommit', () {
     });
 
     group('.toString()', () {
-      var data = const GitCommit(
+      final data = const GitCommit(
         '2ef7bde608ce5404e97d5f042f95f89f1c232871',
         authorEmail: 'anonymous@secret.com',
         authorName: 'Anonymous',
@@ -75,14 +75,14 @@ void main() => group('GitCommit', () {
   group('GitData', () {
     group('.fromJson()', () {
       test('should return an instance with default values for an empty map', () {
-        var data = GitData.fromJson({});
+        final data = GitData.fromJson({});
         expect(data.branch, isEmpty);
         expect(data.commit, isNull);
         expect(data.remotes, isEmpty);
       });
 
       test('should return an initialized instance for a non-empty map', () {
-        var data = GitData.fromJson({
+        final data = GitData.fromJson({
           'branch': 'develop',
           'head': {'id': '2ef7bde608ce5404e97d5f042f95f89f1c232871'},
           'remotes': [{'name': 'origin'}]
@@ -101,7 +101,7 @@ void main() => group('GitCommit', () {
 
     group('.fromRepository()', () {
       test('should retrieve the Git data from the executable output', () async {
-        var data = await GitData.fromRepository();
+        final data = await GitData.fromRepository();
         expect(data.branch, isNotEmpty);
 
         expect(data.commit, const TypeMatcher<GitCommit>());
@@ -110,7 +110,7 @@ void main() => group('GitCommit', () {
         expect(data.remotes, isNotEmpty);
         expect(data.remotes.first, const TypeMatcher<GitRemote>());
 
-        var origin = data.remotes.where((remote) => remote.name == 'origin').toList();
+        final origin = data.remotes.where((remote) => remote.name == 'origin').toList();
         expect(origin, hasLength(1));
         expect(origin.first.url, equals(Uri.https('github.com', '/cedx/coveralls.dart.git')));
       });
@@ -118,14 +118,14 @@ void main() => group('GitCommit', () {
 
     group('.toJson()', () {
       test('should return a map with default values for a newly created instance', () {
-        var map = GitData(null).toJson();
+        final map = GitData(null).toJson();
         expect(map['branch'], isEmpty);
         expect(map['head'], isNull);
         expect(map['remotes'], allOf(isList, isEmpty));
       });
 
       test('should return a non-empty map for an initialized instance', () {
-        var map = GitData(
+        final map = GitData(
           const GitCommit('2ef7bde608ce5404e97d5f042f95f89f1c232871'),
           branch: 'develop',
           remotes: [GitRemote('origin')]
@@ -141,7 +141,7 @@ void main() => group('GitCommit', () {
     });
 
     group('.toString()', () {
-      var data = GitData(
+      final data = GitData(
         const GitCommit('2ef7bde608ce5404e97d5f042f95f89f1c232871'),
         branch: 'develop',
         remotes: [GitRemote('origin')]
@@ -162,13 +162,13 @@ void main() => group('GitCommit', () {
   group('GitRemote', () {
     group('.fromJson()', () {
       test('should return an instance with default values for an empty map', () {
-        var remote = GitRemote.fromJson({});
+        final remote = GitRemote.fromJson({});
         expect(remote.name, isEmpty);
         expect(remote.url, isNull);
       });
 
       test('should return an initialized instance for a non-empty map', () {
-        var remote = GitRemote.fromJson({
+        final remote = GitRemote.fromJson({
           'name': 'origin',
           'url': 'https://github.com/cedx/coveralls.dart.git'
         });
@@ -180,20 +180,20 @@ void main() => group('GitCommit', () {
 
     group('.toJson()', () {
       test('should return a map with default values for a newly created instance', () {
-        var map = GitRemote('').toJson();
+        final map = GitRemote('').toJson();
         expect(map['name'], isEmpty);
         expect(map['url'], isNull);
       });
 
       test('should return a non-empty map for an initialized instance', () {
-        var map = GitRemote('origin', Uri.https('github.com', '/cedx/coveralls.dart.git')).toJson();
+        final map = GitRemote('origin', Uri.https('github.com', '/cedx/coveralls.dart.git')).toJson();
         expect(map['name'], equals('origin'));
         expect(map['url'], equals('https://github.com/cedx/coveralls.dart.git'));
       });
     });
 
     group('.toString()', () {
-      var data = GitRemote('origin', Uri.https('github.com', '/cedx/coveralls.dart.git')).toString();
+      final data = GitRemote('origin', Uri.https('github.com', '/cedx/coveralls.dart.git')).toString();
 
       test('should start with the class name', () {
         expect(data.indexOf('GitRemote {'), equals(0));

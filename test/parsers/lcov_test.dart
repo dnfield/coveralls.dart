@@ -7,7 +7,7 @@ import 'package:test/test.dart';
 void main() => group('Lcov', () {
   group('parseReport()', () {
     test('should properly parse LCOV reports', () async {
-      var job = await parseReport(await File('test/fixtures/lcov.info').readAsString());
+      final job = await parseReport(await File('test/fixtures/lcov.info').readAsString());
       expect(job.sourceFiles, hasLength(3));
 
       expect(job.sourceFiles.first.name, equals(p.join('lib', 'src', 'io', 'client.dart')));
