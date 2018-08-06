@@ -1,0 +1,131 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of coveralls.io;
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+GitCommit _$GitCommitFromJson(Map<String, dynamic> json) {
+  return new GitCommit(json['id'] as String,
+      authorEmail: json['author_email'] as String,
+      authorName: json['author_name'] as String,
+      committerEmail: json['committer_email'] as String,
+      committerName: json['committer_name'] as String,
+      message: json['message'] as String);
+}
+
+Map<String, dynamic> _$GitCommitToJson(GitCommit instance) {
+  var val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('author_email', instance.authorEmail);
+  writeNotNull('author_name', instance.authorName);
+  writeNotNull('committer_email', instance.committerEmail);
+  writeNotNull('committer_name', instance.committerName);
+  writeNotNull('id', instance.id);
+  writeNotNull('message', instance.message);
+  return val;
+}
+
+GitData _$GitDataFromJson(Map<String, dynamic> json) {
+  return new GitData(
+      json['head'] == null
+          ? null
+          : new GitCommit.fromJson(json['head'] as Map<String, dynamic>),
+      branch: json['branch'] as String ?? '',
+      remotes: (json['remotes'] as List)?.map((e) => e == null
+          ? null
+          : new GitRemote.fromJson(e as Map<String, dynamic>)));
+}
+
+Map<String, dynamic> _$GitDataToJson(GitData instance) => <String, dynamic>{
+      'branch': instance.branch,
+      'head':
+          instance.commit == null ? null : _gitCommitToJson(instance.commit),
+      'remotes':
+          instance.remotes == null ? null : _gitRemotesToJson(instance.remotes)
+    };
+
+GitRemote _$GitRemoteFromJson(Map<String, dynamic> json) {
+  return new GitRemote(json['name'] as String ?? '',
+      json['url'] == null ? null : Uri.parse(json['url'] as String));
+}
+
+Map<String, dynamic> _$GitRemoteToJson(GitRemote instance) =>
+    <String, dynamic>{'name': instance.name, 'url': instance.url?.toString()};
+
+Job _$JobFromJson(Map<String, dynamic> json) {
+  return new Job(
+      repoToken: json['repo_token'] as String,
+      serviceJobId: json['service_job_id'] as String,
+      serviceName: json['service_name'] as String,
+      sourceFiles: (json['source_files'] as List)?.map((e) => e == null
+          ? null
+          : new SourceFile.fromJson(e as Map<String, dynamic>)))
+    ..commitSha = json['commit_sha'] as String
+    ..git = json['git'] == null
+        ? null
+        : new GitData.fromJson(json['git'] as Map<String, dynamic>)
+    ..isParallel = json['parallel'] as bool
+    ..runAt =
+        json['run_at'] == null ? null : DateTime.parse(json['run_at'] as String)
+    ..serviceNumber = json['service_number'] as String
+    ..servicePullRequest = json['service_pull_request'] as String;
+}
+
+Map<String, dynamic> _$JobToJson(Job instance) {
+  var val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('commit_sha', instance.commitSha);
+  writeNotNull(
+      'git', instance.git == null ? null : _gitDataToJson(instance.git));
+  writeNotNull('parallel', instance.isParallel);
+  writeNotNull('repo_token', instance.repoToken);
+  writeNotNull('run_at', instance.runAt?.toIso8601String());
+  writeNotNull('service_job_id', instance.serviceJobId);
+  writeNotNull('service_name', instance.serviceName);
+  writeNotNull('service_number', instance.serviceNumber);
+  writeNotNull('service_pull_request', instance.servicePullRequest);
+  writeNotNull(
+      'source_files',
+      instance.sourceFiles == null
+          ? null
+          : _sourceFilesToJson(instance.sourceFiles));
+  return val;
+}
+
+SourceFile _$SourceFileFromJson(Map<String, dynamic> json) {
+  return new SourceFile(
+      json['name'] as String ?? '', json['source_digest'] as String ?? '',
+      coverage: (json['coverage'] as List)?.map((e) => e as int),
+      source: json['source'] as String);
+}
+
+Map<String, dynamic> _$SourceFileToJson(SourceFile instance) {
+  var val = <String, dynamic>{
+    'coverage': instance.coverage,
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('source', instance.source);
+  val['source_digest'] = instance.sourceDigest;
+  return val;
+}
