@@ -7,7 +7,7 @@ part of coveralls.io;
 // **************************************************************************
 
 GitCommit _$GitCommitFromJson(Map<String, dynamic> json) {
-  return new GitCommit(json['id'] as String,
+  return GitCommit(json['id'] as String,
       authorEmail: json['author_email'] as String,
       authorName: json['author_name'] as String,
       committerEmail: json['committer_email'] as String,
@@ -34,14 +34,13 @@ Map<String, dynamic> _$GitCommitToJson(GitCommit instance) {
 }
 
 GitData _$GitDataFromJson(Map<String, dynamic> json) {
-  return new GitData(
+  return GitData(
       json['head'] == null
           ? null
-          : new GitCommit.fromJson(json['head'] as Map<String, dynamic>),
+          : GitCommit.fromJson(json['head'] as Map<String, dynamic>),
       branch: json['branch'] as String ?? '',
-      remotes: (json['remotes'] as List)?.map((e) => e == null
-          ? null
-          : new GitRemote.fromJson(e as Map<String, dynamic>)));
+      remotes: (json['remotes'] as List)?.map((e) =>
+          e == null ? null : GitRemote.fromJson(e as Map<String, dynamic>)));
 }
 
 Map<String, dynamic> _$GitDataToJson(GitData instance) => <String, dynamic>{
@@ -53,7 +52,7 @@ Map<String, dynamic> _$GitDataToJson(GitData instance) => <String, dynamic>{
     };
 
 GitRemote _$GitRemoteFromJson(Map<String, dynamic> json) {
-  return new GitRemote(json['name'] as String ?? '',
+  return GitRemote(json['name'] as String ?? '',
       json['url'] == null ? null : Uri.parse(json['url'] as String));
 }
 
@@ -61,17 +60,16 @@ Map<String, dynamic> _$GitRemoteToJson(GitRemote instance) =>
     <String, dynamic>{'name': instance.name, 'url': instance.url?.toString()};
 
 Job _$JobFromJson(Map<String, dynamic> json) {
-  return new Job(
+  return Job(
       repoToken: json['repo_token'] as String,
       serviceJobId: json['service_job_id'] as String,
       serviceName: json['service_name'] as String,
-      sourceFiles: (json['source_files'] as List)?.map((e) => e == null
-          ? null
-          : new SourceFile.fromJson(e as Map<String, dynamic>)))
+      sourceFiles: (json['source_files'] as List)?.map((e) =>
+          e == null ? null : SourceFile.fromJson(e as Map<String, dynamic>)))
     ..commitSha = json['commit_sha'] as String
     ..git = json['git'] == null
         ? null
-        : new GitData.fromJson(json['git'] as Map<String, dynamic>)
+        : GitData.fromJson(json['git'] as Map<String, dynamic>)
     ..isParallel = json['parallel'] as bool
     ..runAt =
         json['run_at'] == null ? null : DateTime.parse(json['run_at'] as String)
@@ -107,7 +105,7 @@ Map<String, dynamic> _$JobToJson(Job instance) {
 }
 
 SourceFile _$SourceFileFromJson(Map<String, dynamic> json) {
-  return new SourceFile(
+  return SourceFile(
       json['name'] as String ?? '', json['source_digest'] as String ?? '',
       coverage: (json['coverage'] as List)?.map((e) => e as int),
       source: json['source'] as String);
