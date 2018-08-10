@@ -1,4 +1,4 @@
-part of coveralls.io;
+part of '../io.dart';
 
 /// Converts the specified [GitData] instance to a JSON object.
 Map<String, dynamic> _gitDataToJson(GitData data) => data.toJson();

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of coveralls.cli;
+part of 'cli.dart';
 
 // **************************************************************************
 // CliGenerator

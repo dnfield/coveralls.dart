@@ -1,4 +1,4 @@
-part of coveralls.io;
+part of '../io.dart';
 
 /// Uploads code coverage reports to the [Coveralls](https://coveralls.io) service.
 class Client {

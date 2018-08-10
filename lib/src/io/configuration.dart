@@ -1,4 +1,4 @@
-part of coveralls.io;
+part of '../io.dart';
 
 /// Provides access to the coverage settings.
 class Configuration extends Object with MapMixin<String, String> {

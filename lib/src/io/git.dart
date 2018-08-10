@@ -1,4 +1,4 @@
-part of coveralls.io;
+part of '../io.dart';
 
 /// Converts the specified [GitCommit] instance to a JSON object.
 Map<String, dynamic> _gitCommitToJson(GitCommit commit) => commit.toJson();

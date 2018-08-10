@@ -1,4 +1,4 @@
-part of coveralls.io;
+part of '../io.dart';
 
 /// Represents a source code file and its coverage data for a single job.
 @JsonSerializable()
