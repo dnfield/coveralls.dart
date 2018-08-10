@@ -5,8 +5,7 @@ part of '../io.dart';
 class SourceFile {
 
   /// Creates a new source file.
-  SourceFile(this.name, this.sourceDigest, {Iterable<int> coverage, this.source}):
-    coverage = List<int>.from(coverage ?? const <int>[]);
+  SourceFile(this.name, this.sourceDigest, {Iterable<int> coverage, this.source}): coverage = coverage?.toList() ?? <int>[];
 
   /// Creates a new source file from the specified [map] in JSON format.
   factory SourceFile.fromJson(Map<String, dynamic> map) => _$SourceFileFromJson(map);

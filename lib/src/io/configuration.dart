@@ -7,7 +7,7 @@ class Configuration extends Object with MapMixin<String, String> {
   final Map<String, String> _params;
 
   /// Creates a new configuration from the specified [map].
-  Configuration([Map<String, String> map]): _params = Map<String, String>.from(map ?? const <String, String>{});
+  Configuration([Map<String, String> map]): _params = map ?? <String, String>{};
 
   /// Creates a new configuration from the variables of the specified environment.
   /// If [env] is not provided, it defaults to `Platform.environment`.

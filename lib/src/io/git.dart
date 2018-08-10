@@ -51,7 +51,7 @@ class GitCommit {
 class GitData {
 
   /// Creates a new data.
-  GitData(this.commit, {this.branch = '', Iterable<GitRemote> remotes}): remotes = List<GitRemote>.from(remotes ?? const <GitRemote>[]);
+  GitData(this.commit, {this.branch = '', Iterable<GitRemote> remotes}): remotes = remotes?.toList() ?? <GitRemote>[];
 
   /// Creates a new data from the specified [map] in JSON format.
   factory GitData.fromJson(Map<String, dynamic> map) => _$GitDataFromJson(map);

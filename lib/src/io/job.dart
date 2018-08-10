@@ -11,8 +11,7 @@ List<Map<String, dynamic>> _sourceFilesToJson(List<SourceFile> files) => files.m
 class Job {
 
   /// Creates a new job.
-  Job({this.repoToken, this.serviceJobId, this.serviceName, Iterable<SourceFile> sourceFiles}):
-    sourceFiles = List<SourceFile>.from(sourceFiles ?? const <SourceFile>[]);
+  Job({this.repoToken, this.serviceJobId, this.serviceName, Iterable<SourceFile> sourceFiles}): sourceFiles = sourceFiles?.toList() ?? <SourceFile>[];
 
   /// Creates a new job from the specified [map] in JSON format.
   factory Job.fromJson(Map<String, dynamic> map) => _$JobFromJson(map);
