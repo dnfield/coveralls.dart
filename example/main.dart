@@ -12,5 +12,6 @@ Future<void> main() async {
 
   on Exception catch (err) {
     print('An error occurred: $err');
+    if (err is ClientException) print('From: ${err.uri}');
   }
 }
