@@ -11,7 +11,7 @@ Future<Job> parseReport(String report) async {
   for (final record in Report.fromCoverage(report).records) {
     final source = await File(record.sourceFile).readAsString();
     final coverage = List<int>(source.split(RegExp(r'\r?\n')).length);
-    for (final lineData in record.lines.data) coverage[lineData.lineNumber - 1] = lineData.executionCount;
+    if (record.lines != null) for (final lineData in record.lines.data) coverage[lineData.lineNumber - 1] = lineData.executionCount;
 
     final filename = p.relative(record.sourceFile);
     final digest = md5.convert(source.codeUnits).toString();
