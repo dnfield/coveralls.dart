@@ -7,7 +7,7 @@ Map<String, dynamic> _gitCommitToJson(GitCommit commit) => commit.toJson();
 List<Map<String, dynamic>> _gitRemotesToJson(List<GitRemote> remotes) => remotes.map((remote) => remote.toJson()).toList();
 
 /// Represents a Git commit.
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(fieldRename: FieldRename.snake, includeIfNull: false)
 class GitCommit {
 
   /// Creates a new commit.
@@ -17,19 +17,15 @@ class GitCommit {
   factory GitCommit.fromJson(Map<String, dynamic> map) => _$GitCommitFromJson(map);
 
   /// The author mail address.
-  @JsonKey(name: 'author_email')
   final String authorEmail;
 
   /// The author name.
-  @JsonKey(name: 'author_name')
   final String authorName;
 
   /// The committer mail address.
-  @JsonKey(name: 'committer_email')
   final String committerEmail;
 
   /// The committer name.
-  @JsonKey(name: 'committer_name')
   final String committerName;
 
   /// The commit identifier.
