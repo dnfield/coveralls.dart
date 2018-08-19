@@ -50,12 +50,11 @@ class Client {
     job.runAt ??= DateTime.now();
 
     try {
-      if ((await where('git')).isNotEmpty) {
-        final git = await GitData.fromRepository();
-        final branch = job.git != null ? job.git.branch : '';
-        if (git.branch == 'HEAD' && branch.isNotEmpty) git.branch = branch;
-        job.git = git;
-      }
+      await where('git');
+      final git = await GitData.fromRepository();
+      final branch = job.git != null ? job.git.branch : '';
+      if (git.branch == 'HEAD' && branch.isNotEmpty) git.branch = branch;
+      job.git = git;
     }
 
     on Exception { /* Noop */ }
