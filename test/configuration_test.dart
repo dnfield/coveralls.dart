@@ -36,12 +36,12 @@ void main() => group('Configuration', () {
   });
 
   group('.fromEnvironment()', () {
-    test('should return an empty configuration for an empty environment', () {
-      expect(Configuration.fromEnvironment({}), isEmpty);
+    test('should return an empty configuration for an empty environment', () async {
+      expect(await Configuration.fromEnvironment({}), isEmpty);
     });
 
-    test('should return an initialized instance for a non-empty environment', () {
-      final config = Configuration.fromEnvironment({
+    test('should return an initialized instance for a non-empty environment', () async {
+      final config = await Configuration.fromEnvironment({
         'CI_NAME': 'travis-pro',
         'CI_PULL_REQUEST': 'PR #123',
         'COVERALLS_REPO_TOKEN': '0123456789abcdef',
@@ -82,7 +82,7 @@ void main() => group('Configuration', () {
     });
 
     test('should use the environment defaults if the `.coveralls.yml` file is not found', () async {
-      final defaults = Configuration.fromEnvironment();
+      final defaults = await Configuration.fromEnvironment();
       final config = await Configuration.loadDefaults('.dummy/config.yml');
       expect(config.length, equals(defaults.length));
       for (final key in config.keys) expect(config[key], equals(defaults[key]));
