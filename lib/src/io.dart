@@ -12,16 +12,16 @@ import 'package:yaml/yaml.dart';
 
 import 'io/parsers/clover.dart' deferred as clover;
 import 'io/parsers/lcov.dart' deferred as lcov;
-import 'io/services/appveyor.dart' as appveyor;
-import 'io/services/circleci.dart' as circleci;
-import 'io/services/codeship.dart' as codeship;
-import 'io/services/gitlab_ci.dart' as gitlab_ci;
-import 'io/services/jenkins.dart' as jenkins;
-import 'io/services/semaphore.dart' as semaphore;
-import 'io/services/solano_ci.dart' as solano_ci;
-import 'io/services/surf.dart' as surf;
-import 'io/services/travis_ci.dart' as travis_ci;
-import 'io/services/wercker.dart' as wercker;
+import 'io/services/appveyor.dart' deferred as appveyor;
+import 'io/services/circleci.dart' deferred as circleci;
+import 'io/services/codeship.dart' deferred as codeship;
+import 'io/services/gitlab_ci.dart' deferred as gitlab_ci;
+import 'io/services/jenkins.dart' deferred as jenkins;
+import 'io/services/semaphore.dart' deferred as semaphore;
+import 'io/services/solano_ci.dart' deferred as solano_ci;
+import 'io/services/surf.dart' deferred as surf;
+import 'io/services/travis_ci.dart' deferred as travis_ci;
+import 'io/services/wercker.dart' deferred as wercker;
 
 part 'io.g.dart';
 part 'io/client.dart';
