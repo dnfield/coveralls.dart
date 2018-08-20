@@ -57,7 +57,7 @@ class Client {
       job.git = git;
     }
 
-    on Exception { /* Noop */ }
+    on FinderException { /* Noop */ }
     return uploadJob(job);
   }
 

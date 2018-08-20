@@ -25,3 +25,21 @@ Future<void> main() async {
 The `Client#upload()` method returns a [`Future`](https://api.dartlang.org/stable/dart-async/Future-class.html) that completes when the coverage report has been uploaded.
 
 The future completes with a `FormatException` if the input report is invalid. It completes with a `ClientException` if any error occurred while uploading the report.
+
+## Client events
+The `Client` class triggers some events during its life cycle:
+
+- `request` : emitted every time a request is made to the remote service.
+- `response` : emitted every time a response is received from the remote service.
+
+These events are exposed as [`Stream`](https://api.dartlang.org/stable/dart-async/Stream-class.html), you can listen to them using the `on<EventName>` properties:
+
+```dart
+client.onRequest.listen(
+  (event) => print('Client request: ${event.request.url}')
+);
+
+client.onResponse.listen(
+  (event) => print('Server response: ${event.response.statusCode}')
+);
+```

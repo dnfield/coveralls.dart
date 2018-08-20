@@ -7,7 +7,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
-import 'package:where/where.dart' show where;
+import 'package:where/where.dart';
 import 'package:yaml/yaml.dart';
 
 import 'io/parsers/clover.dart' deferred as clover;
