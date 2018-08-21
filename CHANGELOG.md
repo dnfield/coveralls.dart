@@ -1,5 +1,10 @@
 # Changelog
 
+## Version [4.0.0](https://github.com/cedx/coveralls.dart/compare/v3.2.0...v4.0.0)
+- Breaking change: the `Configuration.fromEnvironment()` constructor is now an asynchronous static method.
+- Using deferred loading for the services.
+- Updated the package dependencies.
+
 ## Version [3.2.0](https://github.com/cedx/coveralls.dart/compare/v3.1.0...v3.2.0)
 - Added the `Options` class, used by the command line interface.
 - Raised the [Dart SDK](https://www.dartlang.org/tools/sdk) constraint.
