@@ -1,11 +1,5 @@
 part of '../io.dart';
 
-/// Converts the specified [GitCommit] instance to a JSON object.
-Map<String, dynamic> _gitCommitToJson(GitCommit commit) => commit.toJson();
-
-/// Converts the specified list of [GitRemote] instances to a list of JSON objects.
-List<Map<String, dynamic>> _gitRemotesToJson(List<GitRemote> remotes) => remotes.map((remote) => remote.toJson()).toList();
-
 /// Represents a Git commit.
 @JsonSerializable(fieldRename: FieldRename.snake, includeIfNull: false)
 class GitCommit {
@@ -99,6 +93,12 @@ class GitData {
   /// Returns a [String] representation of this object.
   @override
   String toString() => 'GitData ${json.encode(this)}';
+
+  /// Converts the specified [GitCommit] instance to a JSON object.
+  static Map<String, dynamic> _gitCommitToJson(GitCommit commit) => commit.toJson();
+
+  /// Converts the specified list of [GitRemote] instances to a list of JSON objects.
+  static List<Map<String, dynamic>> _gitRemotesToJson(List<GitRemote> remotes) => remotes.map((remote) => remote.toJson()).toList();
 }
 
 /// Represents a Git remote repository.

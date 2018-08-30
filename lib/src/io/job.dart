@@ -1,11 +1,5 @@
 part of '../io.dart';
 
-/// Converts the specified [GitData] instance to a JSON object.
-Map<String, dynamic> _gitDataToJson(GitData data) => data.toJson();
-
-/// Converts the specified list of [SourceFile] instances to a list of JSON objects.
-List<Map<String, dynamic>> _sourceFilesToJson(List<SourceFile> files) => files.map((file) => file.toJson()).toList();
-
 /// Represents the coverage data from a single run of a test suite.
 @JsonSerializable(includeIfNull: false)
 class Job {
@@ -62,4 +56,10 @@ class Job {
   /// Returns a [String] representation of this object.
   @override
   String toString() => 'Job ${json.encode(this)}';
+
+  /// Converts the specified [GitData] instance to a JSON object.
+  static Map<String, dynamic> _gitDataToJson(GitData data) => data.toJson();
+
+  /// Converts the specified list of [SourceFile] instances to a list of JSON objects.
+  static List<Map<String, dynamic>> _sourceFilesToJson(List<SourceFile> files) => files.map((file) => file.toJson()).toList();
 }

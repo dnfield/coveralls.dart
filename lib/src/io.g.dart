@@ -45,10 +45,12 @@ GitData _$GitDataFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$GitDataToJson(GitData instance) => <String, dynamic>{
       'branch': instance.branch,
-      'head':
-          instance.commit == null ? null : _gitCommitToJson(instance.commit),
-      'remotes':
-          instance.remotes == null ? null : _gitRemotesToJson(instance.remotes)
+      'head': instance.commit == null
+          ? null
+          : GitData._gitCommitToJson(instance.commit),
+      'remotes': instance.remotes == null
+          ? null
+          : GitData._gitRemotesToJson(instance.remotes)
     };
 
 GitRemote _$GitRemoteFromJson(Map<String, dynamic> json) {
@@ -88,7 +90,7 @@ Map<String, dynamic> _$JobToJson(Job instance) {
 
   writeNotNull('commit_sha', instance.commitSha);
   writeNotNull(
-      'git', instance.git == null ? null : _gitDataToJson(instance.git));
+      'git', instance.git == null ? null : Job._gitDataToJson(instance.git));
   writeNotNull('parallel', instance.isParallel);
   writeNotNull('repo_token', instance.repoToken);
   writeNotNull('run_at', instance.runAt?.toIso8601String());
@@ -100,7 +102,7 @@ Map<String, dynamic> _$JobToJson(Job instance) {
       'source_files',
       instance.sourceFiles == null
           ? null
-          : _sourceFilesToJson(instance.sourceFiles));
+          : Job._sourceFilesToJson(instance.sourceFiles));
   return val;
 }
 
