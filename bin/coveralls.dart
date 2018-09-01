@@ -5,7 +5,7 @@ import 'dart:io';
 import 'dart:isolate';
 import 'package:coveralls/coveralls.dart';
 import 'package:coveralls/src/cli.dart';
-import 'package:pubspec_parse/pubspec_parse.dart';
+import 'package:coveralls/src/version.dart';
 
 /// The usage information.
 final String usage = (StringBuffer()
@@ -16,13 +16,6 @@ final String usage = (StringBuffer()
   ..writeln('Options:')
   ..write(argParser.usage))
   .toString();
-
-/// The version number of this package.
-Future<String> get version async {
-  final fileUri = (await Isolate.resolvePackageUri(Uri.parse('package:where/'))).resolve('../pubspec.yaml');
-  final pubspec = Pubspec.parse(await File(fileUri.toFilePath()).readAsString(), sourceUrl: fileUri);
-  return pubspec.version.toString();
-}
 
 /// Application entry point.
 Future<void> main(List<String> args) async {
@@ -37,7 +30,7 @@ Future<void> main(List<String> args) async {
     }
 
     if (options.version) {
-      print(await version);
+      print(packageVersion);
       return;
     }
 
