@@ -2,7 +2,6 @@
 
 import 'dart:async';
 import 'dart:io';
-import 'dart:isolate';
 import 'package:coveralls/coveralls.dart';
 import 'package:coveralls/src/cli.dart';
 import 'package:coveralls/src/version.dart';
