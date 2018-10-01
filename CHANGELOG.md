@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [4.1.0](https://github.com/cedx/coveralls.dart/compare/v4.0.0...v4.1.0)
+- Updated the package dependencies.
+
 ## Version [4.0.0](https://github.com/cedx/coveralls.dart/compare/v3.2.0...v4.0.0)
 - Breaking change: the `Configuration.fromEnvironment()` constructor is now an asynchronous static method.
 - Using deferred loading for the services.
