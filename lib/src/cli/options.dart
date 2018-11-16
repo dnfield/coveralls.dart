@@ -4,6 +4,9 @@ part of '../cli.dart';
 @CliOptions()
 class Options {
 
+  /// Creates a new options object.
+  Options({this.help, this.rest, this.version});
+
   /// Value indicating whether to output usage information.
   @CliOption(abbr: 'h', help: 'Output usage information.', negatable: false)
   final bool help;
@@ -14,7 +17,4 @@ class Options {
   /// Value indicating whether to output the version number.
   @CliOption(abbr: 'v', help: 'Output the version number.', negatable: false)
   final bool version;
-
-  /// Creates a new options object.
-  Options({this.help, this.rest, this.version});
 }

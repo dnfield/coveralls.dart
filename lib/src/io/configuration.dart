@@ -1,10 +1,7 @@
 part of '../io.dart';
 
 /// Provides access to the coverage settings.
-class Configuration extends Object with MapMixin<String, String> {
-
-  /// The coverage parameters.
-  final Map<String, String> _params;
+class Configuration extends Object with MapMixin<String, String> { // ignore: prefer_mixin
 
   /// Creates a new configuration from the specified [map].
   Configuration([Map<String, String> map]): _params = map ?? <String, String>{};
@@ -24,6 +21,9 @@ class Configuration extends Object with MapMixin<String, String> {
       throw FormatException('The specified YAML document is invalid.', document);
     }
   }
+
+  /// The coverage parameters.
+  final Map<String, String> _params;
 
   /// Creates a new configuration from the variables of the specified environment.
   /// If [env] is not provided, it defaults to `Platform.environment`.

@@ -3,6 +3,9 @@ part of '../io.dart';
 /// Uploads code coverage reports to the [Coveralls](https://coveralls.io) service.
 class Client {
 
+  /// Creates a new client.
+  Client([Uri endPoint]): endPoint = endPoint ?? defaultEndPoint;
+
   /// The URL of the default API end point.
   static final Uri defaultEndPoint = Uri.https('coveralls.io', '/');
 
@@ -11,9 +14,6 @@ class Client {
 
   /// The handler of "response" events.
   final StreamController<http.Response> _onResponse = StreamController<http.Response>.broadcast();
-
-  /// Creates a new client.
-  Client([Uri endPoint]): endPoint = endPoint ?? defaultEndPoint;
 
   /// The URL of the API end point.
   final Uri endPoint;
