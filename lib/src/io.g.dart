@@ -16,7 +16,7 @@ GitCommit _$GitCommitFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$GitCommitToJson(GitCommit instance) {
-  var val = <String, dynamic>{};
+  final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -80,7 +80,7 @@ Job _$JobFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$JobToJson(Job instance) {
-  var val = <String, dynamic>{};
+  final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -114,7 +114,7 @@ SourceFile _$SourceFileFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$SourceFileToJson(SourceFile instance) {
-  var val = <String, dynamic>{
+  final val = <String, dynamic>{
     'coverage': instance.coverage,
     'name': instance.name,
   };

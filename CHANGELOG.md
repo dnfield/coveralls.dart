@@ -1,5 +1,9 @@
 # Changelog
 
+## Version [4.3.0](https://github.com/cedx/coveralls.dart/compare/v4.2.0...v4.3.0)
+- Improved the handling of SSH-based [Git](https://git-scm.com) remotes.
+- Updated the package dependencies.
+
 ## Version [4.2.0](https://github.com/cedx/coveralls.dart/compare/v4.1.0...v4.2.0)
 - Updated the package dependencies.
 
