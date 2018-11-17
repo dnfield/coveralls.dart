@@ -3,11 +3,14 @@
 
 Send [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) and [Clover](https://www.atlassian.com/software/clover) coverage reports to the [Coveralls](https://coveralls.io) service, in [Dart](https://www.dartlang.org).
 
-## Resources
-- [Documentation](https://dev.belin.io/coveralls.dart)
+## Documentation
+- [User guide](https://dev.belin.io/coveralls.dart)
 - [API reference](https://dev.belin.io/coveralls.dart/api)
+
+## Development
+- [Git repository](https://git.belin.io/cedx/coveralls.dart)
 - [Pub package](https://pub.dartlang.org/packages/coveralls)
-- [GitHub repository](https://github.com/cedx/coveralls.dart)
+- [Submit an issue](https://git.belin.io/cedx/coveralls.dart/issues)
 
 ## License
 [Coveralls for Dart](https://dev.belin.io/coveralls.dart) is distributed under the MIT License.
