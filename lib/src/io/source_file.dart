@@ -11,6 +11,7 @@ class SourceFile {
   factory SourceFile.fromJson(Map<String, dynamic> map) => _$SourceFileFromJson(map);
 
   /// The coverage data for this file's job.
+  @JsonKey(defaultValue: [])
   final List<int> coverage;
 
   /// The file path of this source file.

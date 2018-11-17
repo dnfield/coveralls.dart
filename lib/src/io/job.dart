@@ -1,7 +1,7 @@
 part of '../io.dart';
 
 /// Represents the coverage data from a single run of a test suite.
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
 class Job {
 
   /// Creates a new job.
@@ -15,7 +15,6 @@ class Job {
   String commitSha;
 
   /// A map of Git data that can be used to display more information to users.
-  @JsonKey(toJson: _gitDataToJson)
   GitData git;
 
   /// Value indicating whether the build will not be considered done until a webhook has been sent to Coveralls.
@@ -47,7 +46,7 @@ class Job {
   String servicePullRequest;
 
   /// The list of source files.
-  @JsonKey(name: 'source_files', toJson: _sourceFilesToJson)
+  @JsonKey(defaultValue: [], name: 'source_files')
   final List<SourceFile> sourceFiles;
 
   /// Converts this object to a [Map] in JSON format.
@@ -56,10 +55,4 @@ class Job {
   /// Returns a [String] representation of this object.
   @override
   String toString() => 'Job ${json.encode(this)}';
-
-  /// Converts the specified [GitData] instance to a JSON object.
-  static Map<String, dynamic> _gitDataToJson(GitData data) => data.toJson();
-
-  /// Converts the specified list of [SourceFile] instances to a list of JSON objects.
-  static List<Map<String, dynamic>> _sourceFilesToJson(List<SourceFile> files) => files.map((file) => file.toJson()).toList();
 }

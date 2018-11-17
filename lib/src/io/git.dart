@@ -37,7 +37,7 @@ class GitCommit {
 }
 
 /// Represents Git data that can be used to display more information to users.
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class GitData {
 
   /// Creates a new data.
@@ -51,11 +51,11 @@ class GitData {
   String branch;
 
   /// The Git commit.
-  @JsonKey(name: 'head', toJson: _gitCommitToJson)
+  @JsonKey(name: 'head')
   final GitCommit commit;
 
   /// The remote repositories.
-  @JsonKey(toJson: _gitRemotesToJson)
+  @JsonKey(defaultValue: [])
   final List<GitRemote> remotes;
 
   /// Creates a new Git data from a repository located at the specified [path] (defaulting to the current working directory).
@@ -93,12 +93,6 @@ class GitData {
   /// Returns a [String] representation of this object.
   @override
   String toString() => 'GitData ${json.encode(this)}';
-
-  /// Converts the specified [GitCommit] instance to a JSON object.
-  static Map<String, dynamic> _gitCommitToJson(GitCommit commit) => commit.toJson();
-
-  /// Converts the specified list of [GitRemote] instances to a list of JSON objects.
-  static List<Map<String, dynamic>> _gitRemotesToJson(List<GitRemote> remotes) => remotes.map((remote) => remote.toJson()).toList();
 }
 
 /// Represents a Git remote repository.
