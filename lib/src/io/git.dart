@@ -81,7 +81,7 @@ class GitData {
     final remotes = <String, GitRemote>{};
     for (final remote in commands['remotes'].split(RegExp(r'\r?\n'))) {
       final parts = remote.replaceAll(RegExp(r'\s+'), ' ').split(' ');
-      remotes.putIfAbsent(parts.first, () => GitRemote(parts.first, parts.length > 1 ? Uri.parse(parts[1]) : null));
+      remotes.putIfAbsent(parts.first, () => GitRemote(parts.first, parts.length > 1 ? parts[1] : null));
     }
 
     return GitData(GitCommit.fromJson(commands), branch: commands['branch'], remotes: remotes.values);
@@ -100,7 +100,9 @@ class GitData {
 class GitRemote {
 
   /// Creates a new remote repository.
-  GitRemote(this.name, [this.url]);
+  GitRemote(this.name, [url]): url = url is String ?
+    Uri.parse(RegExp(r'^\w+://').hasMatch(url) ? url : url.replaceFirstMapped(RegExp(r''), (match) => 'ssh://${match[1]}${match[2]}/${match[3]}')) :
+    url;
 
   /// Creates a new source file from the specified [map] in JSON format.
   factory GitRemote.fromJson(Map<String, dynamic> map) => _$GitRemoteFromJson(map);

@@ -52,8 +52,7 @@ Map<String, dynamic> _$GitDataToJson(GitData instance) => <String, dynamic>{
     };
 
 GitRemote _$GitRemoteFromJson(Map<String, dynamic> json) {
-  return GitRemote(json['name'] as String ?? '',
-      json['url'] == null ? null : Uri.parse(json['url'] as String));
+  return GitRemote(json['name'] as String ?? '', json['url']);
 }
 
 Map<String, dynamic> _$GitRemoteToJson(GitRemote instance) =>
