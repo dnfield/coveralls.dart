@@ -101,7 +101,7 @@ class GitRemote {
 
   /// Creates a new remote repository.
   GitRemote(this.name, [url]): url = url is String ?
-    Uri.parse(RegExp(r'^\w+://').hasMatch(url) ? url : url.replaceFirstMapped(RegExp(r''), (match) => 'ssh://${match[1]}${match[2]}/${match[3]}')) :
+    Uri.parse(RegExp(r'^\w+://').hasMatch(url) ? url : url.replaceFirstMapped(RegExp(r'^([^@]+@)?([^:]+):(.+)$'), (match) => 'ssh://${match[1]}${match[2]}/${match[3]}')) :
     url;
 
   /// Creates a new source file from the specified [map] in JSON format.
