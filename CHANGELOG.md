@@ -1,5 +1,9 @@
 # Changelog
 
+## Version [5.0.0](https://github.com/cedx/coveralls.dart/compare/v4.3.0...v5.0.0)
+- Breaking change: raised the [Dart SDK](https://www.dartlang.org/tools/sdk) constraint.
+- Updated the package dependencies.
+
 ## Version [4.3.0](https://github.com/cedx/coveralls.dart/compare/v4.2.0...v4.3.0)
 - Improved the handling of SSH-based [Git](https://git-scm.com) remotes.
 - Updated the package dependencies.
