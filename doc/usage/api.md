@@ -5,7 +5,6 @@ source: lib/src/io/client.dart
 The hard way. Use the `Client` class to upload your coverage reports:
 
 ```dart
-import 'dart:async';
 import 'dart:io';
 import 'package:coveralls/coveralls.dart';
 

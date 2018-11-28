@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:io';
 import 'package:coveralls/coveralls.dart';
 import 'package:crypto/crypto.dart';

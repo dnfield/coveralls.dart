@@ -1,6 +1,5 @@
 #!/usr/bin/env dart
 
-import 'dart:async';
 import 'dart:io';
 import 'package:coveralls/coveralls.dart';
 import 'package:coveralls/src/cli.dart';
