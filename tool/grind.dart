@@ -14,7 +14,7 @@ void clean() {
 }
 
 @Task('Uploads the results of the code coverage')
-void coverage() => Dart.run('bin/coveralls.dart', arguments: ['var/lcov.info']);
+void coverage() => Dart.run('${binDir.path}/main.dart', arguments: ['var/lcov.info']);
 
 @Task('Builds the documentation')
 Future<void> doc() async {
