@@ -11,8 +11,8 @@ void main() => group('Configuration', () {
     test('should return the list of keys for a non-empty configuration', () {
       final keys = Configuration({'foo': 'bar', 'baz': 'qux'}).keys.toList();
       expect(keys, hasLength(2));
-      expect(keys.first, equals('foo'));
-      expect(keys.last, equals('baz'));
+      expect(keys.first, 'foo');
+      expect(keys.last, 'baz');
     });
   });
 
@@ -22,7 +22,7 @@ void main() => group('Configuration', () {
       expect(config['foo'], isNull);
 
       config['foo'] = 'bar';
-      expect(config['foo'], equals('bar'));
+      expect(config['foo'], 'bar');
     });
   });
 
@@ -50,12 +50,12 @@ void main() => group('Configuration', () {
         'TRAVIS_BRANCH': 'develop'
       });
 
-      expect(config['commit_sha'], equals('HEAD'));
-      expect(config['git_message'], equals('Hello World!'));
-      expect(config['repo_token'], equals('0123456789abcdef'));
-      expect(config['service_branch'], equals('develop'));
-      expect(config['service_name'], equals('travis-pro'));
-      expect(config['service_pull_request'], equals('123'));
+      expect(config['commit_sha'], 'HEAD');
+      expect(config['git_message'], 'Hello World!');
+      expect(config['repo_token'], '0123456789abcdef');
+      expect(config['service_branch'], 'develop');
+      expect(config['service_name'], 'travis-pro');
+      expect(config['service_pull_request'], '123');
     });
   });
 
@@ -68,8 +68,8 @@ void main() => group('Configuration', () {
     test('should return an initialized instance for a non-empty map', () {
       final config = Configuration.fromYaml('repo_token: 0123456789abcdef\nservice_name: travis-ci');
       expect(config, hasLength(2));
-      expect(config['repo_token'], equals('0123456789abcdef'));
-      expect(config['service_name'], equals('travis-ci'));
+      expect(config['repo_token'], '0123456789abcdef');
+      expect(config['service_name'], 'travis-ci');
     });
   });
 
@@ -77,15 +77,15 @@ void main() => group('Configuration', () {
     test('should properly initialize from a `.coveralls.yml` file', () async {
       final config = await Configuration.loadDefaults('test/fixtures/.coveralls.yml');
       expect(config.length, greaterThanOrEqualTo(2));
-      expect(config['repo_token'], equals('yYPv4mMlfjKgUK0rJPgN0AwNXhfzXpVwt'));
-      expect(config['service_name'], equals('travis-pro'));
+      expect(config['repo_token'], 'yYPv4mMlfjKgUK0rJPgN0AwNXhfzXpVwt');
+      expect(config['service_name'], 'travis-pro');
     });
 
     test('should use the environment defaults if the `.coveralls.yml` file is not found', () async {
       final defaults = await Configuration.fromEnvironment();
       final config = await Configuration.loadDefaults('.dummy/config.yml');
-      expect(config.length, equals(defaults.length));
-      for (final key in config.keys) expect(config[key], equals(defaults[key]));
+      expect(config.length, defaults.length);
+      for (final key in config.keys) expect(config[key], defaults[key]);
     });
   });
 
@@ -106,8 +106,8 @@ void main() => group('Configuration', () {
     test('should return a non-empty map for an initialized instance', () {
       final map = Configuration({'foo': 'bar', 'bar': 'baz'}).toJson();
       expect(map, hasLength(2));
-      expect(map['foo'], equals('bar'));
-      expect(map['bar'], equals('baz'));
+      expect(map['foo'], 'bar');
+      expect(map['bar'], 'baz');
     });
   });
 
@@ -115,7 +115,7 @@ void main() => group('Configuration', () {
     final data = Configuration({'foo': 'bar', 'baz': 'qux'}).toString();
 
     test('should start with the class name', () {
-      expect(data.indexOf('Configuration {'), equals(0));
+      expect(data.indexOf('Configuration {'), 0);
     });
 
     test('should contain the instance properties', () {

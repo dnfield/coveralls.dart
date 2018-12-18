@@ -21,10 +21,10 @@ void main() => group('GitCommit', () {
           'message': 'Hello World!'
         });
 
-        expect(commit.authorEmail, equals('anonymous@secret.com'));
-        expect(commit.authorName, equals('Anonymous'));
-        expect(commit.id, equals('2ef7bde608ce5404e97d5f042f95f89f1c232871'));
-        expect(commit.message, equals('Hello World!'));
+        expect(commit.authorEmail, 'anonymous@secret.com');
+        expect(commit.authorName, 'Anonymous');
+        expect(commit.id, '2ef7bde608ce5404e97d5f042f95f89f1c232871');
+        expect(commit.message, 'Hello World!');
       });
     });
 
@@ -44,10 +44,10 @@ void main() => group('GitCommit', () {
         ).toJson();
 
         expect(map, hasLength(4));
-        expect(map['author_email'], equals('anonymous@secret.com'));
-        expect(map['author_name'], equals('Anonymous'));
-        expect(map['id'], equals('2ef7bde608ce5404e97d5f042f95f89f1c232871'));
-        expect(map['message'], equals('Hello World!'));
+        expect(map['author_email'], 'anonymous@secret.com');
+        expect(map['author_name'], 'Anonymous');
+        expect(map['id'], '2ef7bde608ce5404e97d5f042f95f89f1c232871');
+        expect(map['message'], 'Hello World!');
       });
     });
 
@@ -60,7 +60,7 @@ void main() => group('GitCommit', () {
       ).toString();
 
       test('should start with the class name', () {
-        expect(data.indexOf('GitCommit {'), equals(0));
+        expect(data.indexOf('GitCommit {'), 0);
       });
 
       test('should contain the instance properties', () {
@@ -88,14 +88,14 @@ void main() => group('GitCommit', () {
           'remotes': [{'name': 'origin'}]
         });
 
-        expect(data.branch, equals('develop'));
+        expect(data.branch, 'develop');
 
         expect(data.commit, const TypeMatcher<GitCommit>());
-        expect(data.commit.id, equals('2ef7bde608ce5404e97d5f042f95f89f1c232871'));
+        expect(data.commit.id, '2ef7bde608ce5404e97d5f042f95f89f1c232871');
 
         expect(data.remotes, hasLength(1));
         expect(data.remotes.first, const TypeMatcher<GitRemote>());
-        expect(data.remotes.first.name, equals('origin'));
+        expect(data.remotes.first.name, 'origin');
       });
     });
 
@@ -113,10 +113,10 @@ void main() => group('GitCommit', () {
         final origin = data.remotes.where((remote) => remote.name == 'origin').toList();
         expect(origin, hasLength(1));
         expect(origin.first.url, anyOf(
-          equals(Uri.https('git.belin.io', '/cedx/coveralls.dart.git')),
-          equals(Uri.https('github.com', '/cedx/coveralls.dart.git')),
-          equals(Uri.parse('ssh://git@git.belin.io/cedx/coveralls.dart.git')),
-          equals(Uri.parse('ssh://git@github.com/cedx/coveralls.dart.git'))
+          Uri.https('git.belin.io', '/cedx/coveralls.dart.git'),
+          Uri.https('github.com', '/cedx/coveralls.dart.git'),
+          Uri.parse('ssh://git@git.belin.io/cedx/coveralls.dart.git'),
+          Uri.parse('ssh://git@github.com/cedx/coveralls.dart.git')
         ));
       });
     });
@@ -136,12 +136,12 @@ void main() => group('GitCommit', () {
           remotes: [GitRemote('origin')]
         ).toJson();
 
-        expect(map['branch'], equals('develop'));
+        expect(map['branch'], 'develop');
         expect(map['head'], isMap);
-        expect(map['head']['id'], equals('2ef7bde608ce5404e97d5f042f95f89f1c232871'));
+        expect(map['head']['id'], '2ef7bde608ce5404e97d5f042f95f89f1c232871');
         expect(map['remotes'], allOf(isList, hasLength(1)));
         expect(map['remotes'].first, isMap);
-        expect(map['remotes'].first['name'], equals('origin'));
+        expect(map['remotes'].first['name'], 'origin');
       });
     });
 
@@ -153,7 +153,7 @@ void main() => group('GitCommit', () {
       ).toString();
 
       test('should start with the class name', () {
-        expect(data.indexOf('GitData {'), equals(0));
+        expect(data.indexOf('GitData {'), 0);
       });
 
       test('should contain the instance properties', () {
@@ -174,11 +174,11 @@ void main() => group('GitCommit', () {
 
       test('should return an initialized instance for a non-empty map', () {
         var remote = GitRemote.fromJson({'name': 'origin', 'url': 'git@git.belin.io:cedx/coveralls.dart.git'});
-        expect(remote.name, equals('origin'));
-        expect(remote.url, equals(Uri.parse('ssh://git@git.belin.io/cedx/coveralls.dart.git')));
+        expect(remote.name, 'origin');
+        expect(remote.url, Uri.parse('ssh://git@git.belin.io/cedx/coveralls.dart.git'));
 
         remote = GitRemote.fromJson({'name': 'origin', 'url': 'https://git.belin.io/cedx/coveralls.dart.git'});
-        expect(remote.url, equals(Uri.https('git.belin.io', '/cedx/coveralls.dart.git')));
+        expect(remote.url, Uri.https('git.belin.io', '/cedx/coveralls.dart.git'));
       });
     });
 
@@ -191,11 +191,11 @@ void main() => group('GitCommit', () {
 
       test('should return a non-empty map for an initialized instance', () {
         var map = GitRemote('origin', 'git@git.belin.io:cedx/coveralls.dart.git').toJson();
-        expect(map['name'], equals('origin'));
-        expect(map['url'], equals('ssh://git@git.belin.io/cedx/coveralls.dart.git'));
+        expect(map['name'], 'origin');
+        expect(map['url'], 'ssh://git@git.belin.io/cedx/coveralls.dart.git');
 
         map = GitRemote('origin', Uri.https('git.belin.io', '/cedx/coveralls.dart.git')).toJson();
-        expect(map['url'], equals('https://git.belin.io/cedx/coveralls.dart.git'));
+        expect(map['url'], 'https://git.belin.io/cedx/coveralls.dart.git');
       });
     });
 
@@ -203,7 +203,7 @@ void main() => group('GitCommit', () {
       final data = GitRemote('origin', 'git@git.belin.io:cedx/coveralls.dart.git').toString();
 
       test('should start with the class name', () {
-        expect(data.indexOf('GitRemote {'), equals(0));
+        expect(data.indexOf('GitRemote {'), 0);
       });
 
       test('should contain the instance properties', () {

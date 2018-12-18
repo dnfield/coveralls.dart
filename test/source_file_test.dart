@@ -22,10 +22,10 @@ void main() => group('SourceFile', () {
 
       expect(file.coverage, hasLength(7));
       expect(file.coverage.first, isNull);
-      expect(file.coverage[1], equals(2));
-      expect(file.name, equals('coveralls.dart'));
-      expect(file.source, equals('void main() {}'));
-      expect(file.sourceDigest, equals('27f5ebf0f8c559b2af9419d190299a5e'));
+      expect(file.coverage[1], 2);
+      expect(file.name, 'coveralls.dart');
+      expect(file.source, 'void main() {}');
+      expect(file.sourceDigest, '27f5ebf0f8c559b2af9419d190299a5e');
     });
   });
 
@@ -47,10 +47,10 @@ void main() => group('SourceFile', () {
       expect(map, hasLength(4));
       expect(map['coverage'], allOf(isList, hasLength(7)));
       expect(map['coverage'].first, isNull);
-      expect(map['coverage'][1], equals(2));
-      expect(map['name'], equals('coveralls.dart'));
-      expect(map['source'], equals('void main() {}'));
-      expect(map['source_digest'], equals('27f5ebf0f8c559b2af9419d190299a5e'));
+      expect(map['coverage'][1], 2);
+      expect(map['name'], 'coveralls.dart');
+      expect(map['source'], 'void main() {}');
+      expect(map['source_digest'], '27f5ebf0f8c559b2af9419d190299a5e');
     });
   });
 
@@ -61,7 +61,7 @@ void main() => group('SourceFile', () {
     ).toString();
 
     test('should start with the class name', () {
-      expect(data.indexOf('SourceFile {'), equals(0));
+      expect(data.indexOf('SourceFile {'), 0);
     });
 
     test('should contain the instance properties', () {

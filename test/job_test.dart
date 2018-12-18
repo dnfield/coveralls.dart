@@ -25,17 +25,17 @@ void main() => group('Job', () {
 
       expect(job, const TypeMatcher<Job>());
       expect(job.isParallel, isTrue);
-      expect(job.repoToken, equals('yYPv4mMlfjKgUK0rJPgN0AwNXhfzXpVwt'));
+      expect(job.repoToken, 'yYPv4mMlfjKgUK0rJPgN0AwNXhfzXpVwt');
 
       expect(job.git, const TypeMatcher<GitData>());
-      expect(job.git.branch, equals('develop'));
+      expect(job.git.branch, 'develop');
 
       expect(job.runAt, const TypeMatcher<DateTime>());
-      expect(job.runAt.toIso8601String(), equals('2017-01-29T02:43:30.000Z'));
+      expect(job.runAt.toIso8601String(), '2017-01-29T02:43:30.000Z');
 
       expect(job.sourceFiles, hasLength(1));
       expect(job.sourceFiles.first, const TypeMatcher<SourceFile>());
-      expect(job.sourceFiles.first.name, equals('/home/cedx/coveralls.dart'));
+      expect(job.sourceFiles.first.name, '/home/cedx/coveralls.dart');
     });
   });
 
@@ -56,15 +56,15 @@ void main() => group('Job', () {
       final map = job.toJson();
       expect(map, hasLength(5));
       expect(map['parallel'], isTrue);
-      expect(map['repo_token'], equals('yYPv4mMlfjKgUK0rJPgN0AwNXhfzXpVwt'));
-      expect(map['run_at'], equals('2017-01-29T02:43:30.000Z'));
+      expect(map['repo_token'], 'yYPv4mMlfjKgUK0rJPgN0AwNXhfzXpVwt');
+      expect(map['run_at'], '2017-01-29T02:43:30.000Z');
 
       expect(map['git'], isMap);
-      expect(map['git']['branch'], equals('develop'));
+      expect(map['git']['branch'], 'develop');
 
       expect(map['source_files'], allOf(isList, hasLength(1)));
       expect(map['source_files'].first, isMap);
-      expect(map['source_files'].first['name'], equals('/home/cedx/coveralls.dart'));
+      expect(map['source_files'].first['name'], '/home/cedx/coveralls.dart');
     });
   });
 
@@ -77,7 +77,7 @@ void main() => group('Job', () {
 
     final data = job.toString();
     test('should start with the class name', () {
-      expect(data.indexOf('Job {'), equals(0));
+      expect(data.indexOf('Job {'), 0);
     });
 
     test('should contain the instance properties', () {
