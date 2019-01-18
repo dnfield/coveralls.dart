@@ -5,6 +5,8 @@ author: Cédric Belin <cedric@belin.io>
 description: Send LCOV and Clover coverage reports to the Coveralls service.
 documentation: https://dev.belin.io/coveralls.dart/api
 homepage: https://dev.belin.io/coveralls.dart
+issue_tracker: https://github.com/cedx/coveralls.dart/issues
+repository: https://github.com/cedx/coveralls.dart
 
 environment:
   sdk: '>=2.1.0 <3.0.0'

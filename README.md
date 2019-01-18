@@ -8,7 +8,7 @@ Send [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) and [Clover](https://w
 - [API reference](https://dev.belin.io/coveralls.dart/api)
 
 ## Development
-- [Git repository](https://git.belin.io/cedx/coveralls.dart)
+- [Git repository](https://github.com/cedx/coveralls.dart)
 - [Pub package](https://pub.dartlang.org/packages/coveralls)
 - [Submit an issue](https://github.com/cedx/coveralls.dart/issues)
 
