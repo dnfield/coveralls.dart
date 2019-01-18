@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="API docs for the Job class from the coveralls library, for the Dart programming language.">
+  <title>Job class - coveralls library - Dart API</title>
+  <!-- required because all the links are pseudo-absolute -->
+  <base href="..">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link rel="stylesheet" href="static-assets/github.css">
+  <link rel="stylesheet" href="static-assets/styles.css">
+  <link rel="icon" href="static-assets/favicon.png">
+
+</head>
+
+<body>
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="index.html">coveralls</a></li>
+    <li><a href="coveralls/coveralls-library.html">coveralls</a></li>
+    <li class="self-crumb">Job class</li>
+  </ol>
+  <div class="self-name">Job</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <h5>coveralls library</h5>
+    <ol>
+      <li class="section-title"><a href="coveralls/coveralls-library.html#classes">Classes</a></li>
+      <li><a href="coveralls/Client-class.html">Client</a></li>
+      <li><a href="coveralls/Configuration-class.html">Configuration</a></li>
+      <li><a href="coveralls/GitCommit-class.html">GitCommit</a></li>
+      <li><a href="coveralls/GitData-class.html">GitData</a></li>
+      <li><a href="coveralls/GitRemote-class.html">GitRemote</a></li>
+      <li><a href="coveralls/Job-class.html">Job</a></li>
+      <li><a href="coveralls/SourceFile-class.html">SourceFile</a></li>
+    
+    
+    
+    
+    
+    
+    
+      <li class="section-title"><a href="coveralls/coveralls-library.html#exceptions">Exceptions</a></li>
+      <li><a href="coveralls/ClientException-class.html">ClientException</a></li>
+    </ol>
+  </div>
+
+  <div class="col-xs-12 col-sm-9 col-md-8 main-content">
+      <h1>Job class </h1>
+
+    <section class="desc markdown">
+      <p>Represents the coverage data from a single run of a test suite.</p>
+    </section>
+    
+    <section>
+      <dl class="dl-horizontal">
+
+
+
+
+        <dt>Annotations</dt>
+        <dd><ul class="annotation-list clazz-relationships">
+          <li>@JsonSerializable(explicitToJson: true, includeIfNull: false)</li>
+        </ul></dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="constructors">
+      <h2>Constructors</h2>
+
+      <dl class="constructor-summary-list">
+        <dt id="Job" class="callable">
+          <span class="name"><a href="coveralls/Job/Job.html">Job</a></span><span class="signature">({<span class="parameter" id="-param-repoToken"><span class="type-annotation">String</span> <span class="parameter-name">repoToken</span>, </span> <span class="parameter" id="-param-serviceJobId"><span class="type-annotation">String</span> <span class="parameter-name">serviceJobId</span>, </span> <span class="parameter" id="-param-serviceName"><span class="type-annotation">String</span> <span class="parameter-name">serviceName</span>, </span> <span class="parameter" id="-param-sourceFiles"><span class="type-annotation">Iterable<span class="signature">&lt;<wbr><span class="type-parameter"><a href="coveralls/SourceFile-class.html">SourceFile</a></span>&gt;</span></span> <span class="parameter-name">sourceFiles</span></span> })</span>
+        </dt>
+        <dd>
+          Creates a new job.
+        </dd>
+        <dt id="Job.fromJson" class="callable">
+          <span class="name"><a href="coveralls/Job/Job.fromJson.html">Job.fromJson</a></span><span class="signature">(<span class="parameter" id="fromJson-param-map"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">map</span></span>)</span>
+        </dt>
+        <dd>
+          Creates a new job from the specified <code>map</code> in JSON format.
+          <div class="constructor-modifier features">factory</div>
+        </dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="instance-properties">
+      <h2>Properties</h2>
+
+      <dl class="properties">
+        <dt id="commitSha" class="property">
+          <span class="name"><a href="coveralls/Job/commitSha.html">commitSha</a></span>
+          <span class="signature">&#8596; String</span> 
+        </dt>
+        <dd>
+          The current SHA of the commit being built to override the <a href="coveralls/Job/git.html">git</a> property.
+          <div class="features">@JsonKey(name: &#39;commit_sha&#39;), read / write</div>
+</dd>
+        <dt id="git" class="property">
+          <span class="name"><a href="coveralls/Job/git.html">git</a></span>
+          <span class="signature">&#8596; <a href="coveralls/GitData-class.html">GitData</a></span> 
+        </dt>
+        <dd>
+          A map of Git data that can be used to display more information to users.
+          <div class="features">read / write</div>
+</dd>
+        <dt id="isParallel" class="property">
+          <span class="name"><a href="coveralls/Job/isParallel.html">isParallel</a></span>
+          <span class="signature">&#8596; bool</span> 
+        </dt>
+        <dd>
+          Value indicating whether the build will not be considered done until a webhook has been sent to Coveralls.
+          <div class="features">@JsonKey(name: &#39;parallel&#39;), read / write</div>
+</dd>
+        <dt id="repoToken" class="property">
+          <span class="name"><a href="coveralls/Job/repoToken.html">repoToken</a></span>
+          <span class="signature">&#8596; String</span> 
+        </dt>
+        <dd>
+          The secret token for the repository.
+          <div class="features">@JsonKey(name: &#39;repo_token&#39;), read / write</div>
+</dd>
+        <dt id="runAt" class="property">
+          <span class="name"><a href="coveralls/Job/runAt.html">runAt</a></span>
+          <span class="signature">&#8596; DateTime</span> 
+        </dt>
+        <dd>
+          A timestamp of when the job ran.
+          <div class="features">@JsonKey(name: &#39;run_at&#39;), read / write</div>
+</dd>
+        <dt id="serviceJobId" class="property">
+          <span class="name"><a href="coveralls/Job/serviceJobId.html">serviceJobId</a></span>
+          <span class="signature">&#8596; String</span> 
+        </dt>
+        <dd>
+          A unique identifier of the job on the CI service.
+          <div class="features">@JsonKey(name: &#39;service_job_id&#39;), read / write</div>
+</dd>
+        <dt id="serviceName" class="property">
+          <span class="name"><a href="coveralls/Job/serviceName.html">serviceName</a></span>
+          <span class="signature">&#8596; String</span> 
+        </dt>
+        <dd>
+          The CI service or other environment in which the test suite was run.
+          <div class="features">@JsonKey(name: &#39;service_name&#39;), read / write</div>
+</dd>
+        <dt id="serviceNumber" class="property">
+          <span class="name"><a href="coveralls/Job/serviceNumber.html">serviceNumber</a></span>
+          <span class="signature">&#8596; String</span> 
+        </dt>
+        <dd>
+          The build number.
+          <div class="features">@JsonKey(name: &#39;service_number&#39;), read / write</div>
+</dd>
+        <dt id="servicePullRequest" class="property">
+          <span class="name"><a href="coveralls/Job/servicePullRequest.html">servicePullRequest</a></span>
+          <span class="signature">&#8596; String</span> 
+        </dt>
+        <dd>
+          The associated pull request ID of the build.
+          <div class="features">@JsonKey(name: &#39;service_pull_request&#39;), read / write</div>
+</dd>
+        <dt id="sourceFiles" class="property">
+          <span class="name"><a href="coveralls/Job/sourceFiles.html">sourceFiles</a></span>
+          <span class="signature">&#8594; List<span class="signature">&lt;<wbr><span class="type-parameter"><a href="coveralls/SourceFile-class.html">SourceFile</a></span>&gt;</span></span> 
+        </dt>
+        <dd>
+          The list of source files.
+          <div class="features">@JsonKey(defaultValue: const [], name: &#39;source_files&#39;), final</div>
+</dd>
+        <dt id="hashCode" class="property inherited">
+          <span class="name"><a href="coveralls/Job/hashCode.html">hashCode</a></span>
+          <span class="signature">&#8594; int</span> 
+        </dt>
+        <dd class="inherited">
+          The hash code for this object. <a href="coveralls/Job/hashCode.html">[...]</a>
+          <div class="features">read-only, inherited</div>
+</dd>
+        <dt id="runtimeType" class="property inherited">
+          <span class="name"><a href="coveralls/Job/runtimeType.html">runtimeType</a></span>
+          <span class="signature">&#8594; Type</span> 
+        </dt>
+        <dd class="inherited">
+          A representation of the runtime type of the object.
+          <div class="features">read-only, inherited</div>
+</dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="instance-methods">
+      <h2>Methods</h2>
+      <dl class="callables">
+        <dt id="toJson" class="callable">
+          <span class="name"><a href="coveralls/Job/toJson.html">toJson</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          Converts this object to a <code>Map</code> in JSON format.
+          
+</dd>
+        <dt id="toString" class="callable">
+          <span class="name"><a href="coveralls/Job/toString.html">toString</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; String</span>
+          </span>
+          </dt>
+        <dd>
+          Returns a <code>String</code> representation of this object.
+          <div class="features">override</div>
+</dd>
+        <dt id="noSuchMethod" class="callable inherited">
+          <span class="name"><a href="coveralls/Job/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation">Invocation</span> <span class="parameter-name">invocation</span></span>)
+            <span class="returntype parameter">&#8594; dynamic</span>
+          </span>
+          </dt>
+        <dd class="inherited">
+          Invoked when a non-existent method or property is accessed. <a href="coveralls/Job/noSuchMethod.html">[...]</a>
+          <div class="features">inherited</div>
+</dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor inherited" id="operators">
+      <h2>Operators</h2>
+      <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+          <span class="name"><a href="coveralls/Job/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation">dynamic</span> <span class="parameter-name">other</span></span>)
+            <span class="returntype parameter">&#8594; bool</span>
+          </span>
+          </dt>
+        <dd class="inherited">
+          The equality operator. <a href="coveralls/Job/operator_equals.html">[...]</a>
+          <div class="features">inherited</div>
+</dd>
+      </dl>
+    </section>
+
+
+
+
+  </div> <!-- /.main-content -->
+
+  <div class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+    <ol>
+      <li class="section-title"><a href="coveralls/Job-class.html#constructors">Constructors</a></li>
+      <li><a href="coveralls/Job/Job.html">Job</a></li>
+      <li><a href="coveralls/Job/Job.fromJson.html">fromJson</a></li>
+    
+      <li class="section-title">
+        <a href="coveralls/Job-class.html#instance-properties">Properties</a>
+      </li>
+      <li><a href="coveralls/Job/commitSha.html">commitSha</a></li>
+      <li><a href="coveralls/Job/git.html">git</a></li>
+      <li><a href="coveralls/Job/isParallel.html">isParallel</a></li>
+      <li><a href="coveralls/Job/repoToken.html">repoToken</a></li>
+      <li><a href="coveralls/Job/runAt.html">runAt</a></li>
+      <li><a href="coveralls/Job/serviceJobId.html">serviceJobId</a></li>
+      <li><a href="coveralls/Job/serviceName.html">serviceName</a></li>
+      <li><a href="coveralls/Job/serviceNumber.html">serviceNumber</a></li>
+      <li><a href="coveralls/Job/servicePullRequest.html">servicePullRequest</a></li>
+      <li><a href="coveralls/Job/sourceFiles.html">sourceFiles</a></li>
+      <li class="inherited"><a href="coveralls/Job/hashCode.html">hashCode</a></li>
+      <li class="inherited"><a href="coveralls/Job/runtimeType.html">runtimeType</a></li>
+    
+      <li class="section-title"><a href="coveralls/Job-class.html#instance-methods">Methods</a></li>
+      <li><a href="coveralls/Job/toJson.html">toJson</a></li>
+      <li><a href="coveralls/Job/toString.html">toString</a></li>
+      <li class="inherited"><a href="coveralls/Job/noSuchMethod.html">noSuchMethod</a></li>
+    
+      <li class="section-title inherited"><a href="coveralls/Job-class.html#operators">Operators</a></li>
+      <li class="inherited"><a href="coveralls/Job/operator_equals.html">operator ==</a></li>
+    
+    
+    
+    </ol>
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    coveralls 5.1.0
+  </span>
+
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="static-assets/typeahead.bundle.min.js"></script>
+<script src="static-assets/highlight.pack.js"></script>
+<script src="static-assets/URI.js"></script>
+<script src="static-assets/script.js"></script>
+
+
+</body>
+
+</html>

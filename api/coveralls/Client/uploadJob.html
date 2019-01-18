@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="API docs for the uploadJob method from the Client class, for the Dart programming language.">
+  <title>uploadJob method - Client class - coveralls library - Dart API</title>
+  <!-- required because all the links are pseudo-absolute -->
+  <base href="../..">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link rel="stylesheet" href="static-assets/github.css">
+  <link rel="stylesheet" href="static-assets/styles.css">
+  <link rel="icon" href="static-assets/favicon.png">
+
+</head>
+
+<body>
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="index.html">coveralls</a></li>
+    <li><a href="coveralls/coveralls-library.html">coveralls</a></li>
+    <li><a href="coveralls/Client-class.html">Client</a></li>
+    <li class="self-crumb">uploadJob method</li>
+  </ol>
+  <div class="self-name">uploadJob</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <h5>Client class</h5>
+    <ol>
+      <li class="section-title"><a href="coveralls/Client-class.html#constructors">Constructors</a></li>
+      <li><a href="coveralls/Client/Client.html">Client</a></li>
+    
+      <li class="section-title">
+        <a href="coveralls/Client-class.html#instance-properties">Properties</a>
+      </li>
+      <li><a href="coveralls/Client/endPoint.html">endPoint</a></li>
+      <li><a href="coveralls/Client/onRequest.html">onRequest</a></li>
+      <li><a href="coveralls/Client/onResponse.html">onResponse</a></li>
+      <li class="inherited"><a href="coveralls/Client/hashCode.html">hashCode</a></li>
+      <li class="inherited"><a href="coveralls/Client/runtimeType.html">runtimeType</a></li>
+    
+      <li class="section-title"><a href="coveralls/Client-class.html#instance-methods">Methods</a></li>
+      <li><a href="coveralls/Client/upload.html">upload</a></li>
+      <li><a href="coveralls/Client/uploadJob.html">uploadJob</a></li>
+      <li class="inherited"><a href="coveralls/Client/noSuchMethod.html">noSuchMethod</a></li>
+      <li class="inherited"><a href="coveralls/Client/toString.html">toString</a></li>
+    
+      <li class="section-title inherited"><a href="coveralls/Client-class.html#operators">Operators</a></li>
+      <li class="inherited"><a href="coveralls/Client/operator_equals.html">operator ==</a></li>
+    
+      <li class="section-title"><a href="coveralls/Client-class.html#static-properties">Static properties</a></li>
+      <li><a href="coveralls/Client/defaultEndPoint.html">defaultEndPoint</a></li>
+    
+    
+    </ol>
+  </div><!--/.sidebar-offcanvas-->
+
+  <div class="col-xs-12 col-sm-9 col-md-8 main-content">
+    <h1>uploadJob method</h1>
+
+    <section class="multi-line-signature">
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+      <span class="name ">uploadJob</span>
+(<wbr><span class="parameter" id="uploadJob-param-job"><span class="type-annotation"><a href="coveralls/Job-class.html">Job</a></span> <span class="parameter-name">job</span></span>)
+      
+    </section>
+    <section class="desc markdown">
+      <p>Uploads the specified <code>job</code> to the Coveralls service.</p>
+<p>Completes with an <code>ArgumentError</code> if the job does not meet the requirements.
+Completes with a <a href="coveralls/ClientException-class.html">http.ClientException</a> if the remote service does not respond successfully.</p>
+    </section>
+    
+    <section class="summary source-code" id="source">
+      <h2><span>Implementation</span> </h2>
+      <pre class="language-dart"><code class="language-dart">Future&lt;void&gt; uploadJob(Job job) async {
+  if (job.repoToken == null &amp;&amp; job.serviceName == null)
+    throw ArgumentError.value(job, &#39;job&#39;, &#39;The job does not meet the requirements.&#39;);
+
+  final httpClient = http.Client();
+  final request = http.MultipartRequest(&#39;POST&#39;, endPoint.resolve(&#39;api&#47;v1&#47;jobs&#39;))
+    ..files.add(http.MultipartFile.fromString(&#39;json_file&#39;, json.encode(job), filename: &#39;coveralls.json&#39;));
+
+  _onRequest.add(request);
+  final response = await http.Response.fromStream(await httpClient.send(request));
+  _onResponse.add(response);
+  httpClient.close();
+
+  if ((response.statusCode ~&#47; 100) != 2)
+    throw http.ClientException(&#39;An error occurred while uploading the report.&#39;, request.url);
+}</code></pre>
+    </section>
+
+  </div> <!-- /.main-content -->
+
+  <div class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    coveralls 5.1.0
+  </span>
+
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="static-assets/typeahead.bundle.min.js"></script>
+<script src="static-assets/highlight.pack.js"></script>
+<script src="static-assets/URI.js"></script>
+<script src="static-assets/script.js"></script>
+
+
+</body>
+
+</html>

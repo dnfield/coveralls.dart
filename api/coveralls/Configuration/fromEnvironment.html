@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="API docs for the fromEnvironment method from the Configuration class, for the Dart programming language.">
+  <title>fromEnvironment method - Configuration class - coveralls library - Dart API</title>
+  <!-- required because all the links are pseudo-absolute -->
+  <base href="../..">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link rel="stylesheet" href="static-assets/github.css">
+  <link rel="stylesheet" href="static-assets/styles.css">
+  <link rel="icon" href="static-assets/favicon.png">
+
+</head>
+
+<body>
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="index.html">coveralls</a></li>
+    <li><a href="coveralls/coveralls-library.html">coveralls</a></li>
+    <li><a href="coveralls/Configuration-class.html">Configuration</a></li>
+    <li class="self-crumb">fromEnvironment method</li>
+  </ol>
+  <div class="self-name">fromEnvironment</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <h5>Configuration class</h5>
+    <ol>
+      <li class="section-title"><a href="coveralls/Configuration-class.html#constructors">Constructors</a></li>
+      <li><a href="coveralls/Configuration/Configuration.html">Configuration</a></li>
+      <li><a href="coveralls/Configuration/Configuration.fromYaml.html">fromYaml</a></li>
+    
+      <li class="section-title">
+        <a href="coveralls/Configuration-class.html#instance-properties">Properties</a>
+      </li>
+      <li><a href="coveralls/Configuration/keys.html">keys</a></li>
+      <li class="inherited"><a href="coveralls/Configuration/entries.html">entries</a></li>
+      <li class="inherited"><a href="coveralls/Configuration/hashCode.html">hashCode</a></li>
+      <li class="inherited"><a href="coveralls/Configuration/isEmpty.html">isEmpty</a></li>
+      <li class="inherited"><a href="coveralls/Configuration/isNotEmpty.html">isNotEmpty</a></li>
+      <li class="inherited"><a href="coveralls/Configuration/length.html">length</a></li>
+      <li class="inherited"><a href="coveralls/Configuration/runtimeType.html">runtimeType</a></li>
+      <li class="inherited"><a href="coveralls/Configuration/values.html">values</a></li>
+    
+      <li class="section-title"><a href="coveralls/Configuration-class.html#instance-methods">Methods</a></li>
+      <li><a href="coveralls/Configuration/clear.html">clear</a></li>
+      <li><a href="coveralls/Configuration/remove.html">remove</a></li>
+      <li><a href="coveralls/Configuration/toJson.html">toJson</a></li>
+      <li><a href="coveralls/Configuration/toString.html">toString</a></li>
+      <li class="inherited"><a href="coveralls/Configuration/addAll.html">addAll</a></li>
+      <li class="inherited"><a href="coveralls/Configuration/addEntries.html">addEntries</a></li>
+      <li class="inherited"><a href="coveralls/Configuration/cast.html">cast</a></li>
+      <li class="inherited"><a href="coveralls/Configuration/containsKey.html">containsKey</a></li>
+      <li class="inherited"><a href="coveralls/Configuration/containsValue.html">containsValue</a></li>
+      <li class="inherited"><a href="coveralls/Configuration/forEach.html">forEach</a></li>
+      <li class="inherited"><a href="coveralls/Configuration/map.html">map</a></li>
+      <li class="inherited"><a href="coveralls/Configuration/noSuchMethod.html">noSuchMethod</a></li>
+      <li class="inherited"><a href="coveralls/Configuration/putIfAbsent.html">putIfAbsent</a></li>
+      <li class="inherited"><a href="coveralls/Configuration/removeWhere.html">removeWhere</a></li>
+      <li class="inherited"><a href="coveralls/Configuration/update.html">update</a></li>
+      <li class="inherited"><a href="coveralls/Configuration/updateAll.html">updateAll</a></li>
+    
+      <li class="section-title"><a href="coveralls/Configuration-class.html#operators">Operators</a></li>
+      <li><a href="coveralls/Configuration/operator_get.html">operator []</a></li>
+      <li><a href="coveralls/Configuration/operator_put.html">operator []=</a></li>
+      <li class="inherited"><a href="coveralls/Configuration/operator_equals.html">operator ==</a></li>
+    
+    
+      <li class="section-title"><a href="coveralls/Configuration-class.html#static-methods">Static methods</a></li>
+      <li><a href="coveralls/Configuration/fromEnvironment.html">fromEnvironment</a></li>
+      <li><a href="coveralls/Configuration/loadDefaults.html">loadDefaults</a></li>
+    
+    </ol>
+  </div><!--/.sidebar-offcanvas-->
+
+  <div class="col-xs-12 col-sm-9 col-md-8 main-content">
+    <h1>fromEnvironment method</h1>
+
+    <section class="multi-line-signature">
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="coveralls/Configuration-class.html">Configuration</a></span>&gt;</span></span>
+      <span class="name ">fromEnvironment</span>
+(<wbr>[<span class="parameter" id="fromEnvironment-param-env"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">env</span></span> ])
+      
+    </section>
+    <section class="desc markdown">
+      <p>Creates a new configuration from the variables of the specified environment.
+If <code>env</code> is not provided, it defaults to <code>Platform.environment</code>.</p>
+    </section>
+    
+    <section class="summary source-code" id="source">
+      <h2><span>Implementation</span> </h2>
+      <pre class="language-dart"><code class="language-dart">static Future&lt;Configuration&gt; fromEnvironment([Map&lt;String, String&gt; env]) async {
+  env ??= Platform.environment;
+  final config = Configuration();
+
+  &#47;&#47; Standard.
+  final serviceName = env[&#39;CI_NAME&#39;] ?? &#39;&#39;;
+  if (serviceName.isNotEmpty) config[&#39;service_name&#39;] = serviceName;
+
+  if (env.containsKey(&#39;CI_BRANCH&#39;)) config[&#39;service_branch&#39;] = env[&#39;CI_BRANCH&#39;];
+  if (env.containsKey(&#39;CI_BUILD_NUMBER&#39;)) config[&#39;service_number&#39;] = env[&#39;CI_BUILD_NUMBER&#39;];
+  if (env.containsKey(&#39;CI_BUILD_URL&#39;)) config[&#39;service_build_url&#39;] = env[&#39;CI_BUILD_URL&#39;];
+  if (env.containsKey(&#39;CI_COMMIT&#39;)) config[&#39;commit_sha&#39;] = env[&#39;CI_COMMIT&#39;];
+  if (env.containsKey(&#39;CI_JOB_ID&#39;)) config[&#39;service_job_id&#39;] = env[&#39;CI_JOB_ID&#39;];
+
+  if (env.containsKey(&#39;CI_PULL_REQUEST&#39;)) {
+    final matches = RegExp(r&#39;(\d+)$&#39;).allMatches(env[&#39;CI_PULL_REQUEST&#39;]);
+    if (matches.isNotEmpty &amp;&amp; matches.first.groupCount &gt;= 1) config[&#39;service_pull_request&#39;] = matches.first[1];
+  }
+
+  &#47;&#47; Coveralls.
+  if (env.containsKey(&#39;COVERALLS_REPO_TOKEN&#39;) || env.containsKey(&#39;COVERALLS_TOKEN&#39;))
+    config[&#39;repo_token&#39;] = env[&#39;COVERALLS_REPO_TOKEN&#39;] ?? env[&#39;COVERALLS_TOKEN&#39;];
+
+  if (env.containsKey(&#39;COVERALLS_COMMIT_SHA&#39;)) config[&#39;commit_sha&#39;] = env[&#39;COVERALLS_COMMIT_SHA&#39;];
+  if (env.containsKey(&#39;COVERALLS_PARALLEL&#39;)) config[&#39;parallel&#39;] = env[&#39;COVERALLS_PARALLEL&#39;];
+  if (env.containsKey(&#39;COVERALLS_RUN_AT&#39;)) config[&#39;run_at&#39;] = env[&#39;COVERALLS_RUN_AT&#39;];
+  if (env.containsKey(&#39;COVERALLS_SERVICE_BRANCH&#39;)) config[&#39;service_branch&#39;] = env[&#39;COVERALLS_SERVICE_BRANCH&#39;];
+  if (env.containsKey(&#39;COVERALLS_SERVICE_JOB_ID&#39;)) config[&#39;service_job_id&#39;] = env[&#39;COVERALLS_SERVICE_JOB_ID&#39;];
+  if (env.containsKey(&#39;COVERALLS_SERVICE_NAME&#39;)) config[&#39;service_name&#39;] = env[&#39;COVERALLS_SERVICE_NAME&#39;];
+
+  &#47;&#47; Git.
+  if (env.containsKey(&#39;GIT_AUTHOR_EMAIL&#39;)) config[&#39;git_author_email&#39;] = env[&#39;GIT_AUTHOR_EMAIL&#39;];
+  if (env.containsKey(&#39;GIT_AUTHOR_NAME&#39;)) config[&#39;git_author_name&#39;] = env[&#39;GIT_AUTHOR_NAME&#39;];
+  if (env.containsKey(&#39;GIT_BRANCH&#39;)) config[&#39;service_branch&#39;] = env[&#39;GIT_BRANCH&#39;];
+  if (env.containsKey(&#39;GIT_COMMITTER_EMAIL&#39;)) config[&#39;git_committer_email&#39;] = env[&#39;GIT_COMMITTER_EMAIL&#39;];
+  if (env.containsKey(&#39;GIT_COMMITTER_NAME&#39;)) config[&#39;git_committer_name&#39;] = env[&#39;GIT_COMMITTER_NAME&#39;];
+  if (env.containsKey(&#39;GIT_ID&#39;)) config[&#39;commit_sha&#39;] = env[&#39;GIT_ID&#39;];
+  if (env.containsKey(&#39;GIT_MESSAGE&#39;)) config[&#39;git_message&#39;] = env[&#39;GIT_MESSAGE&#39;];
+
+  &#47;&#47; CI services.
+  if (env.containsKey(&#39;TRAVIS&#39;)) {
+    await travis_ci.loadLibrary();
+    config.addAll(travis_ci.getConfiguration(env));
+    if (serviceName.isNotEmpty &amp;&amp; serviceName != &#39;travis-ci&#39;) config[&#39;service_name&#39;] = serviceName;
+  }
+  else if (env.containsKey(&#39;APPVEYOR&#39;)) {
+    await appveyor.loadLibrary();
+    config.addAll(appveyor.getConfiguration(env));
+  }
+  else if (env.containsKey(&#39;CIRCLECI&#39;)) {
+    await circleci.loadLibrary();
+    config.addAll(circleci.getConfiguration(env));
+  }
+  else if (serviceName == &#39;codeship&#39;) {
+    await codeship.loadLibrary();
+    config.addAll(codeship.getConfiguration(env));
+  }
+  else if (env.containsKey(&#39;GITLAB_CI&#39;)) {
+    await gitlab_ci.loadLibrary();
+    config.addAll(gitlab_ci.getConfiguration(env));
+  }
+  else if (env.containsKey(&#39;JENKINS_URL&#39;)) {
+    await jenkins.loadLibrary();
+    config.addAll(jenkins.getConfiguration(env));
+  }
+  else if (env.containsKey(&#39;SEMAPHORE&#39;)) {
+    await semaphore.loadLibrary();
+    config.addAll(semaphore.getConfiguration(env));
+  }
+  else if (env.containsKey(&#39;SURF_SHA1&#39;)) {
+    await surf.loadLibrary();
+    config.addAll(surf.getConfiguration(env));
+  }
+  else if (env.containsKey(&#39;TDDIUM&#39;)) {
+    await solano_ci.loadLibrary();
+    config.addAll(solano_ci.getConfiguration(env));
+  }
+  else if (env.containsKey(&#39;WERCKER&#39;)) {
+    await wercker.loadLibrary();
+    config.addAll(wercker.getConfiguration(env));
+  }
+
+  return config;
+}</code></pre>
+    </section>
+
+  </div> <!-- /.main-content -->
+
+  <div class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    coveralls 5.1.0
+  </span>
+
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="static-assets/typeahead.bundle.min.js"></script>
+<script src="static-assets/highlight.pack.js"></script>
+<script src="static-assets/URI.js"></script>
+<script src="static-assets/script.js"></script>
+
+
+</body>
+
+</html>
