@@ -6,7 +6,7 @@ part of 'cli.dart';
 // CliGenerator
 // **************************************************************************
 
-Options _$parseOptionsResult(ArgResults result) => new Options(
+Options _$parseOptionsResult(ArgResults result) => Options(
     help: result['help'] as bool,
     rest: result.rest,
     version: result['version'] as bool);
@@ -17,9 +17,9 @@ ArgParser _$populateOptionsParser(ArgParser parser) => parser
   ..addFlag('version',
       abbr: 'v', help: 'Output the version number.', negatable: false);
 
-final _$parserForOptions = _$populateOptionsParser(new ArgParser());
+final _$parserForOptions = _$populateOptionsParser(ArgParser());
 
 Options parseOptions(List<String> args) {
-  var result = _$parserForOptions.parse(args);
+  final result = _$parserForOptions.parse(args);
   return _$parseOptionsResult(result);
 }
